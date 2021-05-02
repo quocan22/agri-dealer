@@ -1,0 +1,93 @@
+.footer-container {
+  background-color: seagreen;
+  padding: 4rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-links {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-link-wrapper {
+  display: flex;
+}
+
+.footer-link-items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 16px;
+  text-align: left;
+  width: 280px;
+  box-sizing: border-box;
+  line-height: 32px;
+}
+
+.footer-link-items h2 {
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+.footer-link-items > h2 {
+  color: #fff;
+}
+
+.footer-link-items a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.footer-link-items a:hover {
+  color: goldenrod;
+  transition: 0.3s ease-out;
+}
+
+.social-icon-link {
+  color: #fff;
+  font-size: 24px;
+}
+
+.footer-company {
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.social-contact {
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.social-contact p {
+color: #fff;
+position: relative;
+}
+.social-contact p {
+font-size: 16px;
+color: #fff;
+font-weight: 500;
+padding-right: 16px;
+line-height: 24px;
+}
+.social-contact p a {
+color: #fff;
+}
+.social-contact p a:hover {
+color: goldenrod;
+}
+
+@media screen and (max-width: 820px) {
+  .footer-links {
+      padding-top: 2rem;
+  }
+
+  .footer-link-wrapper {
+      flex-direction: column;
+  }
+}
