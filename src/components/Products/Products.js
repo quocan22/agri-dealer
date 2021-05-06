@@ -86,7 +86,7 @@ const Products = () => {
       <GridList cellHeight={200} className={classes.gridList} cols={1}>
         <Grid container justify="flex-start" spacing={1}>
           {products.map((product) => (
-            <Grid item key={product.id} item xs sm={6} md={4} lg={3}>
+            <Grid item key={product.id} xs sm={6} md={4} lg={3}>
               <Product product={product} />
             </Grid>
           ))}

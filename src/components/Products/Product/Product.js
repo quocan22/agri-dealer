@@ -46,7 +46,7 @@ const Product = ({ product }) => {
           </Typography>
         </div>
         <Typography variant="subtitle2" color="textSecondary">
-          <a className="fas fa-map-marker-alt" style={{ color: "green" }}></a>{" "}
+          <subtitile1 className="fas fa-map-marker-alt" style={{ color: "green" }}></subtitile1>{" "}
           {product.provider}
         </Typography>
       </CardContent>
