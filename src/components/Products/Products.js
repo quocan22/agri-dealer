@@ -7,6 +7,7 @@ const products = [
   {
     id: 1,
     name: "Tỏi Lý Sơn",
+    imgsrc: "https://cdn.vinagex.com/image.php?src=images/5c67b2f2ac210c465e0369b2/product/5c67bb1923b1c.png&size=375x350",
     provider: "Thương hiệu Dori",
     price: "200,000 VNĐ",
     unit: "kg",
@@ -14,6 +15,7 @@ const products = [
   {
     id: 2,
     name: "Chanh ta",
+    imgsrc: "https://cdn.vinagex.com/images/5c36f45fac210c6cd07f0b32/product/5c64b3ad07230.png",
     provider: "Nhà vườn thành thực",
     price: "28,000 VNĐ",
     unit: "trái",
@@ -21,6 +23,7 @@ const products = [
   {
     id: 2,
     name: "Chanh ta",
+    imgsrc: "https://cdn.vinagex.com/images/5c36f45fac210c6cd07f0b32/product/5c64b3ad07230.png",
     provider: "Nhà vườn thành thực",
     price: "28,000 VNĐ",
     unit: "trái",
@@ -28,6 +31,7 @@ const products = [
   {
     id: 2,
     name: "Chanh ta",
+    imgsrc: "https://cdn.vinagex.com/images/5c36f45fac210c6cd07f0b32/product/5c64b3ad07230.png",
     provider: "Nhà vườn thành thực",
     price: "28,000 VNĐ",
     unit: "trái",
@@ -35,6 +39,7 @@ const products = [
   {
     id: 2,
     name: "Chanh ta",
+    imgsrc: "https://cdn.vinagex.com/images/5c36f45fac210c6cd07f0b32/product/5c64b3ad07230.png",
     provider: "Nhà vườn thành thực",
     price: "28,000 VNĐ",
     unit: "trái",
@@ -42,6 +47,7 @@ const products = [
   {
     id: 2,
     name: "Chanh ta",
+    imgsrc: "https://cdn.vinagex.com/images/5c36f45fac210c6cd07f0b32/product/5c64b3ad07230.png",
     provider: "Nhà vườn thành thực",
     price: "28,000 VNĐ",
     unit: "trái",

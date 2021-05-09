@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Post.css";
 
 const products = {
@@ -16,6 +17,16 @@ const products = {
   unit: "kg",
   count: 1,
 };
+
+const provider = {
+  name: "Công ty cổ phần Dori",
+  joinDate: "16/02/2019",
+  address: "Thôn Đông, An Vinh, Lý Sơn, Quảng Ngãi",
+  brand: "Tỏi Lý Sơn",
+  standard: "Viet Gap",
+  scale: "2 ha",
+  quantity: "20 tấn",
+}
 
 class Post extends React.Component {
   constructor(props) {
@@ -99,8 +110,8 @@ class Post extends React.Component {
               />
               <button className="qtyBtn" onClick={this.addQuantity}>
                 <i className="fas fa-plus" />
-              </button>
-              {" "}{products.unit}
+              </button>{" "}
+              {products.unit}
             </p>
             <DetailsThumb
               images={products.src}
@@ -114,6 +125,36 @@ class Post extends React.Component {
         </div>
         <div className="provider">
           <h3>Được cung cấp bởi</h3>
+          <Link to="/" className="provider-link">
+            {provider.name}
+          </Link>
+          <p className="separator"></p>
+          <div>
+            <div className="info-details">
+              <p className="index">Ngày tham gia</p>
+              <p className="info">{provider.joinDate}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Địa chỉ</p>
+              <p className="info">{provider.address}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Thương hiệu</p>
+              <p className="info">{provider.brand}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Tiêu chuẩn</p>
+              <p className="info">{provider.standard}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Quy mô</p>
+              <p className="info">{provider.scale}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Sản lượng</p>
+              <p className="info">{provider.quantity}</p>
+            </div>
+          </div>
         </div>
       </div>
     );

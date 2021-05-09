@@ -6,18 +6,16 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import "./Product.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
   },
   media: {
-    height: 0,
-    paddingTop: "56.25%",
-  },
-  cardContentName: {
-    display: "flex",
-    justifyContent: "flex-start",
+    height: "100%",
+    paddingTop: "100%",
   },
   cardContentPrice: {
     display: "flex",
@@ -31,13 +29,15 @@ const Product = ({ product }) => {
 
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.media} image="" title={product.name} />
+      <Link to="/post">
+        <CardMedia className={classes.media} image={product.imgsrc} title={product.name} />
+      </Link>
       <CardContent>
-        <div className={classes.cardContentName}>
+        <Link to="/post" className="card-content-name">
           <Typography variant="h6" gutterBottom>
             {product.name}
           </Typography>
-        </div>
+        </Link>
         <div className={classes.cardContentPrice}>
           <Typography variant="subtitle1">
             {product.price}
@@ -45,8 +45,11 @@ const Product = ({ product }) => {
             {product.unit}
           </Typography>
         </div>
-        <Typography variant="subtitle2" color="textSecondary">
-          <subtitile1 className="fas fa-map-marker-alt" style={{ color: "green" }}></subtitile1>{" "}
+        <Typography variant="subtitle1" color="textSecondary">
+          <subtitile1
+            className="fas fa-map-marker-alt"
+            style={{ color: "green" }}
+          ></subtitile1>{" "}
           {product.provider}
         </Typography>
       </CardContent>

@@ -1,13 +1,11 @@
-:root {
-  max-width: 100%;
-}
 
-.product-media {
-  height: 0;
-  padding-top: 56%;
-}
-
-.product-content {
+.card-content-name {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.card-content-name:hover {
+  color: seagreen;
 }
