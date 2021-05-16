@@ -14,8 +14,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
   },
   media: {
-    height: "100%",
-    paddingTop: "100%",
+    paddingTop: "80%",
   },
   cardContentPrice: {
     display: "flex",

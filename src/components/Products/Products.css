@@ -1,0 +1,36 @@
+.container {
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+.list-item {
+  margin-top: 0;
+  bottom: 0;
+}
+.products-tab {
+  justify-self: center;
+  color: seagreen;
+  margin: 10px;
+  font-size: large;
+  background-color: whitesmoke;
+}
+.available-tab {
+  width: 100%;
+  border: 1px;
+}
+.read-more-button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: larger;
+  background-color: seagreen;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  left: 50%;
+  position: inherit;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}

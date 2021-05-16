@@ -1,32 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Input } from "@material-ui/core";
+
 import "./Post.css";
-
-const products = {
-  _id: "1",
-  name: "Tỏi Lý Sơn - Thương hiệu Dori",
-  src: [
-    "https://cdn.vinagex.com/image.php?src=images/5c67b2f2ac210c465e0369b2/product/5c67bb1923b1c.png&size=375x350",
-    "https://cdn.vinagex.com/image.php?src=images/5c67b2f2ac210c465e0369b2/product/5c67bb1926e2c.png&size=375x350",
-    "https://cdn.vinagex.com/image.php?src=images/5c67b2f2ac210c465e0369b2/product/5c6bcb90b9b21.png&size=375x350",
-    "https://cdn.vinagex.com/image.php?src=images/5c67b2f2ac210c465e0369b2/product/5c6bcb90bc939.png&size=375x350",
-  ],
-  description: "Lưu ý: Tỏi Lý Sơn - Loại tỏi 3 tép VietGAP",
-  remain: 500,
-  price: "200,000",
-  unit: "kg",
-  count: 1,
-};
-
-const provider = {
-  name: "Công ty cổ phần Dori",
-  joinDate: "16/02/2019",
-  address: "Thôn Đông, An Vinh, Lý Sơn, Quảng Ngãi",
-  brand: "Tỏi Lý Sơn",
-  standard: "Viet Gap",
-  scale: "2 ha",
-  quantity: "20 tấn",
-}
+import Comment from "./Comment/Comment";
+import post from "../../assets/data/post";
+import provider from "../../assets/data/provider";
+import comments from "../../assets/data/comments";
 
 class Post extends React.Component {
   constructor(props) {
@@ -40,7 +20,7 @@ class Post extends React.Component {
   myRef = React.createRef();
 
   handleQuantity = (event) => {
-    this.setState({maxQuantity: products.remain});
+    this.setState({maxQuantity: post.remain});
     const value = event.target.value;
     if (value < 1 || value > this.state.maxQuantity) return;
     this.setState({
@@ -80,47 +60,82 @@ class Post extends React.Component {
     const { index } = this.state;
 
     return (
+      <div className="root">
       <div className="post">
-        <div className="details" key={products._id}>
-          <div className="big-img">
-            <img src={products.src[index]} alt="" />
-          </div>
-
-          <div className="box">
-            <div className="row">
-              <h2>{products.name}</h2>
+        <div className="about-product">
+          <div className="details" key={post._id}>
+            <div className="big-img">
+              <img src={post.src[index]} alt="" />
             </div>
-            <span>
-              {products.price} / {products.unit}
-            </span>
-            <p className="content">{products.description}</p>
-            <p className="content">
-              Còn lại: {products.remain} {products.unit}
-            </p>
-            <p className="quantity">
-              Số lượng{" "}
-              <button className="qtyBtn" onClick={this.subtractQuantity}>
-                <i className="fas fa-minus" />
-              </button>
-              <input
-                className="qtyBox"
-                type="number"
-                value={this.state.quantity}
-                onChange={this.handleQuantity}
+            <div className="box">
+              <div className="row">
+                <h2>{post.name}</h2>
+              </div>
+              <span>
+                {post.price} / {post.unit}
+              </span>
+              <p className="content">{post.description}</p>
+              <p className="content">
+                Còn lại: {post.remain} {post.unit}
+              </p>
+              <p className="quantity">
+                Số lượng{" "}
+                <button className="qtyBtn" onClick={this.subtractQuantity}>
+                  <i className="fas fa-minus" />
+                </button>
+                <input
+                  className="qtyBox"
+                  type="number"
+                  value={this.state.quantity}
+                  onChange={this.handleQuantity}
+                />
+                <button className="qtyBtn" onClick={this.addQuantity}>
+                  <i className="fas fa-plus" />
+                </button>{" "}
+                {post.unit}
+              </p>
+              <DetailsThumb
+                images={post.src}
+                tab={this.handleTab}
+                myRef={this.myRef}
               />
-              <button className="qtyBtn" onClick={this.addQuantity}>
-                <i className="fas fa-plus" />
-              </button>{" "}
-              {products.unit}
-            </p>
-            <DetailsThumb
-              images={products.src}
-              tab={this.handleTab}
-              myRef={this.myRef}
-            />
-            <button className="cart">
-              <i className="fas fa-cart-plus" /> Mua ngay
-            </button>
+              <button className="cart">
+                <i className="fas fa-cart-plus" /> Mua ngay
+              </button>
+            </div>
+          </div>
+          <p style={{fontSize: 20, margin: 20, marginLeft: 10}}>MÔ TẢ SẢN PHẨM</p>
+          <div className="description">
+            Thương hiệu: Dori - Vua Tỏi Lý Sơn<br/>
+            Khối lượng: 1 kg<br/>
+            Bao bì: Túi lưới<br/>
+            Hàng trong kho: Còn hàng<br/>
+            Mô tả: Tỏi Lý Sơn chính hiệu<br/>
+            Dạng khô, đã bóc lớp vỏ lụa bên ngoài, cắt gọn<br/>
+            Tỏi Lý Sơn có một đặc điểm đặc trưng là củ nhỏ vừa, tép đều, màu trắng, chắc. Ăn tỏi Lý Sơn, ta cảm nhận được cả các mùi vị thơm cay dịu ngọt nồng hơn củ tỏi được trồng ở những vùng đất khác.<br/>
+            <br/>
+            Tỏi Lý Sơn chính hiệu rất thơm ngon, vị cay nhẹ, dễ chịu.<br/>
+            <br/>
+            Tỏi Lý Sơn chính hiệu còn có tác dụng trong phòng, trị bệnh<br/>
+            <br/>
+            Ưu điểm của tỏi Lý Sơn là dù có ăn nhiều nhưng không bao giờ có mùi hôi như những giống tỏi khác.<br/>
+            <br/>
+            Củ tỏi có kích thước trung bình từ 1,5 ÷ 3,5 cm, có màu trắng, trung bình mỗi củ có từ 6÷12 tép lớn.Thành phần củ tỏi chứa 0,1÷0.36% tinh dầu, trong đó hơn 90% chứa hợp chất lưu huỳnh, thành phần chủ yếu của củ tỏi là chất alixin. Tỏi tươi không có alixin ngay mà có chứa chất alinin chất này dưới tác động của enzyme alinaza và khi giã dập mới cho alixin. Ngoài ra trong tỏi còn chứa nhiều vitamin và khoáng chất đặc biệt là selen. Đây là khoáng chất giúp cơ thể con người tăng cường hệ miễn dịch, giảm nguy cơ mắc bệnh tim, ung thư, phát triển trí não và tăng cường tuổi thọ cho con người.
+          </div>
+          <p style={{fontSize: 20, margin: 20, marginLeft: 10}}>GIỚI THIỆU SẢN PHẨM</p>
+          <div className="description">
+          Tỏi được các nhà khoa học ở nhiều nước nghiên cứu, phát hiện những đặc tính kỳ diệu như: khả năng tăng cường hệ thống miễn dịch, nâng cao sức khỏe, làm giảm huyết áp, có tác dụng chống tắc nghẽn mạch máu, làm chậm quá trình lão hóa tế bào, chống sự già nua, làm giảm sung huyết và tiêu viêm, phục hồi nhanh thể lực…
+          </div>
+          <div className="comment">
+            <div style={{height: 50, fontSize: 18, padding: 16, backgroundColor: "lightgrey"}}>
+              Bình luận về sản phẩm
+            </div>
+            <div className="comment-list">
+            <Input className="add-comment-field" id="filled-basic" placeholder="Viết bình luận"></Input>
+              {comments.map((comment) => (
+                <Comment comment={comment} />
+              ))}
+            </div>
           </div>
         </div>
         <div className="provider">
@@ -156,6 +171,7 @@ class Post extends React.Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }
