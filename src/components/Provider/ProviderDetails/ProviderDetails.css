@@ -1,0 +1,122 @@
+.main-grid{
+	max-width: 1008px;
+	width: 100%;
+	margin: 100px auto;
+	box-shadow: 0 0 5px #ccc;
+}
+.information-details{
+	max-width: 1008px;
+	width: 100%;
+	margin: 100px auto;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	padding: 30px 0;
+}
+.information-box .big-img{
+	max-width: 400px;
+	min-width: 400px;
+	min-height: 400px;
+	max-height: 400px;
+	margin: 0px;
+	margin-right: 50px;
+}
+.information-box .big-img img{
+	width: 100%;
+	margin: 0px;
+	height: 100%;
+	max-width: 400px;
+	min-width: 400px;
+	min-height: 400px;
+	max-height: 400px;
+	display: block;
+	object-fit: cover;
+}
+
+.information-details .thumb{
+	margin: 25px;
+	padding: 0px;
+	width: auto;
+}
+
+.information-box{
+	max-width: 1080px;
+	margin: 25px;
+	display: flex;
+	flex-direction: row;
+	white-space: normal;
+}
+.information-box .information{
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	margin-bottom: 5px;
+}
+.information h2{
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	border-bottom: 2px solid #52AF50;
+	margin: 0px;
+}
+.information-details .description{
+	margin: 25px;
+}
+.information-details .description h2{
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	border-bottom: 2px solid #52AF50;
+	margin-bottom: 25px;
+}
+.information-description{
+	display: flex;
+	width: auto;
+	height: auto;
+	flex-direction: row;
+	justify-content: space-around;
+	justify-content: space-around;
+	flex-wrap: wrap;
+
+}
+.information-description .column{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+}
+
+
+.information-description .column p{
+		display: flex;
+		flex-direction: column;
+		margin: 12px;
+		/* Font & Text */
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size: 15px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 400;
+		line-height: 17px;
+		text-align: left;
+		text-indent: 0px;
+		text-transform: none;
+		vertical-align: top;
+		white-space: normal;
+		word-spacing: 0px;
+}
+.products {
+	box-shadow: 0 0 5px #ccc;
+	margin: 10px;
+	margin-top: 20px;
+	justify-content: space-between;
+	position: relative;
+	display: block;
+	height: auto;
+	width: fit-content;
+}
+.products-list{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		height: auto;
+		width: fit-content;
+}

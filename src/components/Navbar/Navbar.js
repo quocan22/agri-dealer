@@ -67,7 +67,7 @@ function Navbar() {
               {dropdown && <Dropdown />}
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+              <Link to="/provider" className="nav-links" onClick={closeMobileMenu}>
                 NHÀ CUNG CẤP
               </Link>
             </li>
