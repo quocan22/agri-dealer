@@ -141,33 +141,33 @@ class Post extends React.Component {
         <div className="provider">
           <h3>Được cung cấp bởi</h3>
           <Link to="/" className="provider-link">
-            {provider.name}
+            {provider[0].name}
           </Link>
           <p className="separator"></p>
           <div>
             <div className="info-details">
               <p className="index">Ngày tham gia</p>
-              <p className="info">{provider.joinDate}</p>
+              <p className="info">{provider[0].joinDate}</p>
             </div>
             <div className="info-details">
               <p className="index">Địa chỉ</p>
-              <p className="info">{provider.address}</p>
+              <p className="info">{provider[0].address}</p>
             </div>
             <div className="info-details">
               <p className="index">Thương hiệu</p>
-              <p className="info">{provider.brand}</p>
+              <p className="info">{provider[0].brand}</p>
             </div>
             <div className="info-details">
               <p className="index">Tiêu chuẩn</p>
-              <p className="info">{provider.standard}</p>
+              <p className="info">{provider[0].standard}</p>
             </div>
             <div className="info-details">
               <p className="index">Quy mô</p>
-              <p className="info">{provider.scale}</p>
+              <p className="info">{provider[0].scale}</p>
             </div>
             <div className="info-details">
               <p className="index">Sản lượng</p>
-              <p className="info">{provider.quantity}</p>
+              <p className="info">{provider[0].quantity}</p>
             </div>
           </div>
         </div>
