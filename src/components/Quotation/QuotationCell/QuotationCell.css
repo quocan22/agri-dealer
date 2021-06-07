@@ -1,0 +1,137 @@
+
+.quotation-box{
+	height: 160px;
+	width: 1000px;
+	border-top: 0px none rgb(68, 68, 68);
+	border-right: 0px none rgb(68, 68, 68);
+	border-bottom: 1px solid rgb(238, 238, 238);
+	border-left: 0px none rgb(68, 68, 68);
+	margin: 5px;
+	max-height: none;
+	min-height: 0px;
+	max-width: none;
+	min-width: 0px;
+	display: flex;
+	flex-direction: row;
+}
+
+.media-body {
+	height: 150px;
+	width: 1000px;
+}
+
+.quotation-name .badge{
+	/* Font & Text */
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 700;
+	letter-spacing: normal;
+	line-height: 12px;
+	text-decoration: none solid rgb(255, 255, 255);
+	text-align: center;
+	text-indent: 0px;
+	text-transform: none;
+	vertical-align: middle;
+	white-space: nowrap;
+	word-spacing: 0px;
+
+	/* Color & Background */
+	background-attachment: scroll;
+	background-color: rgb(92, 184, 92);
+	color: rgb(255, 255, 255);
+
+	/* Box */
+	height: 18px;
+	width: auto;
+	margin: 5px;
+	padding: 3px 7px;
+
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.media-object{
+        height: 130px;
+        width: 130px;
+        max-width: 130px;
+        margin-top: 17px;
+}
+.small-link{
+        /* Font & Text */
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-style: bold;
+        font-variant: normal;
+        font-weight: 600;
+        letter-spacing: normal;
+        line-height: 20px;
+        text-decoration: none solid rgb(82, 175, 80);
+        text-align: start;
+        text-indent: 0px;
+        text-transform: none;
+        vertical-align: baseline;
+        white-space: normal;
+        word-spacing: 0px;
+        color: rgb(82, 175, 80);
+
+}
+
+
+.quotation-name {
+        /* Font & Text */
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 1000;
+        letter-spacing: normal;
+        line-height: 19.8px;
+        text-decoration: none solid rgb(82, 175, 80);
+        text-align: start;
+        text-indent: 0px;
+        text-transform: none;
+        vertical-align: baseline;
+        white-space: normal;
+        word-spacing: 0px;
+    
+        /* Color & Background */
+        background-attachment: scroll;
+        background-color: rgba(0, 0, 0, 0);
+        background-image: none;
+        background-position: 0% 0%;
+        background-repeat: repeat;
+        color: rgb(82, 175, 80);
+  }
+  .card-content-name:hover {
+    color: seagreen;
+  }
+
+.quotation-box .quotation-btn {
+	/* Font & Text */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-style: bold;
+	font-variant: normal;
+	font-weight: 550;
+	letter-spacing: normal;
+	line-height: 18px;
+	text-align: center;
+	text-indent: 0px;
+	text-transform: none;
+	vertical-align: middle;
+	white-space: nowrap;
+	word-spacing: 0px;
+
+	/* Color & Background */
+	background-attachment: scroll;
+	background-color: rgb(82, 175, 80);
+	background-image: none;
+	background-position: 0% 0%;
+	background-repeat: repeat;
+	color: rgb(214, 14, 14);
+
+}
