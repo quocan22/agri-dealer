@@ -1,5 +1,7 @@
-using AgriApi.Entities;
-using AgriApi.Services;
+using AgriApi.Entities.Identity;
+using AgriApi.Services.Identity;
+using AgriApi.Utils;
+using AgriApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -34,8 +36,26 @@ namespace AgriApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<User> Create(User user)
+        public ActionResult<User> Create([FromForm] AccountModel account)
         {
+            var matchUser = _userService.GetUserByUsername(account.Username);
+
+            if (matchUser != null)
+                return BadRequest(new { message = "This username has been used." });
+            var passHash = Helpers.Md5Hash(account.Password);
+            User user = new User()
+            {
+                Username = account.Username,
+                PasswordHash = passHash,
+                Role = account.Role,
+                UserClaims = new UserClaim()
+                {
+                    Email = account.Email,
+                    PhoneNumber = account.PhoneNumber,
+                    Displayname = account.DisplayName,
+                    Address = account.Address
+                }
+            };
             _userService.Create(user);
 
             return CreatedAtRoute("GetUser", new { id = user.Id.ToString() }, user);

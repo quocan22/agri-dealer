@@ -1,5 +1,6 @@
 using AgriApi.Entities;
 using AgriApi.Services;
+using AgriApi.Services.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -14,6 +15,9 @@ namespace AgriApi.Utils
               sp.GetRequiredService<IOptions<AgriDealDatabaseSettings>>().Value);
 
             services.AddSingleton<UserService>();
+            services.AddSingleton<ProductService>();
+            services.AddSingleton<CategoryService>();
+            services.AddSingleton<PostService>();
 
             return services;
         }

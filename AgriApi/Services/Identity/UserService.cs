@@ -1,9 +1,10 @@
 using AgriApi.Entities;
+using AgriApi.Entities.Identity;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AgriApi.Services
+namespace AgriApi.Services.Identity
 {
     public class UserService
     {
@@ -22,6 +23,11 @@ namespace AgriApi.Services
 
         public User Get(string id) =>
             _user.Find<User>(user => user.Id == id).FirstOrDefault();
+
+        public User GetUserByUsername(string username)
+        {
+            return _user.Find<User>(user => user.Username == username).FirstOrDefault();
+        }
 
         public User Create(User user)
         {
