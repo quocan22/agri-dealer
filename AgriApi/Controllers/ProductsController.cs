@@ -38,10 +38,11 @@ namespace AgriApi.Controllers
         [HttpPost]
         public ActionResult<Product> Create([FromForm] Product product)
         {
-            var matchProduct = _productService.GetProductByName(product.ProductName);
+            var count = _productService.IsExisted(product.ProductName);
 
-            if (matchProduct != null)
-                return BadRequest(new { message = "Product has been updated."});
+            if (count)
+                return BadRequest(new { message = "Sản phẩm này đã tồn tại."});
+                
             _productService.Create(product);
 
             return CreatedAtRoute("GetProduct", new { id = product.Id.ToString() }, product);

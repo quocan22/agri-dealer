@@ -24,9 +24,14 @@ namespace AgriApi.Services.Identity
         public User Get(string id) =>
             _user.Find<User>(user => user.Id == id).FirstOrDefault();
 
-        public User GetUserByUsername(string username)
+        public bool IsExisted(string email)
         {
-            return _user.Find<User>(user => user.Username == username).FirstOrDefault();
+            var count = _user.Find<User>(user => user.Email == email).CountDocuments();
+
+            if (count == 0)
+                return false;
+
+            return true;
         }
 
         public User Create(User user)

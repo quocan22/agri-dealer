@@ -11,9 +11,6 @@ namespace AgriApi.Entities.Identity
         public string Displayname { get; set; }
         [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string Email { get; set; }
-        [BsonIgnoreIfNull]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string PhoneNumber { get; set; }
         [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

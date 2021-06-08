@@ -38,19 +38,18 @@ namespace AgriApi.Controllers
         [HttpPost]
         public ActionResult<User> Create([FromForm] AccountModel account)
         {
-            var matchUser = _userService.GetUserByUsername(account.Username);
+            var count = _userService.IsExisted(account.Email);
 
-            if (matchUser != null)
-                return BadRequest(new { message = "This username has been used." });
+            if (count)
+                return BadRequest(new { message = "Đã có tài khoản sử dụng email này." });
             var passHash = Helpers.Md5Hash(account.Password);
             User user = new User()
             {
-                Username = account.Username,
+                Email = account.Email,
                 PasswordHash = passHash,
                 Role = account.Role,
                 UserClaims = new UserClaim()
                 {
-                    Email = account.Email,
                     PhoneNumber = account.PhoneNumber,
                     Displayname = account.DisplayName,
                     Address = account.Address

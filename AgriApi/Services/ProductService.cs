@@ -28,8 +28,15 @@ namespace AgriApi.Services
             return product;
         }
 
-        public Product GetProductByName(string productName) =>
-            _product.Find<Product>(product => product.ProductName == productName).FirstOrDefault();
+        public bool IsExisted(string productName)
+        {
+            var count = _product.Find<Product>(product => product.ProductName == productName).CountDocuments();
+
+            if (count == 0)
+                return false;
+
+            return true;
+        }
             
 
         public void Update(string id, Product productIn) =>

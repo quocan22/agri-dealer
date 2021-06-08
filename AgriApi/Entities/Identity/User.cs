@@ -10,7 +10,7 @@ namespace AgriApi.Entities.Identity
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; }
     [BsonRequired]
-    public string Username { get; set; }
+    public string Email { get; set; }
     [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
     [BsonRequired]
     public string PasswordHash { get; set; }
