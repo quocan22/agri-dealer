@@ -72,7 +72,7 @@ function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+              <Link to="/quotation" className="nav-links" onClick={closeMobileMenu}>
                 BÁO GIÁ
               </Link>
             </li>

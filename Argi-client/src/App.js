@@ -7,7 +7,9 @@ import Footer from "./components/Footer/Footer";
 import Post from "./components/Post/Post";
 import Provider from "./components/Provider/Provider";
 import ProviderDetails from "./components/Provider/ProviderDetails/ProviderDetails"
-
+import Quotation from "./components/Quotation/Quotation"
+import Profile from "./components/UserProfile/Profile"
+import Cart from "./components/Cart/Cart"
 function App() {
   return (
     <Router>
@@ -17,6 +19,9 @@ function App() {
         <Route path="/post" component={Post} />
         <Route path="/provider" component={Provider} />
         <Route path="/pvdetails" component={ProviderDetails} />
+        <Route path="/quotation" component={Quotation} />
+        <Route path="/profile" component={Profile}/>
+        <Route path="/cart" component={Cart}/>
       </Switch>
       <Footer />
     </Router>

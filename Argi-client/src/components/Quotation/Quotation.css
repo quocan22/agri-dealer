@@ -1,0 +1,27 @@
+.container {  
+  height: 1008;
+  margin: 25PX auto;
+  position: relative;
+}
+.list-item {
+margin-top: 0;
+bottom: 0;
+}
+
+
+.read-more-button {
+width: 120px;
+height: 40px;
+border: none;
+border-radius: 5px;
+color: white;
+font-size: larger;
+background-color: seagreen;
+cursor: pointer;
+margin-top: 10px;
+margin-bottom: 10px;
+left: 50%;
+position: inherit;
+-ms-transform: translateX(-50%);
+transform: translateX(-50%);
+}
