@@ -28,6 +28,10 @@ namespace AgriApi.Services
             return product;
         }
 
+        public Product GetProductByName(string productName) =>
+            _product.Find<Product>(product => product.ProductName == productName).FirstOrDefault();
+            
+
         public void Update(string id, Product productIn) =>
             _product.ReplaceOne(product => product.Id == id, productIn);
 

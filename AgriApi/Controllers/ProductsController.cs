@@ -36,8 +36,12 @@ namespace AgriApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Product> Create(Product product)
+        public ActionResult<Product> Create([FromForm] Product product)
         {
+            var matchProduct = _productService.GetProductByName(product.ProductName);
+
+            if (matchProduct != null)
+                return BadRequest(new { message = "Product has been updated."});
             _productService.Create(product);
 
             return CreatedAtRoute("GetProduct", new { id = product.Id.ToString() }, product);

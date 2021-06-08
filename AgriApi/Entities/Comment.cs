@@ -5,17 +5,21 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace AgriApi.Entities
 {
-    public class Post
+    public class Comment
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        [BsonDateTimeOptions(DateOnly = true)]
-        public DateTime? PostDate { get; set; }
-        public int MinQuantity { get; set; }
-        public string Describe { get; set; }
-        public string Introduce { get; set; }
+        [BsonRequired]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string UserId { get; set; }
+        [BsonRequired]
         [BsonRepresentation(BsonType.ObjectId)]
         public string ProductId { get; set; }
+        [BsonRequired]
+        public string Content { get; set; }
+        [BsonDateTimeOptions(DateOnly = true)]
+        [BsonRequired]
+        public DateTime? CommentDate { get; set; }
     }
 }

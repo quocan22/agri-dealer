@@ -18,6 +18,10 @@ namespace AgriApi.Entities.Identity
         [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Address { get; set; }
+        [BsonDateTimeOptions(DateOnly = true)]
+        [BsonIgnoreIfNull]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? JoinDate { get; set; }
         [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string AvatarUrl { get; set; }

@@ -7,7 +7,10 @@ namespace AgriApi.Entities
     public string UserCollectionName { get; set; }
     public string ProductCollectionName { get; set; }
     public string CategoryCollectionName { get; set; }
-    public string PostCollectionName { get; set; }
+    public string CartCollectionName { get; set; }
+    public string CommentCollectionName { get; set; }
+    public string QuotationRequestCollectionName { get; set; }
+    public string QuotationCollectionName { get; set; }
   }
 
   public interface IAgriDealDatabaseSettings
@@ -17,6 +20,9 @@ namespace AgriApi.Entities
     string UserCollectionName { get; set; }
     string ProductCollectionName { get; set; }
     string CategoryCollectionName { get; set; }
-    string PostCollectionName { get; set; }
+    string CartCollectionName { get; set; }
+    string CommentCollectionName { get; set; }
+    string QuotationRequestCollectionName { get; set; }
+    string QuotationCollectionName { get; set; }
   }
 }

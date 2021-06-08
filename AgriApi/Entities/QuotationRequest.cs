@@ -1,0 +1,36 @@
+using System;
+using System.Text.Json.Serialization;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace AgriApi.Entities
+{
+    public class QuotationRequest
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRequired]
+        public string UserId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRequired]
+        public string CategoryId { get; set; }
+        [BsonRequired]
+        public string ProductName { get; set; }
+        [BsonRequired]
+        public int Quantity { get; set; }
+        [BsonRequired]
+        public string Unit { get; set; }
+        [BsonRequired]
+        public double WishPrice { get; set; }
+        [BsonRequired]
+        public string Description { get; set; }
+        [BsonRequired]
+        [BsonDateTimeOptions(DateOnly = true)]
+        public DateTime? StartDate { get; set; }
+        [BsonRequired]
+        [BsonDateTimeOptions(DateOnly = true)]
+        public DateTime? EndDate { get; set; }
+    }
+}

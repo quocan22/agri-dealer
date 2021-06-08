@@ -17,7 +17,10 @@ namespace AgriApi.Utils
             services.AddSingleton<UserService>();
             services.AddSingleton<ProductService>();
             services.AddSingleton<CategoryService>();
-            services.AddSingleton<PostService>();
+            services.AddSingleton<CartService>();
+            services.AddSingleton<CommentService>();
+            services.AddSingleton<QuotationRequestService>();
+            services.AddSingleton<QuotationService>();
 
             return services;
         }
