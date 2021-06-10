@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AgriApi.Services;
 using AgriApi.Entities;
 using AgriApi.Utils;
+using AgriApi.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -62,7 +63,7 @@ namespace AgriApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

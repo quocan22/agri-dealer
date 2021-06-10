@@ -1,6 +1,7 @@
 using AgriApi.Entities;
 using AgriApi.Services;
 using AgriApi.Services.Identity;
+using AgriApi.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -22,12 +23,15 @@ namespace AgriApi.Utils
             services.AddSingleton<QuotationRequestService>();
             services.AddSingleton<QuotationService>();
 
+            services.AddScoped<IAuthentication, AuthenticateService>();
+
             return services;
         }
 
         public static IServiceCollection AddConfigOptions(this IServiceCollection services, IConfiguration config)
         {
             services.Configure<AgriDealDatabaseSettings>(config.GetSection(nameof(AgriDealDatabaseSettings)));
+            services.Configure<AppSettings>(config.GetSection(nameof(AppSettings)));
             
             return services;
         }

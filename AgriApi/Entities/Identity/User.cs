@@ -17,8 +17,10 @@ namespace AgriApi.Entities.Identity
     [BsonRequired]
     public string Role { get; set; }
     [BsonIgnoreIfNull]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public UserClaim UserClaims { get; set; }
     [BsonIgnoreIfNull]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public SellerClaim SellerClaims { get; set; }
   }
 }

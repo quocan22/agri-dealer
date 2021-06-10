@@ -1,5 +1,6 @@
 using AgriApi.Entities;
 using AgriApi.Services;
+using AgriApi.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -17,6 +18,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpGet]
+        [Authorize("user, seller")]
         public ActionResult<List<Cart>> GetActionResult() =>
             _cartService.Get();
 

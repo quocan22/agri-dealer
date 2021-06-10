@@ -19,6 +19,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpGet]
+        [Authorize("admin")]
         public ActionResult<List<User>> Get() =>
             _userService.Get();
 
