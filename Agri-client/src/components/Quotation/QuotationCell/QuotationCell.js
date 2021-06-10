@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardMedia,
@@ -89,8 +89,7 @@ function QuotationCell({ quotation }) {
             variant="outlined"
             type="number"
             InputProps={{
-            endAdornment:<InputAdornment position="end" style={{color:"grey"}}>VNĐ / {quotation.unit}</InputAdornment>}}
-            variant="outlined"
+            endAdornment:<InputAdornment position="end" style={{color:"grey"}}>VNĐ / {quotation.unit} </InputAdornment>}}
           />
         </DialogContent>
         <DialogContent>
