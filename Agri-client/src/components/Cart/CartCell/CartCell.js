@@ -1,23 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardMedia,
   Grid,
   Typography,
   Button,
-
-  makeStyles,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./CartCell.css";
 
 function CartCell({ cproduct }) {
 
-  const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
 
   const   handleQuantity = (event) => {
     const value = event.target.value;

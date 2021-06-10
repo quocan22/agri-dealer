@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Typography, Card, Button } from "@material-ui/core";
 import "react-tabs/style/react-tabs.css";
 import quotation from "../../assets/data/quotation"
 import CartCell from "./CartCell/CartCell"
 
 import "./Cart.css";
-import { blueGrey, grey } from "@material-ui/core/colors";
 function Cart() {
   return (
 
