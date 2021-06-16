@@ -13,10 +13,12 @@ namespace AgriApi.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IAuthentication _authService;
+        private readonly IAccountService _accountService;
 
-        public LoginController(IAuthentication authService)
+        public LoginController(IAuthentication authService, IAccountService accountService)
         {
             _authService = authService;
+            _accountService = accountService;
         }
 
         [HttpPost("login")]
@@ -27,6 +29,22 @@ namespace AgriApi.Controllers
             if (!response.Item1)
                 return BadRequest(new { message = response.Item2.ToString() });
             return Ok(response.Item2);
+        }
+
+        [HttpPut("seller")]
+        public ActionResult RegistSeller([FromForm] string id, [FromForm] UserClaim userClaim, [FromForm] SellerClaim sellerClaim)
+        {
+            string userId = (HttpContext.Items["User"] as User).Id;
+            if (userId != id)
+            {
+                return StatusCode(403, new { message = "Forbidden" });
+            }
+            var res = _accountService.RegistSeller(id, userClaim, sellerClaim);
+            if (!res.Item1)
+            {
+                return BadRequest(new { message = res.Item2});
+            }
+            return Ok(new { message = res.Item2 });
         }
     }
 }

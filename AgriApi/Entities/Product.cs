@@ -18,9 +18,6 @@ namespace AgriApi.Entities
         public string Unit { get; set; }
         [BsonRequired]
         public int Quantity { get; set; }
-        [BsonDateTimeOptions(DateOnly = true)]
-        [BsonRequired]
-        public DateTime? PostDate { get; set; }
         [BsonRequired]
         public int MinPurchase { get; set; }
         public string Description { get; set; }

@@ -16,15 +16,15 @@ const products = [
     unit: "kg",
   },
   {
-    id: 2,
+    id: 3,
     name: "Chanh ta",
-    imgsrc: "https://cdn.vinagex.com/images/5c36f45fac210c6cd07f0b32/product/5c64b3ad07230.png",
+    imgsrc: "/upload/chanhta.png",
     provider: "Nhà vườn thành thực",
     price: "28,000 đ",
     unit: "kg",
   },
   {
-    id: 2,
+    id: 4,
     name: "Dưa Pepino Đà Lạt",
     imgsrc: "https://cdn.vinagex.com/image.php?src=images/5b87b10228202628d96ac762/product/5c31751f008fe.png&size=375x350",
     provider: "Đà Lạt Sky Garden",
@@ -32,7 +32,7 @@ const products = [
     unit: "trái",
   },
   {
-    id: 2,
+    id: 5,
     name: "Chanh ta",
     imgsrc: "https://cdn.vinagex.com/images/5c36f45fac210c6cd07f0b32/product/5c64b3ad07230.png",
     provider: "Nhà vườn thành thực",
@@ -40,7 +40,7 @@ const products = [
     unit: "trái",
   },
   {
-    id: 2,
+    id: 6,
     name: "Chanh ta",
     imgsrc: "https://cdn.vinagex.com/images/5c36f45fac210c6cd07f0b32/product/5c64b3ad07230.png",
     provider: "Nhà vườn thành thực",

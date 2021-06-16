@@ -28,13 +28,13 @@ const Product = ({ product }) => {
 
   return (
     <Card className={classes.root}>
-      <Link to="/post">
-        <CardMedia className={classes.media} image={product.imgsrc} title={product.name} />
+      <Link to={`/${product.id}`}>
+        <CardMedia className={classes.media} image={`/upload/${product.imageUrl}`} title={product.productName} />
       </Link>
       <CardContent>
-        <Link to="/post" className="card-content-name">
+        <Link to={`/${product.id}`} className="card-content-name">
           <Typography variant="h6" gutterBottom>
-            {product.name}
+            {product.productName}
           </Typography>
         </Link>
         <div className={classes.cardContentPrice}>
@@ -49,7 +49,10 @@ const Product = ({ product }) => {
             className="fas fa-map-marker-alt"
             style={{ color: "green" }}
           ></subtitile1>{" "}
-          {product.provider}
+          {product.sellerName}
+        </Typography>
+        <Typography variant="subtitle1" color="textSecondary">
+          Tối thiểu: {product.minPurchase} {product.unit}
         </Typography>
       </CardContent>
     </Card>

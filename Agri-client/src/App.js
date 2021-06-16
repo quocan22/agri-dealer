@@ -10,20 +10,25 @@ import ProviderDetails from "./components/Provider/ProviderDetails/ProviderDetai
 import Quotation from "./components/Quotation/Quotation"
 import Profile from "./components/UserProfile/Profile"
 import Cart from "./components/Cart/Cart"
+import Login from "./components/Login/Login";
+
 function App() {
   return (
     <Router>
-      <Navbar />
       <Switch>
+        <Route path="/login" component={Login} />
+        <div>
+      <Navbar />
         <Route path="/" exact component={Home} />
-        <Route path="/post" component={Post} />
         <Route path="/provider" component={Provider} />
         <Route path="/pvdetails" component={ProviderDetails} />
         <Route path="/quotation" component={Quotation} />
         <Route path="/profile" component={Profile}/>
         <Route path="/cart" component={Cart}/>
-      </Switch>
+        <Route path="/:productId" component={Post}/>
       <Footer />
+      </div>
+      </Switch>
     </Router>
   );
 }

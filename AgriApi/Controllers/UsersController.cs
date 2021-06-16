@@ -48,7 +48,7 @@ namespace AgriApi.Controllers
             {
                 Email = account.Email,
                 PasswordHash = passHash,
-                Role = account.Role,
+                Role = "user",
                 UserClaims = new UserClaim()
                 {
                     PhoneNumber = account.PhoneNumber,

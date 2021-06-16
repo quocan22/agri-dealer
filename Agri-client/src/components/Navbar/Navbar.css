@@ -167,7 +167,6 @@
 .navbar-brand {
   color: seagreen;
   justify-self: start;
-  margin-left: 20px;
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
@@ -192,7 +191,6 @@
   width: 50%;
   position: relative;
   display: flex;
-  margin-right: 100px;
 }
 
 .searchTerm {
@@ -221,22 +219,44 @@
   font-size: 20px;
 }
 
+.button-container {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  margin-left: 40px;
+}
+
 .button-account,
 .button-cart {
-  width: 60px;
-  height: 60px;
+  height: 80px;
   background: none;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 20px;
   color: seagreen;
   border: none;
-  margin-right: 20px;
 }
 
 .button-account:hover,
 .button-cart:hover {
   color: goldenrod;
   transition: 0.3s ease-out;
+}
+
+.button-cart {
+  width: 60px;
+}
+
+.button-account {
+  width: 160px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-account > p {
+  margin-left: 10px;
+  font-size: 16px;
 }
 
 .dropdown-menu {

@@ -27,6 +27,9 @@ namespace AgriApi.Services.Identity
         public User GetUserByEmail(string email) =>
             _user.Find<User>(user => user.Email == email).FirstOrDefault();
 
+        public string GetSellerNameById(string id) =>
+            _user.Find<User>(user => user.Id == id).FirstOrDefault().SellerClaims.SellerName;
+
         public string GetRole(string id) =>
             _user.Find<User>(user => user.Id == id).FirstOrDefault().Role;
 
@@ -37,6 +40,17 @@ namespace AgriApi.Services.Identity
             if (count == 0)
                 return false;
 
+            return true;
+        }
+
+        public bool SellerNameUsed(string sellerName)
+        {
+            var count = _user.Find<User>(user => user.SellerClaims.SellerName == sellerName).CountDocuments();
+
+            if (count == 0)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -54,5 +68,16 @@ namespace AgriApi.Services.Identity
 
         public void Remove(string id) => 
             _user.DeleteOne(user => user.Id == id);
+
+        public bool Update(string id, string field, object value)
+        {
+            var update = Builders<User>.Update.Set(field, value);
+            var res = _user.UpdateOne(user => user.Id == id, update);
+            if (res.ModifiedCount == 1)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

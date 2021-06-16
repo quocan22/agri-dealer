@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 import "./Navbar.css";
 import logo from "../../assets/images/Logo3.png";
 
 function Navbar() {
+  const {userAcc} = useContext(AuthContext);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [dropdown, setDropdown] = useState(false);
@@ -41,12 +43,17 @@ function Navbar() {
               <i class="fa fa-search" />
             </button>
           </div>
-          <button className="button-account">
-            <i class="fa fa-user" />
-          </button>
-          <button className="button-cart">
-            <i class="fa fa-shopping-cart" />
-          </button>
+          <div className="button-container">
+            <button className="button-cart">
+              <i class="fa fa-shopping-cart" />
+            </button>
+            <Link to="/login" style={{textDecoration: 'none'}} >
+            <button className="button-account" >
+              <i class="fa fa-user" />
+              {userAcc ? <p>{userAcc.displayName}</p> : <p>Đăng nhập</p>}
+            </button>
+            </Link>
+          </div>
         </div>
       </nav>
       <nav className="navbar">

@@ -1,5 +1,7 @@
 using AgriApi.Entities;
 using AgriApi.Services;
+using AgriApi.Services.Identity;
+using AgriApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -11,16 +13,29 @@ namespace AgriApi.Controllers
     {
         private readonly ProductService _productService;
         private readonly CategoryService _categoryService;
+        private readonly UserService _userService;
 
-        public ProductsController(ProductService productService, CategoryService categoryService)
+        public ProductsController(ProductService productService, CategoryService categoryService, UserService userService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _userService = userService;
         }
 
         [HttpGet]
-        public ActionResult<List<Product>> GetActionResult() =>
-            _productService.Get();
+        public ActionResult<List<ProductResponse>> GetActionResult()
+        {
+            var product = _productService.Get();
+            var productResponse = new List<ProductResponse>();
+
+            foreach (var p in product)
+            {
+                var sellerName = _userService.GetSellerNameById(p.UserId);
+                productResponse.Add(new ProductResponse(p, sellerName));
+            }
+
+            return productResponse;
+        }
 
         [HttpGet("{id:length(24)}", Name = "GetProduct")]
         public ActionResult<Product> Get(string id)

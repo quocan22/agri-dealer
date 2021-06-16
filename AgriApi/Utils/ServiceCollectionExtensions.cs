@@ -24,6 +24,7 @@ namespace AgriApi.Utils
             services.AddSingleton<QuotationService>();
 
             services.AddScoped<IAuthentication, AuthenticateService>();
+            services.AddScoped<IAccountService, AccountService>();
 
             return services;
         }

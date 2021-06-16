@@ -23,6 +23,7 @@ namespace AgriApi.Controllers
             _cartService.Get();
 
         [HttpGet("{id:length(24)}", Name = "GetCart")]
+        [Authorize("user, seller")]
         public ActionResult<Cart> Get(string id)
         {
             var cart = _cartService.Get(id);
@@ -36,6 +37,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpPost]
+        [Authorize("user, seller")]
         public ActionResult<Cart> Create([FromForm] Cart cart)
         {
             _cartService.Create(cart);

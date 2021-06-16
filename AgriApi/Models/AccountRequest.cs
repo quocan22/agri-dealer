@@ -12,8 +12,6 @@ namespace AgriApi.Models
         [Required]
         [StringLength(16, MinimumLength = 5)]
         public string Password { get; set; }
-        [Required]
-        public string Role { get; set; }
         [Phone]
         public string PhoneNumber { get; set; }
         [StringLength(50)]

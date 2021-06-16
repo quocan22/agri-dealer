@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
 import "react-tabs/style/react-tabs.css";
 
 import Product from "./Product/Product";
-import products from "../../assets/data/products";
 import "./Products.css";
+
+const axios = require("axios");
 
 const Products = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchProductData() {
+      axios.get('http://localhost:5000/api/products')
+        .then(response => {
+          setProducts(response.data);
+        }).catch(error => {
+          console.log(error);
+        })
+    }
+    fetchProductData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className="container">
       <Tabs
