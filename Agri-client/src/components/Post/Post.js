@@ -35,7 +35,7 @@ function Post() {
         setDescription(response.data.description);
         setIntroduction(response.data.introduction);
         setImageUrl(response.data.imageUrl);
-        setBuyQuantity(response.data.minPurchase)
+        setBuyQuantity(response.data.minPurchase);
       }).catch(error => {
         console.log(error);
       })
@@ -64,98 +64,98 @@ function Post() {
 
   return (
     <div className="root">
-    <div className="post">
-      <div className="about-product">
-        <div className="details" key={post._id}>
-          <div className="big-img">
-            <img src={`/upload/${imageUrl}`} alt="" />
-          </div>
-          <div className="box">
-            <div className="row">
-              <h2>{productName}</h2>
+      <div className="post">
+        <div className="about-product">
+          <div className="details" key={post._id}>
+            <div className="big-img">
+              <img src={imageUrl} alt="" />
             </div>
-            <span>
-              {numberWithCommas(price)} đ / {unit}
-            </span>
-            <p className="content">{post.description}</p>
-            <p className="content">
-              Còn lại: {quantity} {unit}
-            </p>
-            <p className="quantity">
-              Số lượng{" "}
-              <button className="qtyBtn" onClick={subtractQuantity}>
-                <i className="fas fa-minus" />
+            <div className="box">
+              <div className="row">
+                <h2>{productName}</h2>
+              </div>
+              <span>
+                {numberWithCommas(price)} đ / {unit}
+              </span>
+              <p className="content">{post.description}</p>
+              <p className="content">
+                Còn lại: {quantity} {unit}
+              </p>
+              <p className="quantity">
+                Số lượng{" "}
+                <button className="qtyBtn" onClick={subtractQuantity}>
+                  <i className="fas fa-minus" />
+                </button>
+                <input
+                  className="qtyBox"
+                  type="number"
+                  value={buyQuantity}
+                  onChange={e => handleQuantity(e)}
+                />
+                <button className="qtyBtn" onClick={addQuantity}>
+                  <i className="fas fa-plus" />
+                </button>{" "}
+                {unit}
+              </p>
+              <button className="cart" onClick={() => console.log(productId)}>
+                <i className="fas fa-cart-plus" /> Mua ngay
               </button>
-              <input
-                className="qtyBox"
-                type="number"
-                value={buyQuantity}
-                onChange={e => handleQuantity(e)}
-              />
-              <button className="qtyBtn" onClick={addQuantity}>
-                <i className="fas fa-plus" />
-              </button>{" "}
-              {unit}
-            </p>
-            <button className="cart" onClick={() => console.log(productId)}>
-              <i className="fas fa-cart-plus" /> Mua ngay
-            </button>
+            </div>
+          </div>
+          <p style={{fontSize: 20, margin: 20, marginLeft: 10}}>MÔ TẢ SẢN PHẨM</p>
+          <div className="description">
+            {description}
+          </div>
+          <p style={{fontSize: 20, margin: 20, marginLeft: 10}}>GIỚI THIỆU SẢN PHẨM</p>
+          <div className="description">
+            {introduction}
+          </div>
+          <div className="comment">
+            <div style={{height: 50, fontSize: 18, padding: 16, backgroundColor: "lightgrey"}}>
+              Bình luận về sản phẩm
+            </div>
+            <div className="comment-list">
+            <Input className="add-comment-field" id="filled-basic" placeholder="Viết bình luận"></Input>
+              {comments.map((comment) => (
+                <Comment comment={comment} />
+              ))}
+            </div>
           </div>
         </div>
-        <p style={{fontSize: 20, margin: 20, marginLeft: 10}}>MÔ TẢ SẢN PHẨM</p>
-        <div className="description">
-          {description}
-        </div>
-        <p style={{fontSize: 20, margin: 20, marginLeft: 10}}>GIỚI THIỆU SẢN PHẨM</p>
-        <div className="description">
-          {introduction}
-        </div>
-        <div className="comment">
-          <div style={{height: 50, fontSize: 18, padding: 16, backgroundColor: "lightgrey"}}>
-            Bình luận về sản phẩm
-          </div>
-          <div className="comment-list">
-          <Input className="add-comment-field" id="filled-basic" placeholder="Viết bình luận"></Input>
-            {comments.map((comment) => (
-              <Comment comment={comment} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="provider">
-        <h3>Được cung cấp bởi</h3>
-        <Link to="/" className="provider-link">
-          {provider[0].name}
-        </Link>
-        <p className="separator"></p>
-        <div>
-          <div className="info-details">
-            <p className="index">Ngày tham gia</p>
-            <p className="info">{provider[0].joinDate}</p>
-          </div>
-          <div className="info-details">
-            <p className="index">Địa chỉ</p>
-            <p className="info">{provider[0].address}</p>
-          </div>
-          <div className="info-details">
-            <p className="index">Thương hiệu</p>
-            <p className="info">{provider[0].brand}</p>
-          </div>
-          <div className="info-details">
-            <p className="index">Tiêu chuẩn</p>
-            <p className="info">{provider[0].standard}</p>
-          </div>
-          <div className="info-details">
-            <p className="index">Quy mô</p>
-            <p className="info">{provider[0].scale}</p>
-          </div>
-          <div className="info-details">
-            <p className="index">Sản lượng</p>
-            <p className="info">{provider[0].quantity}</p>
+        <div className="provider">
+          <h3>Được cung cấp bởi</h3>
+          <Link to="/" className="provider-link">
+            {provider[0].name}
+          </Link>
+          <p className="separator"></p>
+          <div>
+            <div className="info-details">
+              <p className="index">Ngày tham gia</p>
+              <p className="info">{provider[0].joinDate}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Địa chỉ</p>
+              <p className="info">{provider[0].address}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Thương hiệu</p>
+              <p className="info">{provider[0].brand}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Tiêu chuẩn</p>
+              <p className="info">{provider[0].standard}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Quy mô</p>
+              <p className="info">{provider[0].scale}</p>
+            </div>
+            <div className="info-details">
+              <p className="index">Sản lượng</p>
+              <p className="info">{provider[0].quantity}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
