@@ -6,7 +6,11 @@ import {
   Select,
   TextField,
   InputAdornment,
+  Collapse,
+  IconButton
 } from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
+import CloseIcon from '@material-ui/icons/Close';
 import "./SellingProduct.css";
 const axios = require("axios");
 
@@ -48,7 +52,12 @@ function SellingProduct() {
     setSelectedFile(e.target.files[0]);
   };
 
+  const [successAlert, setSuccessAlert] = useState(false);
+  const [failAlert, setFailAlert] = useState(false);
+
   const addNewProduct = () => {
+    setSuccessAlert(false);
+    setFailAlert(false);
     let loginToken = localStorage.getItem("LoginToken");
     let userId = localStorage.getItem("UserId");
     let createProductForm = new FormData();
@@ -74,9 +83,15 @@ function SellingProduct() {
       setDescription("");
       setIntroduction("");
       setSelectedFile(null);
-      console.log("thanh cong")
-    }).catch(error => console.log(error));
+      console.log("thanh cong") 
+      setSuccessAlert(true);
+    }).catch(error => 
+      {
+      console.log(error);
+      setFailAlert(true);
+      });
   }
+
 
   return (
     <div className="container">
@@ -216,8 +231,51 @@ function SellingProduct() {
                 {selectedFile && <img className="preview-img" src={preview} alt=""/>}
             </div>
           </div>
-          <div className="custom-row" style={{ margin: 10, justifyContent:"flex-end"}}>
-            <button onClick={addNewProduct} className="add-product-button">Thêm sản phẩm</button>
+          <div className="custom-row" style={{ margin: 10, justifyContent:"space-between", alignContent:"center"}}>
+          <div className="custom-column" style={{ margin: 10, justifyContent:"flex-start", width:"700px"}}>
+
+          <Collapse in={successAlert}>
+            <Alert
+              severity="success"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setSuccessAlert(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              Thêm sản phẩm thành công!
+            </Alert>
+          </Collapse>
+
+          <Collapse in={failAlert}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setFailAlert(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              Thêm sản phẩm thất bại!
+            </Alert>
+          </Collapse>
+          </div>
+               <button onClick={addNewProduct}
+               className="add-product-button">Thêm sản phẩm</button>
           </div>
         </Card> 
       </div>
