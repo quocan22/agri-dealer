@@ -47,7 +47,7 @@ function Navbar() {
             <button className="button-cart">
               <i class="fa fa-shopping-cart" />
             </button>
-            <Link to="/login" style={{textDecoration: 'none'}} >
+            <Link to={userAcc ? "/profile" : "/login"} style={{textDecoration: 'none'}} >
             <button className="button-account" >
               <i class="fa fa-user" />
               {userAcc ? <p>{userAcc.displayName}</p> : <p>Đăng nhập</p>}

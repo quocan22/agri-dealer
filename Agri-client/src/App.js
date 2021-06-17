@@ -30,7 +30,7 @@ function App() {
         <Route path="/cart" component={Cart}/>
         <Route path="/selling-new-product" component={SellingProduct}/>
         <Route path="/profile-setting" component={ProfileSetting}/>
-        <Route path="/:productId" component={Post}/>
+        <Route path="/post/:productId" component={Post}/>
       <Footer />
       </div>
       </Switch>

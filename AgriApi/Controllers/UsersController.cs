@@ -52,7 +52,7 @@ namespace AgriApi.Controllers
                 UserClaims = new UserClaim()
                 {
                     PhoneNumber = account.PhoneNumber,
-                    Displayname = account.DisplayName,
+                    DisplayName = account.DisplayName,
                     Address = account.Address
                 }
             };

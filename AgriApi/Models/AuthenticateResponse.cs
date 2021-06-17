@@ -16,7 +16,7 @@ namespace AgriApi.Models
         {
             Id = user.Id;
             Email = user.Email;
-            DisplayName = user.UserClaims.Displayname;
+            DisplayName = user.UserClaims.DisplayName;
             Token = token;
         }
     }

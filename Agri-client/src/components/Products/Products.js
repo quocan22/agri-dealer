@@ -17,7 +17,6 @@ const Products = () => {
       axios.get('http://localhost:5000/api/products')
         .then(response => {
           setProducts(response.data);
-          console.log(response.data.imageUrl);
         }).catch(error => {
           console.log(error);
         })

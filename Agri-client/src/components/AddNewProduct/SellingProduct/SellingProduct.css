@@ -5,7 +5,7 @@
 	box-shadow: 0 0 5px #ccc;
 }
 
-.selling-product-form .row{
+.selling-product-form .custom-row{
         display: flex;
         flex-direction: row;
 }
@@ -17,7 +17,7 @@
 	margin: 20px auto;
 
 }
-.selling-product-form .row .column {
+.selling-product-form .custom-row .custom-column {
     display: flex;
     flex-direction: column;
     margin: 10px;

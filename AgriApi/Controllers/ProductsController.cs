@@ -2,6 +2,7 @@ using AgriApi.Entities;
 using AgriApi.Services;
 using AgriApi.Services.Identity;
 using AgriApi.Models;
+using AgriApi.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.IO;
@@ -62,6 +63,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpPost]
+        [Authorize("seller")]
         public async Task<ActionResult<Product>> Create([FromForm] Product product,[FromForm] IFormFile file)
         {
             var count = _productService.IsExisted(product.ProductName);

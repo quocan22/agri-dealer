@@ -8,7 +8,7 @@ namespace AgriApi.Entities.Identity
     {
         [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string Displayname { get; set; }
+        public string DisplayName { get; set; }
         [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string PhoneNumber { get; set; }
