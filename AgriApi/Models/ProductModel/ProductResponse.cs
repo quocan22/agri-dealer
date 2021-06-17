@@ -11,22 +11,22 @@ namespace AgriApi.Models
         public double Price { get; set; }
         public string Unit { get; set; }
         public int MinPurchase { get; set; }
+        public string ImageName { get; set; }
         public string ImageUrl { get; set; }
         public string SellerName { get; set; }
         public string CategoryId { get; set; }
 
-        public ProductResponse(Product product, string sellerName)
+        public ProductResponse(Product product, string sellerName, string url)
         {
             Id = product.Id;
             ProductName = product.ProductName;
             Price = product.Price;
             Unit = product.Unit;
             MinPurchase = product.MinPurchase;
-            ImageUrl = product.ImageUrl;
+            ImageName = product.ImageName;
+            ImageUrl = url;
             SellerName = sellerName;
             CategoryId = product.CategoryId;
         }
-    }
-
-    
+    } 
 }

@@ -4,6 +4,12 @@ using AgriApi.Services.Identity;
 using AgriApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AgriApi.Controllers
 {
@@ -14,16 +20,18 @@ namespace AgriApi.Controllers
         private readonly ProductService _productService;
         private readonly CategoryService _categoryService;
         private readonly UserService _userService;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ProductsController(ProductService productService, CategoryService categoryService, UserService userService)
+        public ProductsController(IWebHostEnvironment hostEnvironment, ProductService productService, CategoryService categoryService, UserService userService)
         {
+            _hostEnvironment = hostEnvironment;
             _productService = productService;
             _categoryService = categoryService;
             _userService = userService;
         }
 
         [HttpGet]
-        public ActionResult<List<ProductResponse>> GetActionResult()
+        public ActionResult<List<ProductResponse>> Get()
         {
             var product = _productService.Get();
             var productResponse = new List<ProductResponse>();
@@ -31,14 +39,15 @@ namespace AgriApi.Controllers
             foreach (var p in product)
             {
                 var sellerName = _userService.GetSellerNameById(p.UserId);
-                productResponse.Add(new ProductResponse(p, sellerName));
+                var url = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, p.ImageName);
+                productResponse.Add(new ProductResponse(p, sellerName, url));
             }
 
             return productResponse;
         }
 
         [HttpGet("{id:length(24)}", Name = "GetProduct")]
-        public ActionResult<Product> Get(string id)
+        public ActionResult<ProductDetailResponse> Get(string id)
         {
             var product = _productService.Get(id);
 
@@ -47,20 +56,38 @@ namespace AgriApi.Controllers
                 return NotFound();
             }
 
-            return product;
+            var url = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, product.ImageName);
+            var details = new ProductDetailResponse(product, url);
+            return details;
         }
 
         [HttpPost]
-        public ActionResult<Product> Create([FromForm] Product product)
+        public async Task<ActionResult<Product>> Create([FromForm] Product product,[FromForm] IFormFile file)
         {
             var count = _productService.IsExisted(product.ProductName);
 
             if (count)
                 return BadRequest(new { message = "Sản phẩm này đã tồn tại."});
-                
+
+            product.ImageName = await SaveImage(file);
+
             _productService.Create(product);
 
-            return CreatedAtRoute("GetProduct", new { id = product.Id.ToString() }, product);
+            //return CreatedAtRoute("GetProduct", new { id = productRequest.Product.Id.ToString() }, productRequest.Product);
+            return StatusCode(201);
+        }
+
+        [NonAction]
+        public async Task<string> SaveImage(IFormFile imageFile)
+        {
+            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ','-');
+            imageName = imageName + Path.GetExtension(imageFile.FileName);
+            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images", imageName);
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+            return imageName;
         }
 
         [HttpPut("{id:length(24)}")]
@@ -94,7 +121,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpGet("categories")]
-        public ActionResult<List<Category>> Get() =>
+        public ActionResult<List<Category>> GetCategory() =>
             _categoryService.Get(); 
     }
 }

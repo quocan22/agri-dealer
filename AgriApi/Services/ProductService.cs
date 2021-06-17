@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AgriApi.Entities;
 using MongoDB.Driver;
@@ -37,7 +38,16 @@ namespace AgriApi.Services
 
             return true;
         }
-            
+        
+        public byte[] GetImage(string sBase64String)
+        {
+            byte[] bytes = null;
+            if (!string.IsNullOrEmpty(sBase64String))
+            {
+                bytes = Convert.FromBase64String(sBase64String);
+            }
+            return bytes;
+        }
 
         public void Update(string id, Product productIn) =>
             _product.ReplaceOne(product => product.Id == id, productIn);

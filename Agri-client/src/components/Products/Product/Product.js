@@ -29,7 +29,7 @@ const Product = ({ product }) => {
   return (
     <Card className={classes.root}>
       <Link to={`/${product.id}`}>
-        <CardMedia className={classes.media} image={`/upload/${product.imageUrl}`} title={product.productName} />
+        <CardMedia className={classes.media} image={product.imageUrl} title={product.productName} />
       </Link>
       <CardContent>
         <Link to={`/${product.id}`} className="card-content-name">

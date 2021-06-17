@@ -22,7 +22,7 @@ namespace AgriApi.Entities
         public int MinPurchase { get; set; }
         public string Description { get; set; }
         public string Introduction { get; set; }
-        public string ImageUrl { get; set; }
+        public string ImageName { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonRequired]
         public string UserId { get; set; }
