@@ -15,6 +15,9 @@ import {
   TableRow,
   makeStyles,
 } from "@material-ui/core";
+import SettingsIcon from '@material-ui/icons/Settings';
+import { Link } from "react-router-dom";
+
 const useStyles = 
 makeStyles({
   table: {
@@ -26,10 +29,16 @@ function Profile() {
   const classes = useStyles();
   return (
     <div className="container-profile">
+      <Typography variant="h4" style={{marginBottom:"10px"}}>THÔNG TIN CÁ NHÂN</Typography>
       <Card className="profile-card">
+        <Grid style={{display:"flex", justifyContent:"flex-end"}}>
+        <Link to={"/profile-setting"} className="card-content-name">
+        <SettingsIcon fontSize="large" />
+        </Link> 
+        </Grid>
         <Grid className="row">
           <CardMedia className="user-avatar" image={profile.imgsrc} />
-          <Grid className="info">
+          <Grid className="profile-info">
             <Typography style={{ fontSize: 15 }}>
               Họ và tên:
               <text style={{ margin: 5, fontWeight: "bold" }}>
@@ -83,7 +92,7 @@ function Profile() {
               <text style={{ color: "skyblue", fontWeight: "bold" }}>
                 {" "}
                 Bình thường (1)
-              </text>
+              </text> 
               ,
               <text style={{ color: "red", fontWeight: "bold" }}>
                 {" "}
@@ -92,6 +101,7 @@ function Profile() {
             </Typography>
           </Grid>
         </Grid>
+        
         <Typography variant="h4" style={{ margin: 10 }}>Giao dịch gần đây</Typography>
         <p className="separator" style={{ margin: 10 }}></p>
         <TableContainer component={Paper}>

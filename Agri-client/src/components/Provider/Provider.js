@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid,Typography } from "@material-ui/core";
 import "react-tabs/style/react-tabs.css";
 
 import provider from "../../assets/data/provider";
@@ -9,6 +9,7 @@ import ProviderCell from "./ProviderCell/ProviderCell";
 function Provider() {
   return (
     <div className="container">
+      <Typography variant="h4" style={{marginBottom:"10px"}}>DANH SÁCH NHÀ VƯỜN</Typography>
       <Grid
             className="list-item"
             container

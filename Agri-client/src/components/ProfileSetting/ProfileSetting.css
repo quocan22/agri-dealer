@@ -1,0 +1,63 @@
+.profile-setting-main-grid{
+	max-width: 1008px;
+	width: 100%;
+	margin: 20px auto;
+	box-shadow: 0 0 5px #ccc;
+}
+
+.profile-setting .row{
+        display: flex;
+        flex-direction: row;
+}
+.profile-setting {
+
+	height: auto;
+	max-width: 1008px;
+	width: 100%;
+	margin: 20px auto;
+
+}
+
+.setting-avatar {
+	height: 160px;
+	width: 160px;
+	min-height: 160px;
+	min-width: 160px;
+}
+
+.profile-setting .row .column {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    max-width: 1008px;
+	width: 100% ;
+    align-content: center;
+    justify-content: center;
+}
+
+.preview-img
+{
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 300px;   
+    min-height: 300px;
+
+}
+
+.add-product-button {
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    font-size: larger;
+    background-color: seagreen;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    left: 50%;
+    position: inherit;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+

@@ -1,0 +1,53 @@
+.selling-product-main-grid{
+	max-width: 1008px;
+	width: 100%;
+	margin: 20px auto;
+	box-shadow: 0 0 5px #ccc;
+}
+
+.selling-product-form .row{
+        display: flex;
+        flex-direction: row;
+}
+.selling-product-form {
+
+	height: auto;
+	max-width: 1008px;
+	width: 100%;
+	margin: 20px auto;
+
+}
+.selling-product-form .row .column {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    max-width: 1008px;
+	width: 100%;
+}
+
+.preview-img
+{
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 300px;   
+    min-height: 300px;
+
+}
+
+.add-product-button {
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    font-size: larger;
+    background-color: seagreen;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    left: 50%;
+    position: inherit;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+

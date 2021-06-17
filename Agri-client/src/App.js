@@ -11,6 +11,9 @@ import Quotation from "./components/Quotation/Quotation"
 import Profile from "./components/UserProfile/Profile"
 import Cart from "./components/Cart/Cart"
 import Login from "./components/Login/Login";
+import SellingProduct from "./components/AddNewProduct/SellingProduct/SellingProduct";
+import ProfileSetting from "./components/ProfileSetting/ProfileSetting"
+
 
 function App() {
   return (
@@ -25,6 +28,8 @@ function App() {
         <Route path="/quotation" component={Quotation} />
         <Route path="/profile" component={Profile}/>
         <Route path="/cart" component={Cart}/>
+        <Route path="/selling-new-product" component={SellingProduct}/>
+        <Route path="/profile-setting" component={ProfileSetting}/>
         <Route path="/:productId" component={Post}/>
       <Footer />
       </div>
