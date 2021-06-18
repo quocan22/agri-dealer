@@ -56,8 +56,16 @@ namespace AgriApi.Services.Identity
 
         public User Create(User user)
         {
-            _user.InsertOne(user);
-            return user;
+            user.UserClaims.JoinDate = System.DateTime.Now;
+            try
+            {
+                _user.InsertOne(user);
+                return user;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void Update(string id, User userIn) =>

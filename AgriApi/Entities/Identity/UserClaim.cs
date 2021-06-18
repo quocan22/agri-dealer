@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json.Serialization;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace AgriApi.Entities.Identity
@@ -15,7 +16,7 @@ namespace AgriApi.Entities.Identity
         [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Address { get; set; }
-        [BsonDateTimeOptions(DateOnly = true)]
+        [BsonRepresentation(BsonType.DateTime)]
         [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? JoinDate { get; set; }

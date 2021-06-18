@@ -20,5 +20,8 @@ namespace AgriApi.Services
 
         public string Get(string id) =>
             _cate.Find(cate => cate.Id == id).FirstOrDefault().CategoryName; 
+
+        public string GetCateIdByCateName(string cateName) =>
+            _cate.Find(cate => cate.CategoryName == cateName).FirstOrDefault().Id;
     }
 }

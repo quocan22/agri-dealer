@@ -8,13 +8,18 @@ import "./Products.css";
 
 const axios = require("axios");
 
-const Products = () => {
+const Products = (props) => {
   const [tabIndex, setTabIndex] = useState(0);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchProductData() {
-      axios.get('http://localhost:5000/api/products')
+      axios.get('http://localhost:5000/api/products/search', {
+        params: {
+          type: "categoryid",
+          value: props.cate,
+        },
+      })
         .then(response => {
           setProducts(response.data);
         }).catch(error => {
@@ -33,6 +38,7 @@ const Products = () => {
         onSelect={(index) => setTabIndex(index)}
       >
         <TabList>
+          {props.cate !== "all" ? <button className="cate-button">{props.cate}</button> : null}
           <Tab>Sản phẩm có sẵn</Tab>
           <Tab>Sản phẩm bán trước</Tab>
         </TabList>

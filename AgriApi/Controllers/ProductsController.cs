@@ -47,6 +47,49 @@ namespace AgriApi.Controllers
             return productResponse;
         }
 
+        [HttpGet("search/", Name = "GetProductByValue")]
+        public ActionResult<List<ProductResponse>> GetProductByValue([FromQuery] string type, [FromQuery] string value)
+        {
+            var products = new List<Product>();
+            products.Clear();
+            switch(type) 
+            {
+                case "categoryid":
+                    if (value == "all") 
+                    {
+                        products = _productService.Get();
+                    }
+                    else
+                    {
+                        var cateId = _categoryService.GetCateIdByCateName(value);
+                        if (cateId != null)
+                        {
+                            products = _productService.GetProductByCate(cateId);
+                        }
+                    }
+                    break;
+                case "name":
+                    products = _productService.GetProductByName(value);
+                    break;
+                default:
+                    break;
+            }
+            if (products == null)
+            {
+                return NotFound();
+            }
+            var productResponse = new List<ProductResponse>();
+
+            foreach(var p in products)
+            {
+                var sellerName = _userService.GetSellerNameById(p.UserId);
+                var url = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, p.ImageName);
+                productResponse.Add(new ProductResponse(p, sellerName, url));
+            }
+
+            return productResponse;
+        }
+
         [HttpGet("{id:length(24)}", Name = "GetProduct")]
         public ActionResult<ProductDetailResponse> Get(string id)
         {

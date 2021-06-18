@@ -14,10 +14,10 @@ const Home = () => {
       <p className="home-slogan">
         Hệ thống hỗ trợ báo giá và giao dịch nông sản
       </p>
-      <Products />
-      <Products />
-      <Products />
-      <Products />
+      <Products cate="all" />
+      <Products cate="Trái cây" />
+      <Products cate="Rau củ quả" />
+      <Products cate="Hoa tươi" />
     </div>
   );
 };

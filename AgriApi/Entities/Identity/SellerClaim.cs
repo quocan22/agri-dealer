@@ -6,17 +6,20 @@ namespace AgriApi.Entities.Identity
 {
     public class SellerClaim
     {
-        [BsonIgnoreIfNull]
+        [BsonRequired]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string SellerName { get; set; }
-        [BsonIgnoreIfNull]
+        [BsonRequired]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string BrandName { get; set; }
-        [BsonIgnoreIfNull]
+        [BsonRequired]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Production { get; set; }
-        [BsonIgnoreIfNull]
+        [BsonRequired]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Scale { get; set; }
+        [BsonRequired]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Capacity { get; set; }
     }
 }

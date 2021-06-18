@@ -23,6 +23,12 @@ namespace AgriApi.Services
         public Product Get(string id) =>
             _product.Find<Product>(product => product.Id == id).FirstOrDefault();
 
+        public List<Product> GetProductByName(string name) =>
+            _product.Find<Product>(product => product.ProductName.Contains(name)).ToList();
+
+        public List<Product> GetProductByCate(string cateid) =>
+            _product.Find<Product>(product => product.CategoryId == cateid).ToList();
+
         public Product Create(Product product)
         {
             _product.InsertOne(product);

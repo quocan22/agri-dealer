@@ -18,6 +18,14 @@
   width: 100%;
   border: 1px;
 }
+.cate-button {
+  border: none;
+  width: 150px;
+  height: 35px;
+  font-size: 18px;
+  background-color: seagreen;
+  color: white;
+}
 .read-more-button {
   width: 120px;
   height: 40px;

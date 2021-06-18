@@ -32,8 +32,20 @@ namespace AgriApi.Controllers
             {
                 return NotFound();
             }
-
             return user;
+        }
+
+        [HttpGet("seller", Name = "GetSeller")]
+        public ActionResult<SellerResponse> GetSeller([FromQuery] string id)
+        {
+            var user = _userService.Get(id);
+
+            if (user != null)
+            {
+                return new SellerResponse(user);
+            }
+
+            return NotFound();
         }
 
         [HttpPost]
@@ -56,7 +68,11 @@ namespace AgriApi.Controllers
                     Address = account.Address
                 }
             };
-            _userService.Create(user);
+            var res = _userService.Create(user);
+            if (res == null)
+            {
+                return BadRequest();
+            }
 
             return CreatedAtRoute("GetUser", new { id = user.Id.ToString() }, user);
         }
