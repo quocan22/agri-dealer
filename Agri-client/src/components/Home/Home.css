@@ -1,10 +1,7 @@
 .root {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  justify-self: center;
   overflow: hidden;
   padding: 30;
   margin: 0 auto;
@@ -29,4 +26,45 @@ img {
   margin-bottom: 1em;
   color: seagreen;
   font-size: larger;
+}
+.products-tab {
+  justify-self: center;
+  color: seagreen;
+  margin: 10px;
+  font-size: large;
+  background-color: whitesmoke;
+}
+.available-tab {
+  width: 100%;
+  border: 1px;
+}
+.cate-button {
+  border: none;
+  width: 150px;
+  height: 35px;
+  font-size: 18px;
+  background-color: seagreen;
+  color: white;
+}
+.read-more-button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: larger;
+  background-color: seagreen;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  left: 50%;
+  position: inherit;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.img-product-start {
+  width: 35px;
+  height: 35px;
+  margin-bottom: -10px;
+  margin-right: 5px;
 }

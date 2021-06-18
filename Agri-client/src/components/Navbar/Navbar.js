@@ -1,14 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import useReactRouter from "use-react-router";
 import { AuthContext } from "../../contexts/AuthProvider";
 import "./Navbar.css";
 import logo from "../../assets/images/Logo3.png";
+const axios = require("axios");
 
 function Navbar() {
   const {userAcc} = useContext(AuthContext);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [dropdown, setDropdown] = useState(false);
+  const [cates, setCates] = useState([]);
+  const [search, setSearch] = useState("");
+  const {history} = useReactRouter();
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -20,8 +25,19 @@ function Navbar() {
   const onMouseLeave = () => setDropdown(false);
 
   useEffect(() => {
+    axios.get("http://localhost:5000/api/products/categories")
+      .then(res => {
+        setCates(res.data);
+      }).catch(error => console.log(error));
     showButton();
   }, []);
+
+  const handleSearch = (e) => {
+    const urlEncodedSearch = encodeURI(search);
+    history.push(`/search?type=name&value=${urlEncodedSearch}`);
+    e.preventDefault();
+    setSearch("");
+  }
 
   window.addEventListener("resize", showButton);
 
@@ -35,11 +51,13 @@ function Navbar() {
           </Link>
           <div class="search">
             <input
+              value={search}
               type="text"
               class="searchTerm"
               placeholder="Bạn muốn mua gì?"
+              onChange={e => setSearch(e.target.value)}
             />
-            <button type="submit" class="searchButton">
+            <button onClick={e => handleSearch(e)} type="submit" class="searchButton">
               <i class="fa fa-search" />
             </button>
           </div>
@@ -50,7 +68,9 @@ function Navbar() {
             <Link to={userAcc ? "/profile" : "/login"} style={{textDecoration: 'none'}} >
             <button className="button-account" >
               <i class="fa fa-user" />
-              {userAcc ? <p>{userAcc.displayName}</p> : <p>Đăng nhập</p>}
+              {userAcc ? 
+              <p>{userAcc.displayName}</p> : 
+              <p>Đăng nhập</p>}
             </button>
             </Link>
           </div>
@@ -67,11 +87,11 @@ function Navbar() {
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
             >
-              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+              <p className="nav-links" onClick={closeMobileMenu}>
                 SẢN PHẨM
                 <i className="fas fa-caret-down down-arrow" />
-              </Link>
-              {dropdown && <Dropdown />}
+              </p>
+              {dropdown && <Dropdown cateInfo={cates} />}
             </li>
             <li className="nav-item">
               <Link to="/provider" className="nav-links" onClick={closeMobileMenu}>
@@ -90,25 +110,7 @@ function Navbar() {
   );
 }
 
-const MenuItems = [
-  {
-    title: "Trái cây",
-    path: "",
-    cName: "dropdown-link",
-  },
-  {
-    title: "Rau củ quả",
-    path: "",
-    cName: "dropdown-link",
-  },
-  {
-    title: "Hoa tươi",
-    path: "",
-    cName: "dropdown-link",
-  },
-];
-
-function Dropdown() {
+function Dropdown(props) {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -118,15 +120,15 @@ function Dropdown() {
         onClick={handleClick}
         className={click ? "dropdown-menu clicked" : "dropdown-menu"}
       >
-        {MenuItems.map((item, index) => {
+        {props.cateInfo.map((item, index) => {
           return (
             <li key={index}>
               <Link
-                className={item.cName}
-                to={item.path}
+                className="dropdown-link"
+                to={`/search?type=catename&value=${item.categoryName}`}
                 onClick={() => setClick(false)}
               >
-                {item.title}
+                {item.categoryName}
               </Link>
             </li>
           );

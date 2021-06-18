@@ -13,6 +13,7 @@ import Cart from "./components/Cart/Cart"
 import Login from "./components/Login/Login";
 import SellingProduct from "./components/AddNewProduct/SellingProduct/SellingProduct";
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting"
+import Search from "./components/Search/Search";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/selling-new-product" component={SellingProduct}/>
         <Route path="/profile-setting" component={ProfileSetting}/>
         <Route path="/post/:productId" component={Post}/>
+        <Route path="/search" component={Search} />
       <Footer />
       </div>
       </Switch>

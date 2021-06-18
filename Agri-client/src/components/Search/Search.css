@@ -1,0 +1,13 @@
+.root {
+    background-color: whitesmoke;
+}
+.search-result-text {
+    font-size: larger;
+    margin: 10px;
+    width: 1000px;
+    text-align: left;
+}
+.search-divider {
+    margin: 10px;
+    background-color: grey;
+}

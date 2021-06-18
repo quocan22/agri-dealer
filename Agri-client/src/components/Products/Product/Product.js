@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
 const Product = ({ product }) => {
   const classes = useStyles();
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <Card className={classes.root}>
       <Link to={`/post/${product.id}`}>
@@ -39,8 +43,8 @@ const Product = ({ product }) => {
         </Link>
         <div className={classes.cardContentPrice}>
           <Typography variant="subtitle1">
-            {product.price}
-            <subtitile1> / </subtitile1>
+            {numberWithCommas(product.price)}
+            <subtitile1> đ / </subtitile1>
             {product.unit}
           </Typography>
         </div>

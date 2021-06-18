@@ -49,7 +49,6 @@ function Post() {
   }, [])
 
   useEffect(() => {
-    console.log(providerId);
     axios.get("http://localhost:5000/api/users/seller", {
         params: {
           id: providerId

@@ -21,7 +21,6 @@ const AuthProvider = ({children}) => {
               .then(response => {
                 return response.data;
               }).then(data => {
-                console.log(data);
                 setUserAcc(data);
                 localStorage.setItem('UserId', data.id);
                 localStorage.setItem('LoginToken', data.token);

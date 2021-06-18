@@ -24,7 +24,7 @@ namespace AgriApi.Services
             _product.Find<Product>(product => product.Id == id).FirstOrDefault();
 
         public List<Product> GetProductByName(string name) =>
-            _product.Find<Product>(product => product.ProductName.Contains(name)).ToList();
+            _product.Find<Product>(product => product.ProductName.ToLower().Contains(name.ToLower())).ToList();
 
         public List<Product> GetProductByCate(string cateid) =>
             _product.Find<Product>(product => product.CategoryId == cateid).ToList();

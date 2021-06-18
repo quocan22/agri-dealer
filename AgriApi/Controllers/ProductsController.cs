@@ -54,7 +54,7 @@ namespace AgriApi.Controllers
             products.Clear();
             switch(type) 
             {
-                case "categoryid":
+                case "catename":
                     if (value == "all") 
                     {
                         products = _productService.Get();
@@ -67,6 +67,9 @@ namespace AgriApi.Controllers
                             products = _productService.GetProductByCate(cateId);
                         }
                     }
+                    break;
+                case "cateid":
+                    products = _productService.GetProductByCate(value);
                     break;
                 case "name":
                     products = _productService.GetProductByName(value);
