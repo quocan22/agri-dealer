@@ -26,13 +26,6 @@
 	transition: all 0s ease 0s;
 }
 
-.container-profile {
-
-	height: 539px;
-	width: 1000px;
-	margin: 20px auto;
-	padding: 0px 10px;
-}
 
 .history {
 	/* Font & Text */
@@ -63,36 +56,10 @@
 
 }
 .user-avatar {
-	/* Font & Text */
-	font-family: "Font Awesome 5 Free";
-	font-size: 160px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 900;
-	letter-spacing: normal;
-	line-height: 160px;
-	text-decoration: none solid rgb(68, 68, 68);
-	text-align: center;
-	text-indent: 0px;
-	text-transform: none;
-	vertical-align: baseline;
-	white-space: normal;
-	word-spacing: 0px;
-
-	/* Color & Background */
-	background-attachment: scroll;
-	background-color: rgb(205, 205, 205);
-	background-image: none;
-	background-position: 0% 0%;
-	background-repeat: repeat;
-	color: rgb(68, 68, 68);
-
-	/* Box */
 	height: 160px;
 	width: 160px;
 	min-height: 160px;
 	min-width: 160px;
-
 
 	border-top-left-radius: 50%;	 
 	border-top-right-radius: 50%;
@@ -114,7 +81,6 @@
 	text-indent: 0px;
 	text-transform: none;
 	white-space: normal;
-
 	/* Color & Background */
 	background-attachment: scroll;
 	background-color: rgba(0, 0, 0, 0);
@@ -122,10 +88,28 @@
 	background-position: 0% 0%;
 	background-repeat: repeat;
 	color: rgb(68, 68, 68);
-
 	/* Box */
 	height: 130px;
 	width: auto;
 	padding: 0px 15px;
 	margin: auto auto auto 0px;
+}
+
+.logout {
+    height: 50px;
+    width: fit-content;
+    min-width: fit-content;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    font-size: larger;
+    background-color: seagreen;
+    cursor: pointer;
+    margin-top: 10px;
+    left: 50%;
+    position: inherit;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+	align-content: center;
 }

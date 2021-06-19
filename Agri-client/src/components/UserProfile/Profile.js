@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useContext, useState, useEffect} from "react";
 import "./Profile.css";
 import profile from "../../assets/data/profile";
+import { AuthContext } from "../../contexts/AuthProvider";
+
 import {
   Grid,
   Card,
@@ -16,7 +18,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import SettingsIcon from '@material-ui/icons/Settings';
-import { Link } from "react-router-dom";
+import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
+import { useParams, Link } from "react-router-dom";
 
 const useStyles = 
 makeStyles({
@@ -24,12 +27,19 @@ makeStyles({
     minWidth: 650,
   },
 });
+const axios = require("axios");
+// const dateFormat = require("dateformat");
 
 function Profile() {
   const classes = useStyles();
+  const {id} = useParams();
+  const {userAcc} = useContext(AuthContext);
+
   return (
-    <div className="container-profile">
+    <div className="container">
       <Typography variant="h4" style={{marginBottom:"10px"}}>THÔNG TIN CÁ NHÂN</Typography>
+      {userAcc === null ?
+      <p>Đang tải dữ liệu</p> :
       <Card className="profile-card">
         <Grid style={{display:"flex", justifyContent:"flex-end"}}>
         <Link to={"/profile-setting"} className="card-content-name">
@@ -42,31 +52,33 @@ function Profile() {
             <Typography style={{ fontSize: 15 }}>
               Họ và tên:
               <text style={{ margin: 5, fontWeight: "bold" }}>
-                {profile.name}
+                {userAcc.displayName}
               </text>
             </Typography>
             <Typography style={{ fontSize: 15 }}>
               Số điện thoại:
               <text style={{ margin: 5, fontWeight: "bold" }}>
                 {profile.phonenumber}
+
               </text>
             </Typography>
             <Typography style={{ fontSize: 15 }}>
               Email:
               <text style={{ margin: 5, fontWeight: "bold" }}>
-                {profile.email}
+                {userAcc.email}
               </text>
             </Typography>
             <Typography style={{ fontSize: 15 }}>
               Địa chỉ:
               <text style={{ margin: 5, fontWeight: "bold" }}>
-                {profile.address}
+                {userAcc.address}
+
               </text>
             </Typography>
             <Typography style={{ fontSize: 15 }}>
               Ngày tham gia:
               <text style={{ margin: 5, fontWeight: "bold" }}>
-                {profile.joindate}
+                {userAcc.joinDate}
               </text>
             </Typography>
           </Grid>
@@ -129,8 +141,12 @@ function Profile() {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </TableContainer> 
       </Card>
+}
+      <button className="logout">
+        Đăng xuất  <DirectionsRunIcon style={{marginTop:"3px",fontSize:"large"}}/>
+      </button>
     </div>
   );
 }

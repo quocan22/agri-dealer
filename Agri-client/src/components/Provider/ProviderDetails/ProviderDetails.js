@@ -40,7 +40,6 @@ class ProviderDetails extends React.Component{
                     <p> Chủ sở hữu:</p>
                     <p>Số điện thoại:</p>
                     <p>Thương hiệu:</p>
-                    <p>Sản phẩm cung cấp:	</p>
                     <p>Địa chỉ:	</p>
                     <p>Ngày tham gia: </p>
                     <p>Quy mô nhà vườn:</p>
@@ -50,7 +49,6 @@ class ProviderDetails extends React.Component{
                     <p>{provider.owner}</p>
                     <p>{provider.phonenumber}</p>
                     <p>{provider.brand}</p>
-                    <p>{provider.providedproduct}</p>
                     <p>{provider.address}</p>
                     <p>{provider.joinDate}</p>
                     <p>{provider.scale}</p>

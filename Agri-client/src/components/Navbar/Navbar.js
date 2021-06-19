@@ -62,9 +62,12 @@ function Navbar() {
             </button>
           </div>
           <div className="button-container">
+          <Link to={"/cart"}>
             <button className="button-cart">
               <i class="fa fa-shopping-cart" />
             </button>
+            </Link>
+
             <Link to={userAcc ? "/profile" : "/login"} style={{textDecoration: 'none'}} >
             <button className="button-account" >
               <i class="fa fa-user" />
