@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, {useContext} from "react";
 import "./Profile.css";
 import profile from "../../assets/data/profile";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -19,7 +19,7 @@ import {
 } from "@material-ui/core";
 import SettingsIcon from '@material-ui/icons/Settings';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
-import { useParams, Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = 
 makeStyles({
@@ -27,13 +27,15 @@ makeStyles({
     minWidth: 650,
   },
 });
-const axios = require("axios");
-// const dateFormat = require("dateformat");
 
 function Profile() {
   const classes = useStyles();
-  const {id} = useParams();
-  const {userAcc} = useContext(AuthContext);
+  const {userAcc, logout} = useContext(AuthContext);
+  const history = useHistory();
+
+  const handleLogout = () => {
+    logout().then(history.push("/"));
+  }
 
   return (
     <div className="container">
@@ -143,10 +145,10 @@ function Profile() {
           </Table>
         </TableContainer> 
       </Card>
-}
-      <button className="logout">
-        Đăng xuất  <DirectionsRunIcon style={{marginTop:"3px",fontSize:"large"}}/>
-      </button>
+      }
+        <button className="logout" onClick={handleLogout}>
+          Đăng xuất  <DirectionsRunIcon style={{marginTop:"3px",fontSize:"large"}}/>
+        </button>
     </div>
   );
 }
