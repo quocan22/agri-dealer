@@ -27,7 +27,10 @@ function SellingProduct() {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
 
-  // create a preview as a side effect, wheneDver selected file is changed
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  })
+
   useEffect(() => {
     axios.get("http://localhost:5000/api/products/categories")
       .then(response => {

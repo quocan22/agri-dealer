@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import {
   Typography,
   Card,
@@ -15,6 +15,11 @@ import { Link } from "react-router-dom";
 
 
 function ProfileSetting() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  })
+
   return (
     //THÔNG TIN NHÀ CUNG CẤP
     <div className="container">

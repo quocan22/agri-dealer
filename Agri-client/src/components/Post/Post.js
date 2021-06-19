@@ -27,6 +27,7 @@ function Post() {
   const [buyQuantity, setBuyQuantity] = useState(1);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     function fetchProductDetail() {
       axios.get("http://localhost:5000/api/products/" + productId)
         .then(response => {

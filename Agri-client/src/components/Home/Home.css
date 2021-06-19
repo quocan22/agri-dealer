@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
   padding: 30;
   margin: 0 auto;
@@ -57,6 +58,7 @@ img {
   cursor: pointer;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-right: -120px;
   left: 50%;
   position: inherit;
   -ms-transform: translateX(-50%);

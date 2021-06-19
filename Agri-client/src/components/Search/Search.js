@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useReactRouter from "use-react-router";
 import Products from "../Products/Products";
 import "./Search.css";
@@ -8,6 +8,10 @@ function Search() {
     const params = new URLSearchParams(location.search);
     const type = params.get("type");
     const value = params.get("value");
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
     return (
         <div className="root">

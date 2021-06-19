@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid,Typography } from "@material-ui/core";
 import "react-tabs/style/react-tabs.css";
 import quotation from "../../assets/data/quotation";
@@ -7,6 +7,11 @@ import quotation from "../../assets/data/quotation";
 import "./Quotation.css";
 import QuotationCell from "./QuotationCell/QuotationCell.js"
 function Quotation() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  })
+
   return (
     <div className="container">
                   <Typography variant="h4" style={{marginBottom:"10px"}}>BÁO GIÁ SẢN PHẨM</Typography>

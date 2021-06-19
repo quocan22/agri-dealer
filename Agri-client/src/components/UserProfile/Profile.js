@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useEffect, useContext } from "react";
 import "./Profile.css";
 import profile from "../../assets/data/profile";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -32,6 +32,10 @@ function Profile() {
   const classes = useStyles();
   const {userAcc, logout} = useContext(AuthContext);
   const history = useHistory();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  })
 
   const handleLogout = () => {
     logout().then(history.push("/"));

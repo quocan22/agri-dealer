@@ -49,7 +49,7 @@ function Navbar() {
             <img src={logo} alt="Website Logo" width="60" height="60" />
             AgriDeal
           </Link>
-          <div class="search">
+          <form class="search">
             <input
               value={search}
               type="text"
@@ -60,7 +60,7 @@ function Navbar() {
             <button onClick={e => handleSearch(e)} type="submit" class="searchButton">
               <i class="fa fa-search" />
             </button>
-          </div>
+          </form>
           <div className="button-container">
           <Link to={"/cart"}>
             <button className="button-cart">
