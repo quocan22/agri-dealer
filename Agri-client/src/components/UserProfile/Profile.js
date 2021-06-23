@@ -78,7 +78,6 @@ function Profile() {
               Địa chỉ:
               <text style={{ margin: 5, fontWeight: "bold" }}>
                 {userAcc.address}
-
               </text>
             </Typography>
             <Typography style={{ fontSize: 15 }}>

@@ -8,7 +8,8 @@
 .login-container {
   background-color: white;
   width: 400px;
-  height: 480px;
+  height: fit-content;
+  max-height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +25,12 @@
 .register-forgot > p {
   color: seagreen;
   cursor: pointer;
+}
+
+.register-forgot-link {
+  color: seagreen;
+  cursor: pointer;
+  text-decoration: none;
 }
 .logo {
   width: 100px;

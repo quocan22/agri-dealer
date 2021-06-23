@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useContext, useState } from "react";
 import {
   Typography,
   Card,
@@ -10,8 +10,10 @@ import {
   Button,
 } from "@material-ui/core";
 import "./ProfileSetting.css";
-import products from "../../assets/data/products";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
+const axios = require("axios");
+
 
 
 function ProfileSetting() {
@@ -19,7 +21,22 @@ function ProfileSetting() {
   useEffect(() => {
     window.scrollTo(0, 0);
   })
-
+  const {userAcc} = useContext(AuthContext);
+  useEffect(() => {
+    async function fetchProductData() {
+      axios.get('http://localhost:5000/api/products/' + userAcc.id, {
+          params: {
+          },
+        }).then(response => {
+            setProducts(response.data);
+            console.log(response);
+        }).catch(error => {
+          console.log(error);
+        })
+    }
+    fetchProductData();
+  })
+  const [products, setProducts] = useState([]);
   return (
     //THÔNG TIN NHÀ CUNG CẤP
     <div className="container">
@@ -64,6 +81,7 @@ function ProfileSetting() {
                 placeholder="Chủ sở hữu"
                 variant="filled"
                 disabled
+                value={userAcc.displayName}
               />
             </div>
           </div>
@@ -73,7 +91,11 @@ function ProfileSetting() {
               <label style={{ fontSize: "18px" }}>Email </label>
             </div>
             <div className="column">
-              <TextField type="email" placeholder="Email" />
+              <TextField type="email" placeholder="Email" 
+                              value={userAcc.email}
+                              variant="filled"
+                              disabled
+              />
             </div>
           </div>
 
@@ -91,7 +113,9 @@ function ProfileSetting() {
               <label style={{ fontSize: "18px" }}>Địa chỉ </label>
             </div>
             <div className="column">
-              <TextField type="text" placeholder="Địa chỉ" />
+              <TextField type="text" placeholder="Địa chỉ" 
+                value={userAcc.address}
+              />
             </div>
           </div>
 
@@ -104,9 +128,10 @@ function ProfileSetting() {
               {products.map((product) => (
                 <List item key={product.id} container>
                   <ListItem button>
-                    <Link to={`/${product.id}`} className="card-content-name">
+                    <Link to={`post/${product.id}`} className="card-content-name">
                       <Typography variant="h6" gutterBottom>
-                        {product.productName}
+                      { 
+                         product.productName} 
                       </Typography>
                     </Link>
                   </ListItem>

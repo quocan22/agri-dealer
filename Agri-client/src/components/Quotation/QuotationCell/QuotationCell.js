@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
   Card,
   CardMedia,
@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./QuotationCell.css";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 function QuotationCell({ quotation }) {
     const [open, setOpen] = React.useState(false);
@@ -26,6 +27,8 @@ function QuotationCell({ quotation }) {
     const handleClose = () => {
       setOpen(false);
     };
+    const {userAcc} = useContext(AuthContext);
+
   return (
     <div>
       <Card className="quotation-box">
@@ -76,7 +79,22 @@ function QuotationCell({ quotation }) {
           Báo giá
         </Button>
       </Card>
-
+      {!userAcc ?  <div>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle style={{ alignContent:"center", color:"seagreen"}} >Báo giá</DialogTitle>
+        <DialogContent>
+          <DialogContentText  style={{color:"black"}} >
+          Bạn chưa đăng nhập, vui lòng đăng nhập tại đây: 
+         <Link to="/login" className="register-forgot-link" >
+            <p> Đăng nhập</p>
+          </Link>
+            </DialogContentText>
+        </DialogContent>
+      </Dialog>
+      </div> : 
+      <div>
+      {userAcc.role==="seller" ?
+      <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle style={{ alignContent:"center", color:"seagreen"}} >Báo giá</DialogTitle>
         <DialogContent>
@@ -113,6 +131,23 @@ function QuotationCell({ quotation }) {
           </Button>
         </DialogActions>
       </Dialog>
+      </div>
+      : <div>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle style={{ alignContent:"center", color:"seagreen"}} >Báo giá</DialogTitle>
+        <DialogContent>
+          <DialogContentText  style={{color:"black"}} >
+          Bạn không đủ điều kiện để báo giá, vui lòng cập nhật tài khoản tại đây: 
+         <Link to="/provider-re" className="register-forgot-link" >
+            <p> Đăng ký bán hàng</p>
+          </Link>
+            </DialogContentText>
+        </DialogContent>
+      </Dialog>
+      </div>
+      }
+      </div>
+      }
     </div>
   );
 }

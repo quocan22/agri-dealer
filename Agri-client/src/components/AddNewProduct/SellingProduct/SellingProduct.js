@@ -18,10 +18,10 @@ function SellingProduct() {
   const [productName, setProductName] = useState("");
   const [cateList, setCateList] = useState([]);
   const [cateId, setCateId] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState();
   const [unit, setUnit] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [minPurchase, setMinPurchase] = useState(0);
+  const [quantity, setQuantity] = useState();
+  const [minPurchase, setMinPurchase] = useState();
   const [description, setDescription] = useState("");
   const [introduction, setIntroduction] = useState("");
   const [selectedFile, setSelectedFile] = useState();
@@ -160,6 +160,9 @@ function SellingProduct() {
                 <MenuItem value="tấn">tấn</MenuItem>
                 <MenuItem value="tạ">tạ</MenuItem>
                 <MenuItem value="kg">kg</MenuItem>
+                <MenuItem value="bó">bó</MenuItem>
+                <MenuItem value="gói">gói</MenuItem>
+                <MenuItem value="thùng">thùng</MenuItem>
               </Select>
             </div>
           </div>

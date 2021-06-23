@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Grid,Typography } from "@material-ui/core";
 import "react-tabs/style/react-tabs.css";
 import quotation from "../../assets/data/quotation";
+import { Link } from "react-router-dom";
+
 
 
 import "./Quotation.css";
@@ -27,9 +29,6 @@ function Quotation() {
               </Grid>
             ))}
           </Grid>        
-      <button className="read-more-button">
-        Xem thêm <i className="fas fa-angle-right"/>
-      </button>
     </div>
   );
 };

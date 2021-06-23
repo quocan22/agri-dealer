@@ -15,7 +15,9 @@ import SellingProduct from "./components/AddNewProduct/SellingProduct/SellingPro
 import ProfileSetting from "./components/ProfileSetting/ProfileSetting"
 import Search from "./components/Search/Search";
 import RegisterForm from "./components/Provider/RegisterForm/RegisterForm";
-import ThanksScreen from "./components/Provider/RegisterForm/ThanksScreen"
+import ThanksScreen from "./components/Provider/RegisterForm/ThanksScreen";
+import SignUp from "./components/Login/SignUp/SignUp";
+
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/sign-up" component={SignUp} />
         <div>
       <Navbar />
         <Route path="/" exact component={Home} />
