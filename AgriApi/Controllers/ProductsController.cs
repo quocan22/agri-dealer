@@ -74,6 +74,9 @@ namespace AgriApi.Controllers
                 case "name":
                     products = _productService.GetProductByName(value);
                     break;
+                case "userId":
+                    products = _productService.GetProductByUserId(value);
+                    break;
                 default:
                     break;
             }
