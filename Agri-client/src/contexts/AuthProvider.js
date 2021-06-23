@@ -11,24 +11,25 @@ const AuthProvider = ({children}) => {
       value={{
         userAcc,
         setUserAcc,
-        login: async (email, password) => {
+        login: (email, password) => {
           try {
             console.log('email: ' + email + ', password: ' + password);
             let loginFormData = new FormData();
             loginFormData.append('Email', email);
             loginFormData.append('Password', password);
-            axios.post('http://localhost:5000/api/login', loginFormData)
+            return axios.post('http://localhost:5000/api/login', loginFormData)
               .then(response => {
-                return response.data;
-              }).then(data => {
-                setUserAcc(data);
-                localStorage.setItem('UserId', data.id);
-                localStorage.setItem('LoginToken', data.token);
+                setUserAcc(response.data);
+                localStorage.setItem('UserId', response.data.id);
+                localStorage.setItem('LoginToken', response.data.token);
+                return true;
               }).catch(error => {
                 console.log(error.response.data);
+                return false;
               });
           } catch (error) {
             console.error(error);
+            return false;
           }
         },
         logout: async () => {
