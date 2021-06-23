@@ -8,6 +8,7 @@ namespace AgriApi.Models
     {
         public string Id { get; set; }
         public string Email { get; set; }
+        public string Role { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string DisplayName { get; set; }
         public string Token { get; set; }
@@ -16,6 +17,7 @@ namespace AgriApi.Models
         {
             Id = user.Id;
             Email = user.Email;
+            Role = user.Role;
             DisplayName = user.UserClaims.DisplayName;
             Token = token;
         }
