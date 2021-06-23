@@ -16,6 +16,7 @@ const Products = (props) => {
           params: {
             type: props.type,
             value: props.value,
+            limit: props.limit,
           },
         }).then(response => {
             setProducts(response.data);

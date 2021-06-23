@@ -48,7 +48,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpGet("search/", Name = "GetProductByValue")]
-        public ActionResult<List<ProductResponse>> GetProductByValue([FromQuery] string type, [FromQuery] string value)
+        public ActionResult<List<ProductResponse>> GetProductByValue([FromQuery] string type, [FromQuery] string value, [FromQuery] int limit)
         {
             var products = new List<Product>();
             products.Clear();
@@ -91,6 +91,11 @@ namespace AgriApi.Controllers
                 var sellerName = _userService.GetSellerNameById(p.UserId);
                 var url = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, p.ImageName);
                 productResponse.Add(new ProductResponse(p, sellerName, url));
+            }
+
+            if(limit != 0)
+            {
+                productResponse = productResponse.Take(limit).ToList();
             }
 
             return productResponse;

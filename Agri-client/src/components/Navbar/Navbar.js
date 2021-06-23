@@ -128,7 +128,7 @@ function Dropdown(props) {
             <li key={index}>
               <Link
                 className="dropdown-link"
-                to={`/search?type=catename&value=${item.categoryName}`}
+                to={`/search?type=catename&value=${item.categoryName}&limit=0`}
                 onClick={() => setClick(false)}
               >
                 {item.categoryName}

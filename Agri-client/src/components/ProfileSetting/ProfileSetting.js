@@ -119,6 +119,7 @@ function ProfileSetting() {
             </div>
           </div>
 
+          {userAcc.role === 'seller' &&
           <div className="row" style={{ margin: 10 }}>
             <div className="column" style={{ margin: 10, width: 425 }}>
               <label style={{ fontSize: "18px" }}>Sản phẩm cung cấp </label>
@@ -147,7 +148,7 @@ function ProfileSetting() {
                 </Link>
               </div>
             </div>
-          </div>
+          </div>}
           <div className="row" style={{ margin: 10, justifyContent: "center" }}>
             <button className="add-product-button">Cập nhật thông tin</button>
           </div>

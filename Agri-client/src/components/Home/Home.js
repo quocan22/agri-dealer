@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from 'react-router-dom';
 import Products from "../Products/Products";
 import background from "../../assets/images/background3.png";
 import "./Home.css";
@@ -53,11 +53,12 @@ const Home = () => {
           <Tab>Sản phẩm bán trước</Tab>
         </TabList>
         <TabPanel>
-          <Products type="catename" value="Trái cây" />
+          <Products limit={8} type="catename" value="Trái cây" />
         </TabPanel>
         <TabPanel style={{width: 1000}}></TabPanel>
       </Tabs>
-      <button className="read-more-button">
+      <button
+        className="read-more-button">
         Xem thêm <i className="fas fa-angle-right" />
       </button>
       <Tabs
@@ -72,7 +73,7 @@ const Home = () => {
           <Tab>Sản phẩm bán trước</Tab>
         </TabList>
         <TabPanel>
-          <Products type="catename" value="Rau củ quả" />
+          <Products limit={8} type="catename" value="Rau củ quả" />
         </TabPanel>
         <TabPanel style={{width: 1000}}></TabPanel>
       </Tabs>
@@ -91,7 +92,7 @@ const Home = () => {
           <Tab>Sản phẩm bán trước</Tab>
         </TabList>
         <TabPanel>
-          <Products type="catename" value="Hoa tươi" />
+          <Products limit={8} type="catename" value="Hoa tươi" />
         </TabPanel>
         <TabPanel style={{width: 1000}}></TabPanel>
       </Tabs>
