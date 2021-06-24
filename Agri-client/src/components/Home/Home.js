@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
 import Products from "../Products/Products";
 import background from "../../assets/images/background3.png";
 import "./Home.css";

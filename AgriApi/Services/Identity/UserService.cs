@@ -3,6 +3,7 @@ using AgriApi.Entities.Identity;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace AgriApi.Services.Identity
 {
@@ -87,5 +88,8 @@ namespace AgriApi.Services.Identity
             }
             return false;
         }
+
+        public DateTime? GetJoinDate(string id) =>
+            _user.Find<User>(user => user.Id == id).FirstOrDefault().UserClaims.JoinDate;
     }
 }

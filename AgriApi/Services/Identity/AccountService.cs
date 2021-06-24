@@ -20,11 +20,12 @@ namespace AgriApi.Services.Identity
             var checkName = _userService.SellerNameUsed(sellerClaim.SellerName);
             if (checkName)
             {
-                return new Tuple<bool, string>(false, "Tên thương hiệu đã được sử dụng");
+                return new Tuple<bool, string>(false, "Tên công ty đã được sử dụng");
             }
+            userClaim.JoinDate = _userService.GetJoinDate(id);
             var res = _userService.Update(id, "UserClaims", userClaim);
-            var addressRes = _userService.Update(id, "SellerClaims", sellerClaim);
-            if (res && addressRes)
+            var sellerRes = _userService.Update(id, "SellerClaims", sellerClaim);
+            if (res && sellerRes)
             {
                 _userService.Update(id, "Role", "seller");
                 return new Tuple<bool, string>(true, "Đăng ký bán hàng thành công");

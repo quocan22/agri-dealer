@@ -17,7 +17,6 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     login(email, password).then((res) => {
-      console.log(res);
       if (!res) {
         setOpen(true);
       } else {

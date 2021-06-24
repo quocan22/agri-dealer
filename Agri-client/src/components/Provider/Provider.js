@@ -17,7 +17,7 @@ function Provider() {
         DANH SÁCH NHÀ VƯỜN
       </Typography>
 
-      {userAcc.role === "user" && (
+      {(userAcc !== null && userAcc.role === 'user') && (
         <div>
           <Typography
             variant="h5"

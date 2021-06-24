@@ -9,7 +9,7 @@ namespace AgriApi.Entities.Identity
         [BsonRequired]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string SellerName { get; set; }
-        [BsonRequired]
+        [BsonIgnoreIfNull]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string BrandName { get; set; }
         [BsonRequired]
