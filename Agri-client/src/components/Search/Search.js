@@ -17,6 +17,8 @@ function Search() {
         <div className="root">
             {type === "name" ?
             <p className="search-result-text">Kết quả hiển thị cho: <strong>{value}</strong></p> :
+            value === "all" ?
+            null :
             <p className="search-result-text">Sản phẩm theo danh mục: <strong>{value}</strong></p>
             }
             <p className="search-divider"></p>

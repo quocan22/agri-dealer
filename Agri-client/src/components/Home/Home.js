@@ -3,6 +3,7 @@ import Products from "../Products/Products";
 import background from "../../assets/images/background3.png";
 import "./Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Link } from 'react-router-dom';
 import "react-tabs/style/react-tabs.css";
 import fruitLogo from "../../assets/images/fruit.png";
 import vegetableLogo from "../../assets/images/vegetable.png";
@@ -37,9 +38,11 @@ const Home = () => {
         </TabPanel>
         <TabPanel style={{width: 1000}}></TabPanel>
       </Tabs>
-      <button className="read-more-button">
-        Xem thêm <i className="fas fa-angle-right" />
-      </button>
+      <Link to={`/search?type=catename&value=all`}>
+        <button className="read-more-button">
+          Xem thêm <i className="fas fa-angle-right" />
+        </button>
+      </Link>
       <Tabs
         className="products-tab"
         selectedIndex={tabFruit}
@@ -56,10 +59,12 @@ const Home = () => {
         </TabPanel>
         <TabPanel style={{width: 1000}}></TabPanel>
       </Tabs>
-      <button
-        className="read-more-button">
-        Xem thêm <i className="fas fa-angle-right" />
-      </button>
+      <Link to={`/search?type=catename&value=Trái%20cây&limit=0`}>
+        <button
+          className="read-more-button">
+          Xem thêm <i className="fas fa-angle-right" />
+        </button>
+      </Link>
       <Tabs
         className="products-tab"
         selectedIndex={tabVegetable}
@@ -76,9 +81,11 @@ const Home = () => {
         </TabPanel>
         <TabPanel style={{width: 1000}}></TabPanel>
       </Tabs>
-      <button className="read-more-button">
-        Xem thêm <i className="fas fa-angle-right" />
-      </button>
+      <Link to={`/search?type=catename&value=Rau%20củ%20quả&limit=0`}>
+        <button className="read-more-button">
+          Xem thêm <i className="fas fa-angle-right" />
+        </button>
+      </Link>
       <Tabs
         className="products-tab"
         selectedIndex={tabFlower}
@@ -95,9 +102,11 @@ const Home = () => {
         </TabPanel>
         <TabPanel style={{width: 1000}}></TabPanel>
       </Tabs>
-      <button className="read-more-button">
-        Xem thêm <i className="fas fa-angle-right" />
-      </button>
+      <Link to={`/search?type=catename&value=Hoa%20tươi&limit=0`}>
+        <button className="read-more-button">
+          Xem thêm <i className="fas fa-angle-right" />
+        </button>
+      </Link>
     </div>
   );
 };
