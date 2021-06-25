@@ -31,14 +31,7 @@ function QuotationCell({ quotation }) {
 
   return (
     <div>
-      <Card className="quotation-box">
-        <Link>
-          <CardMedia
-            className="media-object"
-            image={quotation.imgsrc}
-            title={quotation.name}
-          />
-        </Link>
+      <div className="quotation-box">
         <CardContent className="media-body">
           <Link className="quotation-name">
             <Typography variant="h5">{quotation.name}
@@ -66,7 +59,7 @@ function QuotationCell({ quotation }) {
           </Typography>
           <Typography
             style={{
-              marginTop: 5,
+              marginTop: 2,
               fontSize: 14,
               fontStyle: "italic",
               color: "grey",
@@ -78,7 +71,7 @@ function QuotationCell({ quotation }) {
         <Button className="quotation-btn" onClick={handleClickOpen}>
           Báo giá
         </Button>
-      </Card>
+      </div>
       {!userAcc ?  <div>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle style={{ alignContent:"center", color:"seagreen"}} >Báo giá</DialogTitle>
@@ -116,7 +109,7 @@ function QuotationCell({ quotation }) {
         </DialogContentText>
         <TextField
          label="Lời nhắn"
-         multiline
+         multiline  
          fullWidth
          rowsMax={4}
          variant="outlined"

@@ -5,14 +5,16 @@ import { Alert } from "@material-ui/lab";
 import { toast } from "react-toastify";
 import "../Login.css";
 import logo from "../../../assets/images/Logo3.png";
-const axios = require('axios');
+const axios = require("axios");
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = useState(false);
+  const [missingAlert, setOpenMissingAlert] = useState(false);
+  const [successAlert, setOpenSuccessAlert] = useState(false);
+  const [duplicateAlert, setOpenDuplicateAlert] = useState(false);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -37,12 +39,14 @@ function SignUp() {
         setPassword('');
         setPhoneNumber('');
       })
-      .catch(err => console.log(err));
-  }
+      .catch((err) => {console.log(err);
+        setOpenDuplicateAlert(true);
+    })
+  };
 
   return (
     <div className="login-screen">
-      <form autoComplete="off" className="login-container">
+      <div autoComplete="off" className="login-container">
         <Link to="/">
           <img className="logo" src={logo} alt="logo" />
         </Link>
@@ -104,17 +108,57 @@ function SignUp() {
                 color="inherit"
                 size="small"
                 onClick={() => {
-                  setOpen(false);
+                    setOpenMissingAlert(false);
                 }}
               >
-                <i class="fas fa-times" />
+                <i className="fas fa-times" />
               </IconButton>
             }
           >
             Vui lòng nhập đầy đủ các trường.
           </Alert>
         </Collapse>
-      </form>
+        <Collapse in={successAlert}>
+          <Alert
+            className="alert-error"
+            severity="success"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpenSuccessAlert(false);
+                }}
+              >
+                <i className="fas fa-times" />
+              </IconButton>
+            }
+          >
+            Đăng ký tài khoản thành công!
+          </Alert>
+        </Collapse>
+        <Collapse in={duplicateAlert}>
+          <Alert
+            className="alert-error"
+            severity="error"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpenDuplicateAlert(false);
+                }}
+              >
+                <i className="fas fa-times" />
+              </IconButton>
+            }
+          >
+            Email đã được sử dụng!
+          </Alert>
+        </Collapse>
+      </div>
     </div>
   );
 }

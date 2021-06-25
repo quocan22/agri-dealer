@@ -41,6 +41,7 @@ function Post() {
           setImageUrl(response.data.imageUrl);
           setBuyQuantity(response.data.minPurchase);
           setProviderId(response.data.userId);
+          console.log(response);
         }).catch(error => {
           console.log(error);
         })

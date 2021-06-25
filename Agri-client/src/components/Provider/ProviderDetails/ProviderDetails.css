@@ -7,7 +7,6 @@
 .information-details{
 	max-width: 1008px;
 	width: 100%;
-	margin: 100px auto;
 	justify-content: space-around;
 	flex-wrap: wrap;
 	padding: 30px 0;
@@ -57,15 +56,35 @@
 	border-bottom: 2px solid #52AF50;
 	margin: 0px;
 }
-.information-details .description{
+.information-details .production{
 	margin: 25px;
 }
-.information-details .description h2{
+.information-details .production h2{
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	border-bottom: 2px solid #52AF50;
 	margin-bottom: 25px;
 }
+
+.information-details .production p{
+		/* Font & Text */
+		font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 450;
+		letter-spacing: normal;
+		line-height: 19.9995px;
+		text-decoration: none solid rgb(5, 5, 5);
+		text-align: start;
+		text-indent: 0px;
+		text-transform: none;
+		vertical-align: baseline;
+		white-space: pre-wrap;
+		word-spacing: 0px;
+	
+}
+
 .information-description{
 	display: flex;
 	width: auto;
@@ -76,47 +95,132 @@
 	flex-wrap: wrap;
 
 }
-.information-description .column{
+.information-description .cuscolumn1{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	flex-wrap: wrap;
-
+	height: 320px;
+}
+.information-description .cuscolumn2{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	height: 320px;
 }
 
+.information-description .cuscolumn1 p{
+	display: flex;
+	flex-direction: column;
+	margin: 12px;
+	/* Font & Text */
+	font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 650;
+	letter-spacing: normal;
+	line-height: 19.9995px;
+	text-decoration: none solid rgb(5, 5, 5);
+	text-align: start;
+	text-indent: 0px;
+	text-transform: none;
+	vertical-align: baseline;
+	white-space: pre-wrap;
+	word-spacing: 0px;
+}
 
-.information-description .column p{
+.information-description .cuscolumn2 p{
 		display: flex;
 		flex-direction: column;
 		margin: 12px;
 		/* Font & Text */
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		font-size: 15px;
+		font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+		font-size: 16px;
 		font-style: normal;
 		font-variant: normal;
-		font-weight: 400;
-		line-height: 17px;
-		text-align: left;
+		font-weight: 450;
+		letter-spacing: normal;
+		line-height: 19.9995px;
+		text-decoration: none solid rgb(5, 5, 5);
+		text-align: start;
 		text-indent: 0px;
 		text-transform: none;
-		vertical-align: top;
-		white-space: normal;
+		vertical-align: baseline;
+		white-space: pre-wrap;
 		word-spacing: 0px;
 }
 .products {
 	box-shadow: 0 0 5px #ccc;
-	margin: 10px;
-	margin-top: 20px;
-	justify-content: space-between;
-	position: relative;
+	justify-content: flex-start;
 	display: block;
 	height: auto;
-	width: fit-content;
+	width: 1000px;
 }
 .products-list{
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
+		justify-content: flex-start;
 		height: auto;
-		width: fit-content;
+		width: 1000px;
 }
+.product{
+		
+		margin: 4px;
+		max-height: none;
+		min-height: 0px;
+		max-width: none;
+		min-width: 0px;
+	
+		/* Positioning */
+		position: static;
+		top: auto;
+		bottom: auto;
+		right: auto;
+		left: auto;
+		float: none;
+		display: block;
+		clear: none;
+		z-index: auto;
+	
+		/* List */
+		list-style-image: none;
+		list-style-type: disc;
+		list-style-position: outside;
+	
+		/* Table */
+		border-collapse: separate;
+		border-spacing: 0px 0px;
+		caption-side: top;
+		empty-cells: show;
+		table-layout: auto;
+	
+		/* Miscellaneous */
+		overflow: visible;
+		cursor: auto;
+		visibility: visible;
+
+	
+		/* Effects */
+		transform: none;
+		transition: all 0s ease 0s;
+		outline: rgb(0, 128, 0) ridge 1px;
+		outline-offset: 0px;
+		box-sizing: border-box;
+		resize: none;
+		text-shadow: none;
+		text-overflow: clip;
+		word-wrap: normal;
+		box-shadow: none;
+}
+.product-name {
+	display: flex;
+	justify-content: center;
+	text-decoration: none;
+	color: green;
+	cursor: pointer;
+  }
+  .product-name:hover {
+	color: black;
+  }

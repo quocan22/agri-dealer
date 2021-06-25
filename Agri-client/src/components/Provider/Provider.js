@@ -1,22 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Grid, Typography } from "@material-ui/core";
 import "react-tabs/style/react-tabs.css";
 
-import provider from "../../assets/data/provider";
 import "./Provider.css";
 import ProviderCell from "./ProviderCell/ProviderCell";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+const axios = require("axios");
+
 
 function Provider() {
   const { userAcc } = useContext(AuthContext);
+  const [providers, setProviders] = useState([]);
 
+  useEffect(() => {
+    async function fetchProvidersData() {
+      axios.get('http://localhost:5000/api/users/sellers', {
+        }).then(response => {
+          setProviders(response.data);
+          console.log(response.data);
+        }).catch(error => {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          console.log(error);
+        })
+    }
+    fetchProvidersData();
+  }, [])
+  
   return (
     <div className="container">
       <Typography variant="h4" style={{ marginBottom: "10px" }}>
         DANH SÁCH NHÀ VƯỜN
       </Typography>
-
       {(userAcc !== null && userAcc.role === 'user') && (
         <div>
           <Typography
@@ -42,8 +59,8 @@ function Provider() {
       )}
 
       <Grid className="list-item" container justify="flex-start" spacing={1}>
-        {provider.map((provider) => (
-          <Grid item key={provider.id}>
+        {providers.map((provider) => (
+          <Grid item key={provider.userId}>
             <ProviderCell provider={provider} />
           </Grid>
         ))}
