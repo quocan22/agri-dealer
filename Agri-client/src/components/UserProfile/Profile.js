@@ -1,6 +1,5 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import "./Profile.css";
-import profile from "../../assets/data/profile";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 import {
@@ -20,6 +19,7 @@ import {
 import SettingsIcon from '@material-ui/icons/Settings';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import { Link, useHistory } from "react-router-dom";
+const axios = require("axios");
 
 const useStyles = 
 makeStyles({
@@ -32,10 +32,22 @@ function Profile() {
   const classes = useStyles();
   const {userAcc, logout} = useContext(AuthContext);
   const history = useHistory();
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  })
+    async function fetchUserData() {
+      // eslint-disable-next-line no-lone-blocks
+      axios.get('http://localhost:5000/api/users/'+userAcc.id, {
+      }).then(response => {
+          setUserData(response.data.userClaims);
+          console.log(response.data.userClaims);
+      }).catch(error => {
+          console.log(error);
+      })
+    }
+    fetchUserData();
+  },[userAcc.id])
 
   const handleLogout = () => {
     logout().then(history.push("/"));
@@ -53,18 +65,20 @@ function Profile() {
         </Link> 
         </Grid>
         <Grid className="row">
-          <CardMedia className="user-avatar" image={profile.imgsrc} />
+          <CardMedia className="user-avatar" image={ userData.avatarUrl
+                        ? userData.avatarUrl
+                        : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"} />
           <Grid className="profile-info">
             <Typography style={{ fontSize: 15 }}>
               Họ và tên:
               <text style={{ margin: 5, fontWeight: "bold" }}>
-                {userAcc.displayName}
+                {userData.displayName}
               </text>
             </Typography>
             <Typography style={{ fontSize: 15 }}>
               Số điện thoại:
               <text style={{ margin: 5, fontWeight: "bold" }}>
-                {profile.phonenumber}
+                {userData.phonenumber}
 
               </text>
             </Typography>
@@ -77,13 +91,15 @@ function Profile() {
             <Typography style={{ fontSize: 15 }}>
               Địa chỉ:
               <text style={{ margin: 5, fontWeight: "bold" }}>
-                {userAcc.address}
+                {userData.address}
               </text>
             </Typography>
             <Typography style={{ fontSize: 15 }}>
               Ngày tham gia:
               <text style={{ margin: 5, fontWeight: "bold" }}>
-                {userAcc.joinDate}
+              {new Date(userData.joinDate).toLocaleDateString("vi-VI", {
+                        timeZone: "UTC",
+                      })}              
               </text>
             </Typography>
           </Grid>
@@ -119,7 +135,7 @@ function Profile() {
           </Grid>
         </Grid>
         
-        <Typography variant="h4" style={{ margin: 10 }}>Giao dịch gần đây</Typography>
+        {/* <Typography variant="h4" style={{ margin: 10 }}>Giao dịch gần đây</Typography>
         <p className="separator" style={{ margin: 10 }}></p>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
@@ -146,7 +162,7 @@ function Profile() {
               ))}
             </TableBody>
           </Table>
-        </TableContainer> 
+        </TableContainer>  */}
       </Card>
       }
         <button className="logout" onClick={handleLogout}>

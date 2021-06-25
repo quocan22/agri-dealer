@@ -51,7 +51,6 @@ function SellingProduct() {
       setSelectedFile(undefined);
       return;
     }
-
     setSelectedFile(e.target.files[0]);
   };
 

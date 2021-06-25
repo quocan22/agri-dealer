@@ -6,6 +6,7 @@ namespace AgriApi.Models
 {
     public class SellerResponse
     {
+        public string UserId {get; set;}
         public string SellerName { get; set; }
         public DateTime? JoinDate { get; set; }
         public string Address { get; set; }
@@ -18,6 +19,7 @@ namespace AgriApi.Models
 
         public SellerResponse(User user)
         {
+            UserId = user.Id;
             SellerName = user.SellerClaims.SellerName;
             JoinDate = user.UserClaims.JoinDate;
             Address = user.UserClaims.Address;

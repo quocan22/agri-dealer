@@ -27,7 +27,7 @@ function RegisterForm() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [sellerName, setSellerName] = useState('');
   const [address, setAddress] = useState('');
-  const [introduction, setIntroduction] = useState('');
+  const [production, setProduction] = useState('');
   const [brandName, setBrandName] = useState('');
   const [scale, setScale] = useState('');
   const [capacity, setCapacity] = useState('');
@@ -66,7 +66,7 @@ function RegisterForm() {
   };
 
   const handleRegist = () => {
-    if (!displayName || !phoneNumber || !sellerName || !address || !introduction || !selectedFile || !scale || !capacity) {
+    if (!displayName || !phoneNumber || !sellerName || !address || !production || !selectedFile || !scale || !capacity) {
       return;
     }
     let userId = localStorage.getItem('UserId');
@@ -79,9 +79,10 @@ function RegisterForm() {
     registForm.append('address', address);
     registForm.append('sellerName', sellerName);
     if (brandName) { registForm.append('brandName', brandName) }
-    registForm.append('introduction', introduction);
+    registForm.append('production', production);
     registForm.append('scale', scale + scaleUnit);
     registForm.append('capacity', capacity + capaUnit);
+
     return axios.put('http://localhost:5000/api/seller', registForm, {
       headers: {
         Authorization: 'Bearer ' + loginToken,
@@ -104,6 +105,7 @@ function RegisterForm() {
     e.preventDefault();
     handleRegist().then(res => {
       if (!res) {
+
         return;
       } else {
         history.push('/thanks');
@@ -195,8 +197,8 @@ function RegisterForm() {
             </div>
             <div className="column">
               <TextField
-                value={introduction}
-                onChange={e => setIntroduction(e.target.value)}
+                value={production}
+                onChange={e => setProduction(e.target.value)}
                 multiline 
                 rows={6} 
                 variant="outlined" />
