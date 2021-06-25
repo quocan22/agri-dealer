@@ -1,5 +1,8 @@
 using AgriApi.Entities;
 using AgriApi.Services;
+using AgriApi.Services.Identity;
+using AgriApi.Utils;
+using AgriApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -33,7 +36,35 @@ namespace AgriApi.Controllers
             return quotation;
         }
 
+        [HttpGet("filter/", Name = "GetQuotationByValue")]
+        [Authorize("seller, user")]
+        public ActionResult<List<QuotationResponse>> GetQuoByValue([FromQuery] string type, [FromQuery] string value)
+        {
+            var quotations = new List<Quotation>();
+            quotations.Clear();
+
+            switch(type)
+            {
+                case "userid":
+                    quotations = _quotationService.GetByUserId(value);
+                    break;
+                case "requestid":
+                    quotations = _quotationService.GetByRequestId(value);
+                    break;
+                default:
+                    break;
+            }
+            if(quotations == null)
+            {
+                return NotFound();
+            }
+            var quoResponse = new List<QuotationResponse>(_quotationService.GetResponses(quotations));
+
+            return quoResponse;
+        }
+
         [HttpPost]
+        [Authorize("seller")]
         public ActionResult<Quotation> Create([FromForm] Quotation quotation)
         {
             _quotationService.Create(quotation);
@@ -42,6 +73,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpPut("{id:length(24)}")]
+        [Authorize("seller")]
         public IActionResult Update(string id, Quotation quotationIn)
         {
             var quotation = _quotationService.Get(id);
@@ -57,6 +89,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpDelete("{id:length(24)}")]
+        [Authorize("seller")]
         public IActionResult Delete(string id)
         {
             var quotation = _quotationService.Get(id);

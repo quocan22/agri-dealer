@@ -22,6 +22,12 @@ namespace AgriApi.Services
         public QuotationRequest Get(string id) =>
             _quotationRequest.Find<QuotationRequest>(quotationRequest => quotationRequest.Id == id).FirstOrDefault();
 
+        public List<QuotationRequest> GetByUserId(string userId) =>
+            _quotationRequest.Find<QuotationRequest>(quotationRequest => quotationRequest.UserId == userId).ToList();
+
+        public string GetRequestOwner(string id) =>
+            _quotationRequest.Find<QuotationRequest>(quotationRequest => quotationRequest.Id == id).FirstOrDefault().UserId;
+
         public QuotationRequest Create(QuotationRequest quotationRequest)
         {
             _quotationRequest.InsertOne(quotationRequest);

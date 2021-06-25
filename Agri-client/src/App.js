@@ -17,32 +17,33 @@ import Search from "./components/Search/Search";
 import RegisterForm from "./components/Provider/RegisterForm/RegisterForm";
 import ThanksScreen from "./components/Provider/RegisterForm/ThanksScreen";
 import SignUp from "./components/Login/SignUp/SignUp";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/sign-up" component={SignUp} />
         <div>
-      <Navbar />
-        <Route path="/" exact component={Home} />
-        <Route path="/provider" component={Provider} />
-        <Route path="/pvdetails" component={ProviderDetails} />
-        <Route path="/quotation" component={Quotation} />
-        <Route path="/profile" component={Profile}/>
-        <Route path="/cart" component={Cart}/>
-        <Route path="/selling-new-product" component={SellingProduct}/>
-        <Route path="/profile-setting" component={ProfileSetting}/>
-        <Route path="/post/:productId" component={Post}/>
-        <Route path="/search" component={Search} />
-        <Route path="/provider-re" component={RegisterForm} />
-        <Route path="/thanks" component={ThanksScreen} />
-
-      <Footer />
-      </div>
+          <Navbar />
+            <Route path="/" exact component={Home} />
+            <Route path="/provider" component={Provider} />
+            <Route path="/pvdetails" component={ProviderDetails} />
+            <Route path="/quotation" component={Quotation} />
+            <Route path="/profile" component={Profile}/>
+            <Route path="/cart" component={Cart}/>
+            <Route path="/selling-new-product" component={SellingProduct}/>
+            <Route path="/profile-setting" component={ProfileSetting}/>
+            <Route path="/post/:productId" component={Post}/>
+            <Route path="/search" component={Search} />
+            <Route path="/provider-re" component={RegisterForm} />
+            <Route path="/thanks" component={ThanksScreen} />
+          <Footer />
+        </div>
       </Switch>
     </Router>
   );

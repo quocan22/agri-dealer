@@ -12,10 +12,17 @@ namespace AgriApi.Entities
         public string Id { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonRequired]
+        public string UserId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRequired]
         public string RequestId { get; set; }
         [BsonRequired]
         public double QuotePrice { get; set; }
         [BsonRequired]
         public string Description { get; set; }
+        public enum QuotationState { pending, canceled, confirmed }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        [BsonRepresentation(BsonType.String)]
+        public QuotationState State { get; set; }
     }
 }

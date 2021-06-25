@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { TextField, IconButton, Collapse } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import { toast } from "react-toastify";
 import "../Login.css";
 import logo from "../../../assets/images/Logo3.png";
 const axios = require('axios');
@@ -13,7 +14,8 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
 
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault();
       if (!email || !displayName || !password || !phoneNumber) {
           setOpen(true);
           return;
@@ -27,6 +29,13 @@ function SignUp() {
       axios.post('http://localhost:5000/api/users', signUpForm)
       .then(res => {
         setOpen(false);
+        toast.success("Đăng ký tài khoản thành công", {
+          position: toast.POSITION.TOP_CENTER
+        });
+        setEmail('');
+        setDisplayName('');
+        setPassword('');
+        setPhoneNumber('');
       })
       .catch(err => console.log(err));
   }
@@ -83,7 +92,7 @@ function SignUp() {
           </Link>
         </div>
 
-        <button onClick={handleSignUp} className="login-button">Đăng ký</button>
+        <button onClick={e => handleSignUp(e)} className="login-button">Đăng ký</button>
         
         <Collapse in={open}>
           <Alert

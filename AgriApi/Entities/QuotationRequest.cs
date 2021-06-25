@@ -17,6 +17,8 @@ namespace AgriApi.Entities
         [BsonRequired]
         public string CategoryId { get; set; }
         [BsonRequired]
+        public string CategoryName { get; set; }
+        [BsonRequired]
         public string ProductName { get; set; }
         [BsonIgnoreIfNull]
         public int Quantity { get; set; }

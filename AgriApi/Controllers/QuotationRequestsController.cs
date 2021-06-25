@@ -22,6 +22,27 @@ namespace AgriApi.Controllers
         public ActionResult<List<QuotationRequest>> GetActionResult() =>
             _quoReqService.Get();
 
+        [HttpGet("search/", Name = "GetQuoReqByValue")]
+        public ActionResult<List<QuotationRequest>> GetQuoReqByValue([FromQuery] string type, [FromQuery] string value)
+        {
+            var quoReqs = new List<QuotationRequest>();
+            quoReqs.Clear();
+
+            switch(type)
+            {
+                case "userid":
+                    quoReqs = _quoReqService.GetByUserId(value);
+                    break;
+                default:
+                    break;
+            }
+            if(quoReqs == null)
+            {
+                return NotFound();
+            }
+            return quoReqs;
+        }
+
         [HttpGet("{id:length(24)}", Name = "GetQuotationRequest")]
         [Authorize("user, seller")]
         public ActionResult<QuotationRequest> Get(string id)
