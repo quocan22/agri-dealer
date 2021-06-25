@@ -31,6 +31,9 @@ namespace AgriApi.Services.Identity
         public string GetSellerNameById(string id) =>
             _user.Find<User>(user => user.Id == id).FirstOrDefault().SellerClaims.SellerName;
 
+        public List<User> GetAllSeller() => 
+            _user.Find<User>(user => user.Role == "seller").ToList();
+
         public string GetRole(string id) =>
             _user.Find<User>(user => user.Id == id).FirstOrDefault().Role;
 

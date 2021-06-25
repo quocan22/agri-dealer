@@ -1,5 +1,6 @@
 using AgriApi.Entities;
 using AgriApi.Services;
+using AgriApi.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -17,10 +18,12 @@ namespace AgriApi.Controllers
         }
 
         [HttpGet]
+        [Authorize("user, seller")]
         public ActionResult<List<QuotationRequest>> GetActionResult() =>
             _quoReqService.Get();
 
         [HttpGet("{id:length(24)}", Name = "GetQuotationRequest")]
+        [Authorize("user, seller")]
         public ActionResult<QuotationRequest> Get(string id)
         {
             var quoReq = _quoReqService.Get(id);
@@ -34,6 +37,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpPost]
+        [Authorize("user, seller")]
         public ActionResult<QuotationRequest> Create([FromForm] QuotationRequest quoReq)
         {
             _quoReqService.Create(quoReq);
@@ -42,6 +46,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpPut("{id:length(24)}")]
+        [Authorize("user, seller")]
         public IActionResult Update(string id, QuotationRequest quoReqIn)
         {
             var quoReq = _quoReqService.Get(id);
@@ -57,6 +62,7 @@ namespace AgriApi.Controllers
         }
 
         [HttpDelete("{id:length(24)}")]
+        [Authorize("user, seller")]
         public IActionResult Delete(string id)
         {
             var quoReq = _quoReqService.Get(id);

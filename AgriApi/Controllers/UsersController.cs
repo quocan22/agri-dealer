@@ -48,6 +48,24 @@ namespace AgriApi.Controllers
             return NotFound();
         }
 
+        [HttpGet("sellers")]
+        public ActionResult<List<SellerResponse>> GetAllSeller()
+        {
+            var users = _userService.GetAllSeller();
+
+            if (users != null)
+            {
+                var seller = new List<SellerResponse>();
+                foreach(var u in users)
+                {
+                    seller.Add(new SellerResponse(u));
+                }
+                return seller;
+            }
+
+            return NotFound();
+        }
+
         [HttpPost]
         public ActionResult<User> Create([FromForm] AccountModel account)
         {

@@ -18,11 +18,11 @@ namespace AgriApi.Entities
         public string CategoryId { get; set; }
         [BsonRequired]
         public string ProductName { get; set; }
-        [BsonRequired]
+        [BsonIgnoreIfNull]
         public int Quantity { get; set; }
-        [BsonRequired]
+        [BsonIgnoreIfNull]
         public string Unit { get; set; }
-        [BsonRequired]
+        [BsonIgnoreIfNull]
         public double WishPrice { get; set; }
         [BsonRequired]
         public string Description { get; set; }
