@@ -11,6 +11,7 @@ namespace AgriApi.Models
         public string BrandName { get; set; }
         public string Scale { get; set; }
         public string Capacity { get; set; }
+        public string Production { get; set; }
 
         public SellerResponse(User user)
         {
@@ -20,6 +21,7 @@ namespace AgriApi.Models
             BrandName = user.SellerClaims.BrandName;
             Scale = user.SellerClaims.Scale;
             Capacity = user.SellerClaims.Capacity;
+            Production = user.SellerClaims.Production;
         }
     }
 }
