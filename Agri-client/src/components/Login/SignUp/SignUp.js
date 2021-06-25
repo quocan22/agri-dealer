@@ -13,35 +13,36 @@ function SignUp() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [missingAlert, setOpenMissingAlert] = useState(false);
-  const [successAlert, setOpenSuccessAlert] = useState(false);
   const [duplicateAlert, setOpenDuplicateAlert] = useState(false);
 
   const handleSignUp = (e) => {
     e.preventDefault();
-      if (!email || !displayName || !password || !phoneNumber) {
-          setOpen(true);
-          return;
-      }
-      const signUpForm = new FormData();
-      signUpForm.append('email', email);
-      signUpForm.append('password', password);
-      signUpForm.append('displayName', displayName);
-      signUpForm.append('phoneNumber', phoneNumber);
+    if (!email || !displayName || !password || !phoneNumber) {
+      setOpenMissingAlert(true);
+      return;
+    }
+    const signUpForm = new FormData();
+    signUpForm.append("email", email);
+    signUpForm.append("password", password);
+    signUpForm.append("displayName", displayName);
+    signUpForm.append("phoneNumber", phoneNumber);
 
-      axios.post('http://localhost:5000/api/users', signUpForm)
-      .then(res => {
-        setOpen(false);
+    axios
+      .post("http://localhost:5000/api/users", signUpForm)
+      .then((res) => {
+        setOpenMissingAlert(false);
         toast.success("Đăng ký tài khoản thành công", {
-          position: toast.POSITION.TOP_CENTER
+          position: toast.POSITION.TOP_CENTER,
         });
-        setEmail('');
-        setDisplayName('');
-        setPassword('');
-        setPhoneNumber('');
+        setEmail("");
+        setDisplayName("");
+        setPassword("");
+        setPhoneNumber("");
       })
-      .catch((err) => {console.log(err);
+      .catch((err) => {
+        console.log(err);
         setOpenDuplicateAlert(true);
-    })
+      });
   };
 
   return (
@@ -96,9 +97,11 @@ function SignUp() {
           </Link>
         </div>
 
-        <button onClick={e => handleSignUp(e)} className="login-button">Đăng ký</button>
-        
-        <Collapse in={open}>
+        <button onClick={(e) => handleSignUp(e)} className="login-button">
+          Đăng ký
+        </button>
+
+        <Collapse in={missingAlert}>
           <Alert
             className="alert-error"
             severity="error"
@@ -108,7 +111,7 @@ function SignUp() {
                 color="inherit"
                 size="small"
                 onClick={() => {
-                    setOpenMissingAlert(false);
+                  setOpenMissingAlert(false);
                 }}
               >
                 <i className="fas fa-times" />
@@ -116,26 +119,6 @@ function SignUp() {
             }
           >
             Vui lòng nhập đầy đủ các trường.
-          </Alert>
-        </Collapse>
-        <Collapse in={successAlert}>
-          <Alert
-            className="alert-error"
-            severity="success"
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setOpenSuccessAlert(false);
-                }}
-              >
-                <i className="fas fa-times" />
-              </IconButton>
-            }
-          >
-            Đăng ký tài khoản thành công!
           </Alert>
         </Collapse>
         <Collapse in={duplicateAlert}>
