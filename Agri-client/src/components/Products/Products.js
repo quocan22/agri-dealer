@@ -28,7 +28,7 @@ const Products = (props) => {
   }, [props])
 
   return (
-    <div className="container">
+    <div className="products-container">
       {products.length < 1 ? 
       <p>Không tìm thấy sản phẩm phù hợp</p> :
       <Grid

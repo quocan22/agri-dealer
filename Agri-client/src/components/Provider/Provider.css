@@ -1,7 +1,9 @@
-.container {  
-    height: 1008;
+.providers-container {
+    min-height: 800px;
+    width: 1000px;
     margin: 25PX auto;
     position: relative;
+    align-items: center;
 }
 .list-item {
   margin-top: 0;

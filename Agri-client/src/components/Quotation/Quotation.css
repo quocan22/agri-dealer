@@ -1,5 +1,6 @@
-.container {  
-  height: 1008;
+.quotation-container {
+  min-height: 800px;
+  width: 1000px;
   margin: 25PX auto;
   position: relative;
 }

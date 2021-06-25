@@ -96,7 +96,7 @@ function SellingProduct() {
 
 
   return (
-    <div className="container">
+    <div className="selling-container">
         <Typography variant="h4" >
           ĐĂNG BÁN SẢN PHẨM
         </Typography>   

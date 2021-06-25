@@ -1,3 +1,7 @@
+.profile-setting-container {
+    width: 1000px;
+    margin: 25px auto;
+}
 .profile-setting-main-grid{
 	max-width: 1008px;
 	width: 100%;

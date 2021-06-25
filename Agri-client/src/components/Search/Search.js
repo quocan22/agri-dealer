@@ -14,14 +14,14 @@ function Search() {
     }, [])
 
     return (
-        <div className="root">
+        <div className="search-root">
             {type === "name" ?
             <p className="search-result-text">Kết quả hiển thị cho: <strong>{value}</strong></p> :
             value === "all" ?
             null :
             <p className="search-result-text">Sản phẩm theo danh mục: <strong>{value}</strong></p>
             }
-            <p className="search-divider"></p>
+            <div className="search-divider"></div>
             <Products type={type} value={value}/>
         </div>
     );

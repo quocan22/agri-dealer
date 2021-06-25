@@ -85,7 +85,7 @@ function CreateQuotation() {
     setDescription('')
   }
   return (
-    <div className="container">
+    <div className="quotation-container">
       <Typography variant="h4">ĐĂNG BÁN SẢN PHẨM</Typography>
       <div className="selling-product-main-grid">
         <Card className="selling-product-form">

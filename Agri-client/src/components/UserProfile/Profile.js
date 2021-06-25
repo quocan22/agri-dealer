@@ -54,7 +54,7 @@ function Profile() {
   }
 
   return (
-    <div className="container">
+    <div className="profile-container">
       <Typography variant="h4" style={{marginBottom:"10px"}}>THÔNG TIN CÁ NHÂN</Typography>
       {userAcc === null ?
       <p>Đang tải dữ liệu</p> :
@@ -165,9 +165,11 @@ function Profile() {
         </TableContainer>  */}
       </Card>
       }
+      <div style={{display: 'flex', justifyContent: "center"}}>
         <button className="logout" onClick={handleLogout}>
           Đăng xuất  <DirectionsRunIcon style={{marginTop:"3px",fontSize:"large"}}/>
         </button>
+      </div>
     </div>
   );
 }

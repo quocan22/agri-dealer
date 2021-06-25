@@ -30,7 +30,7 @@ function Provider() {
   }, [])
   
   return (
-    <div className="container">
+    <div className="providers-container">
       <Typography variant="h4" style={{ marginBottom: "10px" }}>
         DANH SÁCH NHÀ VƯỜN
       </Typography>
