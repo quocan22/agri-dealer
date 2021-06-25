@@ -4,6 +4,7 @@ using AgriApi.Utils;
 using AgriApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System;
 
 namespace AgriApi.Controllers
 {
@@ -32,6 +33,12 @@ namespace AgriApi.Controllers
             {
                 return NotFound();
             }
+
+            if (user.UserClaims.AvatarUrl != null)
+            {
+                user.UserClaims.AvatarUrl = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, user.UserClaims.AvatarUrl);
+            }
+
             return user;
         }
 
@@ -58,6 +65,11 @@ namespace AgriApi.Controllers
                 var seller = new List<SellerResponse>();
                 foreach(var u in users)
                 {
+                    if (u.UserClaims.AvatarUrl != null)
+                    {
+                        u.UserClaims.AvatarUrl = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, u.UserClaims.AvatarUrl);
+                    }
+
                     seller.Add(new SellerResponse(u));
                 }
                 return seller;
