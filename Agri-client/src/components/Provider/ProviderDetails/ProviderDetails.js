@@ -97,7 +97,7 @@ function ProviderDetails() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="provider-detail-container">
       <div className="main-grid">
         {
           <div className="information-details">

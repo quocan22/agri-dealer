@@ -1,3 +1,7 @@
+.provider-detail-container {
+	width: 1000px;
+	margin: 0 auto;
+}
 .main-grid{
 	max-width: 1008px;
 	width: 100%;
@@ -74,7 +78,7 @@
 		font-variant: normal;
 		font-weight: 450;
 		letter-spacing: normal;
-		line-height: 19.9995px;
+		line-height: 25px;
 		text-decoration: none solid rgb(5, 5, 5);
 		text-align: start;
 		text-indent: 0px;
@@ -82,7 +86,7 @@
 		vertical-align: baseline;
 		white-space: pre-wrap;
 		word-spacing: 0px;
-	
+		text-align: justify;
 }
 
 .information-description{
@@ -157,6 +161,7 @@
 	display: block;
 	height: auto;
 	width: 1000px;
+	margin-bottom: 40px;
 }
 .products-list{
 		display: flex;

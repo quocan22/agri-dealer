@@ -1,12 +1,12 @@
 .quotation-container {
   min-height: 800px;
   width: 1000px;
-  margin: 25PX auto;
+  margin: 25px auto;
   position: relative;
 }
 .list-item {
-margin-top: 0;
-bottom: 0;
+  margin-top: 0;
+  bottom: 0;
 }
 .quotations-tab {
   justify-self: center;
@@ -16,79 +16,79 @@ bottom: 0;
   font-size: large;
   background-color: white;
 }
-.manage-link{
+.manage-link {
   font: size 20px;
   color: seagreen;
-  background-color: white;  
+  background-color: white;
   text-decoration: none;
   cursor: pointer;
-  position:static;
+  position: static;
   align-content: center;
   justify-content: center;
   display: flex;
   flex-direction: row;
   height: fit-content;
+  margin: 10px;
 }
-.create-quotation-link{
+.create-quotation-link {
   font: size 30px;
   color: seagreen;
-  background-color: white;  
+  background-color: white;
   text-decoration: none;
   cursor: pointer;
-  position:relative;
+  position: relative;
   align-items: flex-start;
   justify-content: flex-start;
   display: flex;
   flex-direction: row;
 }
 .quotation-heading {
-    /* Font & Text */
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-size: 30px;
-    font-weight: 500;
-    letter-spacing: normal;
-    line-height: 33px;
-    text-decoration: none solid rgb(68, 68, 68);
-    text-align: start;
-    text-indent: 0px;
-    text-transform: none;
-    white-space: normal;
-    word-spacing: 0px;
-    
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-  
-    /* Color & Background */
-    background-attachment: scroll;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: none;
-    background-position: 0% 0%;
-    background-repeat: repeat;
-    color: rgb(68, 68, 68);
-  
-    /* Box */
-    width: 1000px;
+  /* Font & Text */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 33px;
+  text-decoration: none solid rgb(68, 68, 68);
+  text-align: start;
+  text-indent: 0px;
+  text-transform: none;
+  white-space: normal;
+  word-spacing: 0px;
 
-    margin: 20px 0px;
-    padding: 0px;
-    max-height: none;
-    min-height: 0px;
-    max-width: none;
-    min-width: 0px;
-  
-  
-    /* List */
-    list-style-image: none;
-    list-style-type: disc;
-    list-style-position: outside;
-  
-    /* Table */
-    border-collapse: separate;
-    border-spacing: 0px 0px;
-    caption-side: top;
-    empty-cells: show;
-    table-layout: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+
+  /* Color & Background */
+  background-attachment: scroll;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: none;
+  background-position: 0% 0%;
+  background-repeat: repeat;
+  color: rgb(68, 68, 68);
+
+  /* Box */
+  width: 1000px;
+
+  margin: 20px 0px;
+  padding: 0px;
+  max-height: none;
+  min-height: 0px;
+  max-width: none;
+  min-width: 0px;
+
+  /* List */
+  list-style-image: none;
+  list-style-type: disc;
+  list-style-position: outside;
+
+  /* Table */
+  border-collapse: separate;
+  border-spacing: 0px 0px;
+  caption-side: top;
+  empty-cells: show;
+  table-layout: auto;
 }

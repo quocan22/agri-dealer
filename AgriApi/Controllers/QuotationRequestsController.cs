@@ -1,6 +1,8 @@
 using AgriApi.Entities;
 using AgriApi.Services;
+using AgriApi.Services.Identity;
 using AgriApi.Utils;
+using AgriApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -11,19 +13,39 @@ namespace AgriApi.Controllers
     public class QuotationRequestsController : ControllerBase
     {
         private readonly QuotationRequestService _quoReqService;
+        private readonly UserService _userService;
 
-        public QuotationRequestsController(QuotationRequestService quotationRequestService)
+        public QuotationRequestsController(QuotationRequestService quotationRequestService, UserService userService)
         {
             _quoReqService = quotationRequestService;
+            _userService = userService;
         }
 
         [HttpGet]
         [Authorize("user, seller")]
-        public ActionResult<List<QuotationRequest>> GetActionResult() =>
-            _quoReqService.Get();
+        public ActionResult<List<QuotationRequestResponse>> GetActionResult()
+        {
+            var quoReqs = _quoReqService.Get();
+            var quoReqResponses = new List<QuotationRequestResponse>();
+            quoReqResponses.Clear();
+            if (quoReqs != null)
+            {
+                foreach(var q in quoReqs)
+                {
+                    var owner = _userService.GetDisplayNameById(q.UserId);
+                    quoReqResponses.Add(new QuotationRequestResponse(q, owner));
+                }
+            }
+
+            if (quoReqResponses == null)
+            {
+                return NotFound();
+            }
+            return quoReqResponses;
+        }
 
         [HttpGet("search/", Name = "GetQuoReqByValue")]
-        public ActionResult<List<QuotationRequest>> GetQuoReqByValue([FromQuery] string type, [FromQuery] string value)
+        public ActionResult<List<QuotationRequestResponse>> GetQuoReqByValue([FromQuery] string type, [FromQuery] string value)
         {
             var quoReqs = new List<QuotationRequest>();
             quoReqs.Clear();
@@ -36,11 +58,22 @@ namespace AgriApi.Controllers
                 default:
                     break;
             }
-            if(quoReqs == null)
+            var quoReqResponses = new List<QuotationRequestResponse>();
+            quoReqResponses.Clear();
+            if (quoReqs != null)
+            {
+                foreach(var q in quoReqs)
+                {
+                    var owner = _userService.GetDisplayNameById(q.UserId);
+                    quoReqResponses.Add(new QuotationRequestResponse(q, owner));
+                }
+            }
+
+            if (quoReqResponses == null)
             {
                 return NotFound();
             }
-            return quoReqs;
+            return quoReqResponses;
         }
 
         [HttpGet("{id:length(24)}", Name = "GetQuotationRequest")]
