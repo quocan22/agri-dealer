@@ -7,29 +7,14 @@ import {
   Card,
   CardMedia,
   Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  Paper,
-  TableRow,
-  makeStyles,
 } from "@material-ui/core";
 import SettingsIcon from '@material-ui/icons/Settings';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import { Link, useHistory } from "react-router-dom";
 const axios = require("axios");
 
-const useStyles = 
-makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
 
 function Profile() {
-  const classes = useStyles();
   const {userAcc, logout} = useContext(AuthContext);
   const history = useHistory();
   const [userData, setUserData] = useState([]);

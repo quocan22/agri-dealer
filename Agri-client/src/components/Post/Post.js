@@ -144,7 +144,7 @@ function Post() {
         </div>
         <div className="provider">
           <h3>Được cung cấp bởi</h3>
-          <Link to="/" className="provider-link">
+          <Link to={`/pvdetails/${provider.userId}`} className="provider-link">
           {provider.sellerName}
           </Link>
           <p className="separator"></p>

@@ -39,7 +39,7 @@ function ListedQuotation({ quotation }) {
       <CardContent className="media-body">
         <Link className="quotation-name">
           <Typography variant="h5">
-            Tên sản phẩm được yêu cầu báo giá{" "}
+            Điều Bình Phước
             <span
               className="badge"
               style={{ backgroundColor: badgeColor(quotation.state) }}
@@ -57,7 +57,7 @@ function ListedQuotation({ quotation }) {
         <Typography style={{ fontSize: 15 }}>
           Đã trả giá:
           <text style={{ margin: 5, fontWeight: "bold" }}>
-            {quotation.quotePrice}₫ / {quotation.unit}
+            {quotation.quotePrice}₫ / kg {quotation.requestUnit}
           </text>
         </Typography>
         <Typography style={{ fontSize: 15 }}>

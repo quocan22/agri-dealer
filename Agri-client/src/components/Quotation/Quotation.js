@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import "react-tabs/style/react-tabs.css";
-import quotation from "../../assets/data/quotation";
 import { Link } from "react-router-dom";
 import SubjectIcon from "@material-ui/icons/Subject";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -26,8 +25,12 @@ function Quotation() {
         })
         .then((res) => {
           setQuoReq(res.data);
-        });
+        }).catch(error => {
+          console.log(error);
+          console.log(error.data);
+      });
     }
+    fetchQuoReqData();
   }, []);
 
   return (
@@ -42,9 +45,9 @@ function Quotation() {
         )}
       </div>
       <div className="quotations-tab">
-        {quotation.map((quotation) => (
-          <div item key={quotation.id}>
-            <QuotationCell quotation={quotation} />
+        {quoReq.map((quotationrq) => (
+          <div item key={quotationrq.id}>
+            <QuotationCell quotation={quotationrq} />
           </div>
         ))}
       </div>

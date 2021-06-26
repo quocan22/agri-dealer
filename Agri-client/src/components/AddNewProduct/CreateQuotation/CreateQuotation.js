@@ -12,11 +12,14 @@ import {
 import {Alert } from "@material-ui/lab";
 import CloseIcon from "@material-ui/icons/Close";
 import "../SellingProduct/SellingProduct.css";
+import { Link } from "react-router-dom";
+
 const axios = require("axios");
 
 function CreateQuotation() {
   const [productName, setProductName] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [categoryName, setCategoryName] = useState("");
   const [categoryList, setCategoryList] = useState([]);
   const [quantity, setQuantity] = useState(null);
   const [unit, setUnit] = useState("");
@@ -29,7 +32,7 @@ function CreateQuotation() {
 
 
   const handleRequestQuotation = () => {
-    if (!productName || !categoryId || !description || !startDate || !endDate) {
+    if (!productName || !categoryId || !description || !startDate || !endDate || !categoryName) {
       setSuccessAlert(false);
       setFailAlert(true);
       //thong bao thieu thong tin
@@ -40,6 +43,7 @@ function CreateQuotation() {
     const quotationForm = new FormData();
     quotationForm.append("userId", userId);
     quotationForm.append("categoryId", categoryId);
+    quotationForm.append("categoryName", categoryName);
     quotationForm.append("productName", productName);
     quotationForm.append("quantity", quantity);
     quotationForm.append("unit", unit);
@@ -79,6 +83,7 @@ function CreateQuotation() {
     setCategoryId(null);
     setQuantity('');
     setWishPrice('');
+    setCategoryName('');
     setUnit(null);
     setStartDate('');
     setEndDate('');
@@ -100,7 +105,17 @@ function CreateQuotation() {
                 onChange={(e) => setProductName(e.target.value)}
               />
             </div>
-            <div className="custom-column" style={{ width: 250 }}>
+            <div className="custom-column" style={{ width: 350 }}>
+              <label style={{ fontSize: "16px" }}>Phân loại </label>
+              <TextField
+                type="text"
+                placeholder="Phân loại: Tỏi, ớt,..."
+                variant="outlined"
+                value={categoryName}
+                onChange={(e) => setCategoryName(e.target.value)}
+              />
+            </div>
+            <div className="custom-column" style={{ width: 350 }}>
               <label style={{ fontSize: "16px" }}>Danh mục sản phẩm </label>
               <Select
                 defaultValue={"DEFAULT"}
@@ -226,7 +241,7 @@ function CreateQuotation() {
               style={{
                 margin: 10,
                 justifyContent: "flex-start",
-                width: "700px",
+                width: "600px",
               }}
             >
               <Collapse in={successAlert}>
@@ -268,13 +283,21 @@ function CreateQuotation() {
                   Yêu cầu báo giá thất bại, vui lòng kiểm tra lại thông tin!
                 </Alert>
               </Collapse>
-            </div>
+              </div>
+              <Link to={"/quotation-manage"}>
+              <button
+              className="add-product-button"
+            >
+              Quay lại
+            </button>
+            </Link>
             <button
               onClick={handleRequestQuotation}
               className="add-product-button"
             >
               Yêu cầu báo giá
             </button>
+        
           </div>
         </Card>
       </div>

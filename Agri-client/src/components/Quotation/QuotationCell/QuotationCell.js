@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
-  Card,
-  CardMedia,
   CardContent,
   Typography,
   Dialog,
@@ -16,46 +14,107 @@ import {
 import { Link } from "react-router-dom";
 import "./QuotationCell.css";
 import { AuthContext } from "../../../contexts/AuthProvider";
+const axios = require("axios");
 
 function QuotationCell({ quotation }) {
   const [open, setOpen] = React.useState(false);
-
+  const [categoryList, setCategoryList] = useState(null);
+  const [userData, setUserData] = useState([]);
+  const [quotationList, setQuotationList] = useState([]);
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
   const { userAcc } = useContext(AuthContext);
 
+  useEffect(() => {
+    let loginToken = localStorage.getItem("LoginToken");
+    axios
+      .get("http://localhost:5000/api/products/categories")
+      .then((response) => {
+        setCategoryList(response.data);
+      })
+      .catch((error) => console.log(error));
+    axios
+      .get("http://localhost:5000/api/users/" + quotation.userId, {})
+      .then((response) => {
+        setUserData(response.data.userClaims);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    function fetchQuotationData() {
+        axios.get("http://localhost:5000/api/quotations/filter",{ 
+          params:
+          {
+            type: "requestid", 
+            value: quotation.id
+          },  
+          headers: {
+            Authorization: "Bearer " + loginToken,
+          },
+        })
+          .then((res) => {
+            setQuotationList(res.data);
+          }).catch(error => {
+            console.log(error);
+        });
+      }
+    fetchQuotationData();
+  }, [quotation.userId, quotation.id ]);
+
   return (
     <div>
-      <div className="quotation-box">
+      <div className="quotation-rq-box">
         <CardContent className="media-body">
           <Link className="quotation-name">
             <Typography variant="h5">
-              {quotation.name}
-              <span className="badge">{quotation.count} Báo giá</span>
+              {quotation.productName}
+              <span 
+              onClick={()=>console.log(quotationList.lenght)}
+              className="badge">{quotationList.length} Báo giá</span>
+
             </Typography>
           </Link>
           <Typography style={{ marginBottom: 10, fontSize: 12 }}>
-            (Danh mục:{" "}
-            <Link className="small-link"> {quotation.category} </Link>
+            (Phân loại:{" "}
+            <Link className="small-link">{quotation.categoryName}</Link>
+            <subtitile2> | </subtitile2>
+            Danh mục:{" "}
+            <Link className="small-link">
+              {categoryList
+                ? categoryList.find((cate) => cate.id === quotation.categoryId)
+                    .categoryName
+                : ""}
+            </Link>
             <subtitile2> | </subtitile2>
             Được yêu cầu bởi:{" "}
-            <Link className="small-link">{quotation.requiredby}</Link>)
+            <Link className="small-link">{userData.displayName}</Link>)
           </Typography>
           <Typography style={{ marginTop: 5, fontSize: 15 }}>
             Số lượng cần mua:
             <text style={{ margin: 5, fontWeight: "bold" }}>
-              {quotation.requiredamount}
+              {quotation.quantity} {quotation.unit}
+            </text>
+          </Typography>
+          <Typography style={{ fontSize: 15 }}>
+            Mức giá mong muốn:
+            <text style={{ margin: 5, fontWeight: "bold" }}>
+              {quotation.wishPrice}₫ / {quotation.unit}
             </text>
           </Typography>
           <Typography style={{ fontSize: 15 }}>
             Ngày mua - hết hạn:
             <text style={{ margin: 5, fontWeight: "bold" }}>
-              {quotation.date}
+              {new Date(quotation.startDate).toLocaleDateString("vi-VI", {
+                timeZone: "UTC",
+              })}{" "}
+              -{" "}
+              {new Date(quotation.endDate).toLocaleDateString("vi-VI", {
+                timeZone: "UTC",
+              })}
             </text>
           </Typography>
           <Typography
@@ -69,7 +128,7 @@ function QuotationCell({ quotation }) {
             "{quotation.description}"
           </Typography>
         </CardContent>
-        <Button className="quotation-btn" onClick={handleClickOpen}>
+        <Button className="quote-btn" onClick={handleClickOpen}>
           Báo giá
         </Button>
       </div>
@@ -110,13 +169,14 @@ function QuotationCell({ quotation }) {
                 <DialogContent>
                   <DialogContentText style={{ color: "black" }}>
                     Báo giá cho sản phẩm
-                    <text style={{ color: "seagreen" }}> {quotation.name}</text>
+                    <text style={{ color: "seagreen" }}> {quotation.productName}</text>
                     :
                   </DialogContentText>
                   <TextField
                     label="Giá tiền"
                     variant="outlined"
                     type="number"
+                    defaultValue={quotation.wishPrice}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment
@@ -134,7 +194,7 @@ function QuotationCell({ quotation }) {
                     Lời nhắn cho{" "}
                     <text style={{ color: "seagreen" }}>
                       {" "}
-                      {quotation.requiredby}
+                      {userData.displayName}
                     </text>
                     :
                   </DialogContentText>

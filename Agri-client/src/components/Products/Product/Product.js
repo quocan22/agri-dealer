@@ -55,6 +55,7 @@ const Product = ({ product }) => {
           ></subtitile2>{" "}
           {product.sellerName}
         </Typography>
+        
         <Typography variant="subtitle2" color="textSecondary">
           Tối thiểu: {product.minPurchase} {product.unit}
         </Typography>
