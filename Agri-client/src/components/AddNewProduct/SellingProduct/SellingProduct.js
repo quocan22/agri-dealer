@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   MenuItem,
   Typography,
@@ -12,10 +12,13 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
 import "./SellingProduct.css";
+import { AuthContext } from "../../../contexts/AuthProvider";
 const axios = require("axios");
+
 
 function SellingProduct() {
   const [productName, setProductName] = useState("");
+  const { userAcc } = useContext(AuthContext);
   const [cateList, setCateList] = useState([]);
   const [cateId, setCateId] = useState("");
   const [price, setPrice] = useState();
@@ -26,10 +29,6 @@ function SellingProduct() {
   const [introduction, setIntroduction] = useState("");
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  })
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/products/categories")
@@ -61,7 +60,7 @@ function SellingProduct() {
     setSuccessAlert(false);
     setFailAlert(false);
     let loginToken = localStorage.getItem("LoginToken");
-    let userId = localStorage.getItem("UserId");
+    let userId = userAcc.id;
     let createProductForm = new FormData();
     createProductForm.append("file", selectedFile);
     createProductForm.append("productName", productName);

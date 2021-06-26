@@ -1,6 +1,22 @@
 
+.quotation-rq-box{
+	height: 175px;
+	width: 1000px;
+	border-top: 1px solid seagreen;
+	border-right: 1px solid seagreen;
+	border-bottom: 1px solid seagreen;
+	border-left: 1px solid seagreen;
+	max-height: none;
+	min-height: 0px;
+	max-width: 1000;
+	min-width: 0px;
+	display: flex;
+	flex-direction: row;
+	margin-bottom:10px;
+}
+
 .quotation-box{
-	height: 165px;
+	height: 130px;
 	width: 1000px;
 	border-top: 1px solid seagreen;
 	border-right: 1px solid seagreen;
@@ -107,7 +123,7 @@
     color: seagreen;
   }
 
-.quotation-box .quotation-btn {
+.quotation-rq-box .quote-btn {
 	/* Font & Text */
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 15px;
@@ -139,6 +155,6 @@
 
 }
 
-.quotation-box .quotation-btn:hover {
+.quotation-rq-box .quote-btn:hover {
 	color: rgb(82, 175, 80);
   }
