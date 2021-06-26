@@ -13,8 +13,10 @@ namespace AgriApi.Models
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public QuotationState State { get; set; }
     public string RequestUser { get; set; }
+    public string RequestName { get; set; }
+    public string RequestUnit { get; set; }
 
-    public QuotationResponse(Quotation quotation, string owner)
+    public QuotationResponse(Quotation quotation, string owner, string rqName, string rqUnit)
     {
       Id = quotation.Id;
       RequestId = quotation.RequestId;
@@ -22,6 +24,8 @@ namespace AgriApi.Models
       Description = quotation.Description;
       State = quotation.State;
       RequestUser = owner;
+      RequestName = rqName;
+      RequestUnit = rqUnit;
     }
   }
 }

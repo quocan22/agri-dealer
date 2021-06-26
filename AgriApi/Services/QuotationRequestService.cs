@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using AgriApi.Entities;
 using MongoDB.Driver;
 
@@ -27,6 +28,12 @@ namespace AgriApi.Services
 
         public string GetRequestOwner(string id) =>
             _quotationRequest.Find<QuotationRequest>(quotationRequest => quotationRequest.Id == id).FirstOrDefault().UserId;
+
+        public string GetRequestName(string id) =>
+            _quotationRequest.Find<QuotationRequest>(quotationRequest => quotationRequest.Id == id).FirstOrDefault().ProductName;
+
+        public string GetRequestUnit(string id) =>
+            _quotationRequest.Find<QuotationRequest>(quotationRequest => quotationRequest.Id == id).FirstOrDefault().Unit;
 
         public QuotationRequest Create(QuotationRequest quotationRequest)
         {

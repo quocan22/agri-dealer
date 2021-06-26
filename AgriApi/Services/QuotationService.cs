@@ -42,8 +42,10 @@ namespace AgriApi.Services
             foreach(var q in quotations)
             {
                 var userId = _quotationRequestService.GetRequestOwner(q.RequestId);
+                var rqName = _quotationRequestService.GetRequestName(q.RequestId);
+                var rqUnit = _quotationRequestService.GetRequestUnit(q.RequestId);
                 var ownerName = _userService.GetDisplayNameById(userId);
-                quoResponses.Add(new QuotationResponse(q, ownerName));
+                quoResponses.Add(new QuotationResponse(q, ownerName, rqName, rqUnit));
             }
             return quoResponses;
         }
