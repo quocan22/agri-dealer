@@ -22,7 +22,6 @@ namespace AgriApi.Controllers
         }
 
         [HttpGet]
-        [Authorize("user, seller")]
         public ActionResult<List<QuotationRequestResponse>> GetActionResult()
         {
             var quoReqs = _quoReqService.Get();
@@ -77,7 +76,6 @@ namespace AgriApi.Controllers
         }
 
         [HttpGet("{id:length(24)}", Name = "GetQuotationRequest")]
-        [Authorize("user, seller")]
         public ActionResult<QuotationRequest> Get(string id)
         {
             var quoReq = _quoReqService.Get(id);

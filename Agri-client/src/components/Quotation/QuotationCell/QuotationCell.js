@@ -21,6 +21,10 @@ function QuotationCell({ quotation }) {
   const [categoryList, setCategoryList] = useState(null);
   const [userData, setUserData] = useState([]);
   const [quotationList, setQuotationList] = useState([]);
+
+  const [quotePrice, setQuotePrice] = useState(null);
+  const [description, setDescription] = useState(null);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -28,6 +32,40 @@ function QuotationCell({ quotation }) {
     setOpen(false);
   };
   const { userAcc } = useContext(AuthContext);
+  const handleCreateQuotationtoRequest = () => {
+    let userId = localStorage.getItem("UserId");
+    let loginToken = localStorage.getItem("LoginToken");
+    if ( !quotePrice) {
+      setQuotePrice(quotation.wishPrice);
+     }
+     if ( !description)
+     {
+       setDescription("Báo giá bởi " + userData.displayName);
+     }
+    const newquotationForm = new FormData();
+    if (description && quotePrice )
+    {
+      newquotationForm.append("userId", userId);
+      newquotationForm.append("requestId", quotation.id);
+      newquotationForm.append("quotePrice", quotePrice);
+      newquotationForm.append("Description", description);
+      newquotationForm.append("State", "pending");
+    }
+    axios
+      .post("http://localhost:5000/api/quotations", newquotationForm, {
+        headers: {
+          Authorization: "Bearer " + loginToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    
+  };
 
   useEffect(() => {
     let loginToken = localStorage.getItem("LoginToken");
@@ -62,7 +100,7 @@ function QuotationCell({ quotation }) {
             console.log(error);
         });
       }
-    fetchQuotationData();
+      fetchQuotationData();
   }, [quotation.userId, quotation.id ]);
 
   return (
@@ -169,13 +207,15 @@ function QuotationCell({ quotation }) {
                 <DialogContent>
                   <DialogContentText style={{ color: "black" }}>
                     Báo giá cho sản phẩm
-                    <text style={{ color: "seagreen" }}> {quotation.productName}</text>
+                    <text style={{ color: "seagreen" }}> {quotation.productName}
+                    </text>
                     :
                   </DialogContentText>
                   <TextField
                     label="Giá tiền"
                     variant="outlined"
                     type="number"
+                    onChange={(e) => setQuotePrice(e.target.value)}
                     defaultValue={quotation.wishPrice}
                     InputProps={{
                       endAdornment: (
@@ -202,6 +242,7 @@ function QuotationCell({ quotation }) {
                     label="Lời nhắn"
                     multiline
                     fullWidth
+                    onChange={(e) => setDescription(e.target.value)}
                     rowsMax={4}
                     variant="outlined"
                   />
@@ -210,7 +251,7 @@ function QuotationCell({ quotation }) {
                   <Button onClick={handleClose} style={{ color: "seagreen" }}>
                     Hủy
                   </Button>
-                  <Button onClick={handleClose} style={{ color: "seagreen" }}>
+                  <Button onClick={handleCreateQuotationtoRequest} style={{ color: "seagreen" }}>
                     Báo giá
                   </Button>
                 </DialogActions>

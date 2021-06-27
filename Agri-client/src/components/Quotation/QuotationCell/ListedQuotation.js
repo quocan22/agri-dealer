@@ -39,8 +39,8 @@ function ListedQuotation({ quotation }) {
       <CardContent className="media-body">
         <Link className="quotation-name">
           <Typography variant="h5">
-            Điều Bình Phước
-            <span
+            {quotation.requestName}           
+             <span
               className="badge"
               style={{ backgroundColor: badgeColor(quotation.state) }}
             >
@@ -53,11 +53,10 @@ function ListedQuotation({ quotation }) {
           (Được yêu cầu bởi:{" "}
           <Link className="small-link">{quotation.requestUser}</Link>)
         </Typography>
-
         <Typography style={{ fontSize: 15 }}>
           Đã trả giá:
           <text style={{ margin: 5, fontWeight: "bold" }}>
-            {quotation.quotePrice}₫ / kg {quotation.requestUnit}
+            {quotation.quotePrice}₫ /{quotation.requestUnit}
           </text>
         </Typography>
         <Typography style={{ fontSize: 15 }}>

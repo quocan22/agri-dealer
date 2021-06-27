@@ -5,7 +5,8 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { Link } from "react-router-dom";
 import ArrowBackOutlined from "@material-ui/icons/ArrowBackOutlined";
 import "./Quotation.css";
-import QuotationCell from "./QuotationCell/QuotationCell.js";
+import MyQuotationCell from "./QuotationCell/MyQuotationCell.js";
+
 import ListedQuotation from "./QuotationCell/ListedQuotation.js";
 
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -93,7 +94,7 @@ function QuotationManage() {
               <div>
                 {quoReqData.map((quotationrq) => (
                   <div item key={quotationrq.id}>
-                    <QuotationCell quotation={quotationrq} />
+                    <MyQuotationCell quotation={quotationrq} />
                   </div>
                 ))}
               </div>

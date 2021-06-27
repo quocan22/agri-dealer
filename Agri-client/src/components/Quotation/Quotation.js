@@ -15,13 +15,10 @@ function Quotation() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    let loginToken = localStorage.getItem("LoginToken");
     function fetchQuoReqData() {
       axios
         .get("http://localhost:5000/api/quotationrequests", {
-          headers: {
-            Authorization: "Bearer " + loginToken,
-          },
+
         })
         .then((res) => {
           setQuoReq(res.data);
