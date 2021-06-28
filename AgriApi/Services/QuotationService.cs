@@ -60,6 +60,26 @@ namespace AgriApi.Services
         public void Update(string id, Quotation quotationIn) =>
             _quotation.ReplaceOne(quotation => quotation.Id == id, quotationIn);
 
+        public bool BrowseQuotation(string id, string status)
+        {
+            var quotation = _quotation.Find<Quotation>(quotation => quotation.Id == id).FirstOrDefault();
+
+            switch(status)
+            {
+                case "confirmed":
+                    quotation.State = Quotation.QuotationState.confirmed;
+                    break;
+                case "canceled":
+                    quotation.State = Quotation.QuotationState.canceled;
+                    break;
+                default:
+                    return false;
+            }
+
+            Update(id, quotation);
+            return true;
+        }
+
         public void Remove(Quotation quotationIn) =>
             _quotation.DeleteOne(quotation => quotation.Id == quotationIn.Id);
 

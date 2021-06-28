@@ -18,7 +18,7 @@ namespace AgriApi.Entities
         public string ProductId { get; set; }
         [BsonRequired]
         public string Content { get; set; }
-        [BsonDateTimeOptions(DateOnly = true)]
+        [BsonRepresentation(BsonType.DateTime)]
         [BsonRequired]
         public DateTime? CommentDate { get; set; }
     }

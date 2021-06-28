@@ -35,16 +35,14 @@ function QuotationCell({ quotation }) {
   const handleCreateQuotationtoRequest = () => {
     let userId = localStorage.getItem("UserId");
     let loginToken = localStorage.getItem("LoginToken");
-    if ( !quotePrice) {
+    if (!quotePrice) {
       setQuotePrice(quotation.wishPrice);
-     }
-     if ( !description)
-     {
-       setDescription("Báo giá bởi " + userData.displayName);
-     }
+    }
+    if (!description) {
+      setDescription("Báo giá bởi " + userData.displayName);
+    }
     const newquotationForm = new FormData();
-    if (description && quotePrice )
-    {
+    if (description && quotePrice) {
       newquotationForm.append("userId", userId);
       newquotationForm.append("requestId", quotation.id);
       newquotationForm.append("quotePrice", quotePrice);
@@ -64,11 +62,9 @@ function QuotationCell({ quotation }) {
       .catch((err) => {
         console.log(err);
       });
-    
   };
 
   useEffect(() => {
-    let loginToken = localStorage.getItem("LoginToken");
     axios
       .get("http://localhost:5000/api/products/categories")
       .then((response) => {
@@ -84,24 +80,22 @@ function QuotationCell({ quotation }) {
         console.log(error);
       });
     function fetchQuotationData() {
-        axios.get("http://localhost:5000/api/quotations/filter",{ 
-          params:
-          {
-            type: "requestid", 
-            value: quotation.id
-          },  
-          headers: {
-            Authorization: "Bearer " + loginToken,
+      axios
+        .get("http://localhost:5000/api/quotations/filter", {
+          params: {
+            type: "requestid",
+            value: quotation.id,
           },
         })
-          .then((res) => {
-            setQuotationList(res.data);
-          }).catch(error => {
-            console.log(error);
+        .then((res) => {
+          setQuotationList(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      }
-      fetchQuotationData();
-  }, [quotation.userId, quotation.id ]);
+    }
+    fetchQuotationData();
+  }, [quotation.userId, quotation.id]);
 
   return (
     <div>
@@ -110,10 +104,12 @@ function QuotationCell({ quotation }) {
           <Link className="quotation-name">
             <Typography variant="h5">
               {quotation.productName}
-              <span 
-              onClick={()=>console.log(quotationList.lenght)}
-              className="badge">{quotationList.length} Báo giá</span>
-
+              <span
+                onClick={() => console.log(quotationList.lenght)}
+                className="badge"
+              >
+                {quotationList.length} Báo giá
+              </span>
             </Typography>
           </Link>
           <Typography style={{ marginBottom: 10, fontSize: 12 }}>
@@ -207,7 +203,9 @@ function QuotationCell({ quotation }) {
                 <DialogContent>
                   <DialogContentText style={{ color: "black" }}>
                     Báo giá cho sản phẩm
-                    <text style={{ color: "seagreen" }}> {quotation.productName}
+                    <text style={{ color: "seagreen" }}>
+                      {" "}
+                      {quotation.productName}
                     </text>
                     :
                   </DialogContentText>
@@ -251,7 +249,10 @@ function QuotationCell({ quotation }) {
                   <Button onClick={handleClose} style={{ color: "seagreen" }}>
                     Hủy
                   </Button>
-                  <Button onClick={handleCreateQuotationtoRequest} style={{ color: "seagreen" }}>
+                  <Button
+                    onClick={handleCreateQuotationtoRequest}
+                    style={{ color: "seagreen" }}
+                  >
                     Báo giá
                   </Button>
                 </DialogActions>

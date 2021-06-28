@@ -22,10 +22,22 @@ namespace AgriApi.Services
         public Comment Get(string id) =>
             _comment.Find<Comment>(comment => comment.Id == id).FirstOrDefault();
 
+        public List<Comment> GetByProductId(string productId) =>
+            _comment.Find<Comment>(comment => comment.ProductId == productId).ToList();
+
         public Comment Create(Comment comment)
         {
-            _comment.InsertOne(comment);
-            return comment;
+            comment.CommentDate = System.DateTime.Now;
+
+            try
+            {
+                _comment.InsertOne(comment);
+                return comment;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void Update(string id, Comment commentIn) =>

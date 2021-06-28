@@ -37,7 +37,6 @@ namespace AgriApi.Controllers
         }
 
         [HttpGet("filter/", Name = "GetQuotationByValue")]
-        [Authorize("seller, user")]
         public ActionResult<List<QuotationResponse>> GetQuoByValue([FromQuery] string type, [FromQuery] string value)
         {
             var quotations = new List<Quotation>();
@@ -86,6 +85,18 @@ namespace AgriApi.Controllers
             _quotationService.Update(id, quotationIn);
 
             return NoContent();
+        }
+
+        [HttpPut("browse", Name = "BrowseQuotation")]
+        public IActionResult BrowseQuotation([FromForm] string id, [FromForm] string status)
+        {
+            bool res = _quotationService.BrowseQuotation(id, status);
+
+            if (res)
+            {
+                return Ok(new {message = "Xác nhận thành công"});
+            }
+            return BadRequest(new {message = "Xác nhận thất bại"});
         }
 
         [HttpDelete("{id:length(24)}")]

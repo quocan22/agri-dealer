@@ -33,6 +33,28 @@ namespace AgriApi.Services.Identity
 
         public string GetDisplayNameById(string id) =>
             _user.Find<User>(user => user.Id == id).FirstOrDefault().UserClaims.DisplayName;
+        
+        public string GetRepName(string id)
+        {
+            var user = _user.Find<User>(user => user.Id == id).FirstOrDefault();
+
+            if (user.SellerClaims == null)
+            {
+                return user.UserClaims.DisplayName;
+            }
+
+            return user.SellerClaims.SellerName;
+        }
+
+        public string GetImageNameById(string id)
+        {
+            var user =_user.Find<User>(user => user.Id == id).FirstOrDefault();
+            if (user.UserClaims.AvatarUrl == null)
+            {
+                return "noavatar.png";
+            }
+            return user.UserClaims.AvatarUrl;
+        }
 
         public List<User> GetAllSeller() => 
             _user.Find<User>(user => user.Role == "seller").ToList();

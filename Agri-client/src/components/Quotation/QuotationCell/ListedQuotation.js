@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "./QuotationCell.css";
 
 function ListedQuotation({ quotation }) {
-
   const badgeColor = (state) => {
     let color;
     switch (state) {
@@ -39,16 +38,16 @@ function ListedQuotation({ quotation }) {
       <CardContent className="media-body">
         <Link className="quotation-name">
           <Typography variant="h5">
-            {quotation.requestName}           
-             <span
+            {quotation.requestName}
+            <span
               className="badge"
               style={{ backgroundColor: badgeColor(quotation.state) }}
             >
-              {badgeText(quotation.state)} 
+              {badgeText(quotation.state)}
             </span>
           </Typography>
         </Link>
-        
+
         <Typography style={{ marginBottom: 5, fontSize: 12 }}>
           (Được yêu cầu bởi:{" "}
           <Link className="small-link">{quotation.requestUser}</Link>)

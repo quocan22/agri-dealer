@@ -18,51 +18,42 @@ function QuotationManage() {
   const [quoReqData, setQuoReqData] = useState([]);
   const [quotationList, setQuotationList] = useState([]);
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    let loginToken = localStorage.getItem("LoginToken");
-    async function fetchQuoReqData() {
+    function fetchQuoReqData() {
       axios
         .get("http://localhost:5000/api/quotationrequests/search", {
-          params:
-          {
+          params: {
             type: "userid",
-            value: userAcc.id
-          },
-          headers: {
-            Authorization: "Bearer " + loginToken,
+            value: userAcc.id,
           },
         })
         .then((res) => {
           setQuoReqData(res.data);
-        }).catch(error => {
+        })
+        .catch((error) => {
           console.log(error);
-          console.log(error.data);
-      });
+        });
     }
-    async function fetchQuotationData() {
-    axios.get("http://localhost:5000/api/quotations/filter",{
-      params:
-      {
-        type: "userid", 
-        value: userAcc.id
-      },  
-      headers: {
-        Authorization: "Bearer " + loginToken,
-      },
-    })
-      .then((res) => {
-        setQuotationList(res.data);
-        console.log(res.data);
-      }).catch(error => {
-        console.log(error);
-        console.log(error.data);
-    });
-  }
+    function fetchQuotationData() {
+      axios
+        .get("http://localhost:5000/api/quotations/filter", {
+          params: {
+            type: "userid",
+            value: userAcc.id,
+          },
+        })
+        .then((res) => {
+          setQuotationList(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     fetchQuotationData();
     fetchQuoReqData();
-  },[userAcc.id]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="quotation-container">
@@ -103,7 +94,7 @@ function QuotationManage() {
         </TabPanel>
         <TabPanel>
           <div>
-            {quoReqData.length < 1 ? (
+            {setQuotationList.length < 1 ? (
               "Bạn chưa báo giá sản phẩm nào"
             ) : (
               <div>

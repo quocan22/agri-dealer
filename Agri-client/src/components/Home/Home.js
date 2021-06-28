@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Products from "../Products/Products";
 import background from "../../assets/images/background3.png";
 import "./Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "react-tabs/style/react-tabs.css";
 import fruitLogo from "../../assets/images/fruit.png";
 import vegetableLogo from "../../assets/images/vegetable.png";
@@ -14,6 +14,10 @@ const Home = () => {
   const [tabFruit, setTabFruit] = useState(0);
   const [tabVegetable, setTabVegetable] = useState(0);
   const [tabFlower, setTabFlower] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="root">
@@ -36,7 +40,7 @@ const Home = () => {
         <TabPanel>
           <Products type="catename" value="all" />
         </TabPanel>
-        <TabPanel style={{width: 1000}}></TabPanel>
+        <TabPanel style={{ width: 1000 }}></TabPanel>
       </Tabs>
       <Link to={`/search?type=catename&value=all`}>
         <button className="read-more-button">
@@ -57,11 +61,10 @@ const Home = () => {
         <TabPanel>
           <Products limit={8} type="catename" value="Trái cây" />
         </TabPanel>
-        <TabPanel style={{width: 1000}}></TabPanel>
+        <TabPanel style={{ width: 1000 }}></TabPanel>
       </Tabs>
       <Link to={`/search?type=catename&value=Trái%20cây&limit=0`}>
-        <button
-          className="read-more-button">
+        <button className="read-more-button">
           Xem thêm <i className="fas fa-angle-right" />
         </button>
       </Link>
@@ -79,7 +82,7 @@ const Home = () => {
         <TabPanel>
           <Products limit={8} type="catename" value="Rau củ quả" />
         </TabPanel>
-        <TabPanel style={{width: 1000}}></TabPanel>
+        <TabPanel style={{ width: 1000 }}></TabPanel>
       </Tabs>
       <Link to={`/search?type=catename&value=Rau%20củ%20quả&limit=0`}>
         <button className="read-more-button">
@@ -100,7 +103,7 @@ const Home = () => {
         <TabPanel>
           <Products limit={8} type="catename" value="Hoa tươi" />
         </TabPanel>
-        <TabPanel style={{width: 1000}}></TabPanel>
+        <TabPanel style={{ width: 1000 }}></TabPanel>
       </Tabs>
       <Link to={`/search?type=catename&value=Hoa%20tươi&limit=0`}>
         <button className="read-more-button">

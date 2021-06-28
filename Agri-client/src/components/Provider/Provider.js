@@ -8,33 +8,30 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 const axios = require("axios");
 
-
 function Provider() {
   const { userAcc } = useContext(AuthContext);
   const [providers, setProviders] = useState([]);
 
   useEffect(() => {
     async function fetchProvidersData() {
-      axios.get('http://localhost:5000/api/users/sellers', {
-        }).then(response => {
+      axios
+        .get("http://localhost:5000/api/users/sellers", {})
+        .then((response) => {
           setProviders(response.data);
-          console.log(response.data);
-        }).catch(error => {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-          console.log(error);
         })
+        .catch((error) => {
+          console.log(error);
+        });
     }
     fetchProvidersData();
-  }, [])
-  
+  }, []);
+
   return (
     <div className="providers-container">
       <Typography variant="h4" style={{ marginBottom: "10px" }}>
         DANH SÁCH NHÀ VƯỜN
       </Typography>
-      {(userAcc !== null && userAcc.role === 'user') && (
+      {userAcc !== null && userAcc.role === "user" && (
         <div>
           <Typography
             variant="h5"

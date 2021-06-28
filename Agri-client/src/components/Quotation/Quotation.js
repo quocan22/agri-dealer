@@ -17,15 +17,13 @@ function Quotation() {
     window.scrollTo(0, 0);
     function fetchQuoReqData() {
       axios
-        .get("http://localhost:5000/api/quotationrequests", {
-
-        })
+        .get("http://localhost:5000/api/quotationrequests", {})
         .then((res) => {
           setQuoReq(res.data);
-        }).catch(error => {
+        })
+        .catch((error) => {
           console.log(error);
-          console.log(error.data);
-      });
+        });
     }
     fetchQuoReqData();
   }, []);
