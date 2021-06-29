@@ -94,7 +94,7 @@ function QuotationManage() {
         </TabPanel>
         <TabPanel>
           <div>
-            {setQuotationList.length < 1 ? (
+            {quotationList.length < 1 ? (
               "Bạn chưa báo giá sản phẩm nào"
             ) : (
               <div>

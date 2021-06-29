@@ -12,9 +12,82 @@
 	min-width: 0px;
 	display: flex;
 	flex-direction: row;
+	margin-top:15px;
+}
+.quotation-list-dropdown{
+	border-right: 1px solid seagreen;
+	border-bottom: 1px solid seagreen;
+	border-left: 1px solid seagreen;
+	max-height: none;
+	min-height: 0px;
+	max-width: 1000;
+	min-width: 0px;
 	margin-bottom:10px;
+	margin-top: 0px;
+}
+.quotation-list-cell{
+	width: 965px;
+	display: flex;
+	flex-direction: row;
+	border-top: 1px solid seagreen;
+	border-right: 1px solid seagreen;
+	border-bottom: 1px solid seagreen;
+	border-left: 1px solid seagreen;
+	margin: 5px;
+}
+.confirm-button-group
+{
+	width: 200px;	
+	display: flex;
+	max-height: 35px;
+	flex-direction: row;;
 }
 
+.confirm-button-group .confirm
+{
+	color: white;
+	background-color: green;
+	width: 95px;	
+	border-top: 1px solid green;
+	border-right: 1px solid green;
+	border-bottom: 1px solid green;
+	border-left: 1px solid green;
+	margin: 5px;
+}
+.confirm-button-group .confirm :hover
+{
+	color: green;
+}
+
+.confirm-button-group .cancel
+{
+	color: white;
+	background-color: red;
+	width: 50px;
+	border-top: 1px solid red;
+	border-right: 1px solid red;
+	border-bottom: 1px solid red;
+	border-left: 1px solid red;
+	margin: 5px;
+}
+.confirm-button-group .cancel :hover
+{
+	color: red;
+	
+}
+
+.quotation-text-box{
+	border-right: 1px solid seagreen;
+	width: 400px;
+	margin-right: 10px;
+	padding: 10px;
+	align-content: center;
+	justify-content: center;
+}
+.quotation-list{
+	display: flex;
+	flex-direction: column;
+}
 .quotation-box{
 	height: 130px;
 	width: 1000px;

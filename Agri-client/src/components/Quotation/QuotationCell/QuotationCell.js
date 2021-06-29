@@ -22,8 +22,10 @@ function QuotationCell({ quotation }) {
   const [userData, setUserData] = useState([]);
   const [quotationList, setQuotationList] = useState([]);
 
-  const [quotePrice, setQuotePrice] = useState(null);
-  const [description, setDescription] = useState(null);
+ 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,23 +34,21 @@ function QuotationCell({ quotation }) {
     setOpen(false);
   };
   const { userAcc } = useContext(AuthContext);
+  const [quotePrice, setQuotePrice] = useState(quotation.wishPrice);
+  const [description, setDescription] = useState("Báo giá bởi " + userAcc.displayName);
   const handleCreateQuotationtoRequest = () => {
     let userId = localStorage.getItem("UserId");
     let loginToken = localStorage.getItem("LoginToken");
-    if (!quotePrice) {
-      setQuotePrice(quotation.wishPrice);
-    }
-    if (!description) {
-      setDescription("Báo giá bởi " + userData.displayName);
+    if (!userId || !quotation.id)
+    {
+      return;
     }
     const newquotationForm = new FormData();
-    if (description && quotePrice) {
-      newquotationForm.append("userId", userId);
-      newquotationForm.append("requestId", quotation.id);
-      newquotationForm.append("quotePrice", quotePrice);
-      newquotationForm.append("Description", description);
-      newquotationForm.append("State", "pending");
-    }
+    newquotationForm.append("userId", userId);
+    newquotationForm.append("requestId", quotation.id);
+    newquotationForm.append("quotePrice", quotePrice);
+    newquotationForm.append("Description", description);
+    newquotationForm.append("State", "pending");
     axios
       .post("http://localhost:5000/api/quotations", newquotationForm, {
         headers: {
@@ -136,7 +136,7 @@ function QuotationCell({ quotation }) {
           <Typography style={{ fontSize: 15 }}>
             Mức giá mong muốn:
             <text style={{ margin: 5, fontWeight: "bold" }}>
-              {quotation.wishPrice}₫ / {quotation.unit}
+              {numberWithCommas(quotation.wishPrice)}₫ /{quotation.unit}
             </text>
           </Typography>
           <Typography style={{ fontSize: 15 }}>
@@ -241,6 +241,7 @@ function QuotationCell({ quotation }) {
                     multiline
                     fullWidth
                     onChange={(e) => setDescription(e.target.value)}
+                    defaultValue ={"Báo giá bởi " + userAcc.displayName}
                     rowsMax={4}
                     variant="outlined"
                   />
