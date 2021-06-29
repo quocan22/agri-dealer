@@ -52,7 +52,7 @@ function CartCell({ cproduct }) {
         </Link>
         </Grid>
                   
-            <p variant="subtitle2" style={{color:"orange", height: "auto",width: "fit-content",margin: 20}}>12.301.230₫</p>
+            <p variant="subtitle2" style={{color:"orange", height: "auto",width: "fit-content",margin: 20}}>5,000,000₫</p>
         <p className="quantity" style={{margin:20, width:200}}>
             <button className="qtyBtn" onClick={subtractQuantity}>
               <i className="fas fa-minus" />
@@ -61,6 +61,7 @@ function CartCell({ cproduct }) {
               className="qtyBox"
               type="number"
               onChange={handleQuantity}
+              value="1"
             />
             <button className="qtyBtn" onClick={addQuantity}>
               <i className="fas fa-plus" />

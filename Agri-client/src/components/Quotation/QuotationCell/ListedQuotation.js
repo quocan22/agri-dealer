@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import "./QuotationCell.css";
 
 function ListedQuotation({ quotation }) {
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   const badgeColor = (state) => {
     let color;
     switch (state) {
@@ -55,7 +59,7 @@ function ListedQuotation({ quotation }) {
         <Typography style={{ fontSize: 15 }}>
           Đã trả giá:
           <text style={{ margin: 5, fontWeight: "bold" }}>
-            {quotation.quotePrice}₫ /{quotation.requestUnit}
+            {numberWithCommas(quotation.quotePrice)}₫ /{quotation.requestUnit}
           </text>
         </Typography>
         <Typography style={{ fontSize: 15 }}>
