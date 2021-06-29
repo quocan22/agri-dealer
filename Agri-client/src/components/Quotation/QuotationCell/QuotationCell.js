@@ -28,18 +28,22 @@ function QuotationCell({ quotation }) {
   }
 
   const handleClickOpen = () => {
+    setDescription("Báo giá bởi " + userAcc.displayName);
+    setQuotePrice(quotation.wishPrice);
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
   const { userAcc } = useContext(AuthContext);
-  const [quotePrice, setQuotePrice] = useState(quotation.wishPrice);
-  const [description, setDescription] = useState("Báo giá bởi " + userAcc.displayName);
+  const [quotePrice, setQuotePrice] = useState(null);
+  const [description, setDescription] = useState(null);
+
   const handleCreateQuotationtoRequest = () => {
     let userId = localStorage.getItem("UserId");
     let loginToken = localStorage.getItem("LoginToken");
-    if (!userId || !quotation.id)
+  
+    if (!userAcc || !quotation.id)
     {
       return;
     }
@@ -240,8 +244,8 @@ function QuotationCell({ quotation }) {
                     label="Lời nhắn"
                     multiline
                     fullWidth
-                    onChange={(e) => setDescription(e.target.value)}
                     defaultValue ={"Báo giá bởi " + userAcc.displayName}
+                    onChange={(e) => setDescription(e.target.value)}
                     rowsMax={4}
                     variant="outlined"
                   />
