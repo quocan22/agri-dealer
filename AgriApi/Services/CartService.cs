@@ -68,6 +68,15 @@ namespace AgriApi.Services
                 _cart.InsertOne(curCart);
                 return true;
             }
+            foreach (var d in curCart.Details)
+            {
+                if (d.ProductId == cartDetail.ProductId)
+                {
+                    d.BuyQuantity += cartDetail.BuyQuantity;
+                    Update(curCart.Id, curCart);
+                    return true;
+                }
+            }
             curCart.Details.Add(cartDetail);
             Update(curCart.Id, curCart);
             return true;
