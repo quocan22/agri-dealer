@@ -94,7 +94,7 @@ function Profile() {
               </text>
             </Typography>
           </Grid>
-          <Grid className="history">
+          <Grid className="pro-history">
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
               Lịch sử giao dịch
             </Typography>
@@ -126,34 +126,7 @@ function Profile() {
           </Grid>
         </Grid>
         
-        {/* <Typography variant="h4" style={{ margin: 10 }}>Giao dịch gần đây</Typography>
-        <p className="separator" style={{ margin: 10 }}></p>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell style={{fontWeight:"bold"}}>Mã Đơn Hàng</TableCell>
-                <TableCell style={{fontWeight:"bold"}}>Nhà Cung Cấp	</TableCell>
-                <TableCell style={{fontWeight:"bold"}}>Sản Phẩm	</TableCell>
-                <TableCell style={{fontWeight:"bold"}}>Tổng Tiền</TableCell>
-                <TableCell style={{fontWeight:"bold"}}>Ngày Mua</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {profile.recentorder.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell component="th" scope="row">
-                    {row.id}
-                  </TableCell>
-                  <TableCell>{row.provider}</TableCell>
-                  <TableCell>{row.product}</TableCell>
-                  <TableCell>{row.bill}</TableCell>
-                  <TableCell>{row.date}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>  */}
+     
       </Card>
       }
       <div style={{display: 'flex', justifyContent: "center"}}>
