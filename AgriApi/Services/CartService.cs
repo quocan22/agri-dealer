@@ -30,9 +30,14 @@ namespace AgriApi.Services
         public Cart Get(string id) =>
             _cart.Find<Cart>(cart => cart.Id == id).FirstOrDefault();
 
-        public List<CartDetailResponse> GetDetailCurrentCart(string userId)
+        public List<Cart> GetHistoryCart(string userId) =>
+            _cart.Find<Cart>(cart => cart.UserId == userId && cart.Paid == true).ToList();
+
+        public Cart GetCurrentCart(string userId) => 
+            _cart.Find<Cart>(cart => cart.UserId == userId && cart.Paid == false).FirstOrDefault();
+
+        public List<CartDetailResponse> GetDetailCart(Cart cart)
         {
-            var cart = _cart.Find<Cart>(cart => (cart.UserId == userId && cart.Paid == false)).FirstOrDefault();
             var detailResponse = new List<CartDetailResponse>();
             detailResponse.Clear();
 

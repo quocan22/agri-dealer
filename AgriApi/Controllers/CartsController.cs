@@ -38,14 +38,21 @@ namespace AgriApi.Controllers
             return cart;
         }
 
-        [HttpGet("currentdetail")]
+        [HttpGet("currentcart")]
         [Authorize("user, seller")]
-        public ActionResult<List<CartDetailResponse>> GetCurrentDetail([FromForm] string userId)
+        public ActionResult<CartResponse> GetCurrentDetail([FromQuery] string userId)
         {
             var detailResponse = new List<CartDetailResponse>();
             detailResponse.Clear();
 
-            detailResponse = _cartService.GetDetailCurrentCart(userId);
+            var cart = _cartService.GetCurrentCart(userId);
+
+            if (cart == null)
+            {
+                return BadRequest(new { message = "Hiện không có giỏ hàng nào"});
+            }
+
+            detailResponse = _cartService.GetDetailCart(cart);
             if (detailResponse != null)
             {
                 foreach (var d in detailResponse)
@@ -53,8 +60,36 @@ namespace AgriApi.Controllers
                     d.ProductImage = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, d.ProductImage);
                 }
             }
+            var cartResponse = new CartResponse(cart, detailResponse);
 
-            return detailResponse;
+            return cartResponse;
+        }
+
+        [HttpGet("historycart")]
+        [Authorize("user, seller")]
+        public ActionResult<List<CartResponse>> GetHistoryDetail([FromQuery] string userId)
+        {
+            var cartResponse = new List<CartResponse>();
+            cartResponse.Clear();
+
+            var cart = _cartService.GetHistoryCart(userId);
+
+            if (cart != null)
+            {
+                foreach (var c in cart)
+                {
+                    var detailResponse = _cartService.GetDetailCart(c);
+                    if (detailResponse != null)
+                    {
+                        foreach (var d in detailResponse)
+                        {
+                            d.ProductImage = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, d.ProductImage);
+                        }
+                    }
+                    cartResponse.Add(new CartResponse(c, detailResponse));
+                }
+            }
+            return cartResponse;
         }
 
         [HttpPost]
