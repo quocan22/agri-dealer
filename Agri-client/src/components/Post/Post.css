@@ -123,6 +123,8 @@
   border: 1px solid grey;
   margin-bottom: 5px;
   padding: 0 0 0 10px;
+  margin: 0; 
+
 }
 .quantity {
   line-height: 1;

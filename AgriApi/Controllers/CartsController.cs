@@ -40,7 +40,7 @@ namespace AgriApi.Controllers
 
         [HttpGet("currentdetail")]
         [Authorize("user, seller")]
-        public ActionResult<List<CartDetailResponse>> GetCurrentDetail([FromForm] string userId)
+        public ActionResult<List<CartDetailResponse>> GetCurrentDetail([FromQuery] string userId)
         {
             var detailResponse = new List<CartDetailResponse>();
             detailResponse.Clear();

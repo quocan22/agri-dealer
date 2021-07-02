@@ -18,6 +18,8 @@ import Search from "./components/Search/Search";
 import RegisterForm from "./components/Provider/RegisterForm/RegisterForm";
 import ThanksScreen from "./components/Provider/RegisterForm/ThanksScreen";
 import SignUp from "./components/Login/SignUp/SignUp";
+import CartHistory from "./components/Cart/CartHistory";
+
 import CreateQuotation from "./components/AddNewProduct/CreateQuotation/CreateQuotation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,6 +47,7 @@ function App() {
           <Route path="/search" component={Search} />
           <Route path="/provider-re" component={RegisterForm} />
           <Route path="/thanks" component={ThanksScreen} />
+          <Route path="/cart-history" component={CartHistory} />
           <Footer />
         </div>
       </Switch>
