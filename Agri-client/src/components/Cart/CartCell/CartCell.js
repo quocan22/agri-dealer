@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {
   Card,
   CardMedia,
@@ -13,15 +13,57 @@ const axios = require("axios");
 
 
 function CartCell({ cproduct }) {
-   const { userAcc } = useContext(AuthContext);
+  const { userAcc } = useContext(AuthContext);
   const [quantity, setQuantity] = useState(0);
   const [buyQuantity, setBuyQuantity] = useState(cproduct.buyQuantity);
   const [minPurchase, setMinPurchase] = useState(0);
-  
+  const [cartId, setCartId] = useState('');
+
+
+  useEffect(() => {
+    function fetchCartData() {
+    let loginToken = localStorage.getItem("LoginToken");
+    axios
+    .get("http://localhost:5000/api/carts/currentcart",
+    {
+      params:
+      {
+        userId:userAcc.id,
+      },
+      headers:
+        {
+          Authorization: "Bearer " + loginToken,
+        }
+    })
+    .then((res) => {
+      setCartId(res.data.id);
+    })
+    .catch((error) => {console.log(error);
+    });
+    }
+    fetchCartData();
+  },[userAcc.id]
+  );
+
   const handleQuantity = (event) => {
     const value = event.target.value;
     if (value < 1 || value > quantity) return;
     setBuyQuantity(value);
+    let loginToken = localStorage.getItem("LoginToken");
+    let changeData = new FormData();
+    changeData.append("id", cartId);
+    changeData.append("productId", cproduct.productId);
+    changeData.append("newAmount", buyQuantity);
+    axios
+      .put("localhost:5000/api/carts/changeamount", changeData, {
+        headers: {
+          Authorization: "Bearer " + loginToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   function addQuantity() {
@@ -43,8 +85,9 @@ function CartCell({ cproduct }) {
     console.log(cproduct.productId);
     let loginToken = localStorage.getItem("LoginToken");
     let removeData = new FormData();
-    removeData.append("id", "60de7dc64a393873f4f3f323");
+    removeData.append("id", cartId);
     removeData.append("productId", cproduct.productId);
+    
     axios
       .delete("http://localhost:5000/api/carts/removeproduct", removeData, {
         headers: {
@@ -56,7 +99,6 @@ function CartCell({ cproduct }) {
       })
       .catch((err) => console.log(err));
   }
-  
   return (
     <div className ="cart-container"> 
       <Grid className="provider-table">

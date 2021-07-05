@@ -22,7 +22,7 @@ function Cart() {
     function fetchCartData() {
     let loginToken = localStorage.getItem("LoginToken");
     axios
-    .get("http://localhost:5000/api/carts/currentdetail",
+    .get("http://localhost:5000/api/carts/currentcart",
     {
       params:
       {
@@ -35,10 +35,10 @@ function Cart() {
     })
     .then((res) => {
       console.log(res);
-      setCartData(res.data);
+      setCartId(res.data.id);
+      setCartData(res.data.details);
     })
     .catch((error) => {console.log(error);
-    console.log(userAcc.id);
     });
     }
     fetchCartData();
