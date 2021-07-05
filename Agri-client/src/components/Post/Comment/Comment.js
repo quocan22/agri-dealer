@@ -45,10 +45,7 @@ const Comment = ({ comment, onDelete }) => {
   };
 
   const handleDelete = () => {
-    axios
-      .delete("localhost:5000/api/comments/" + comment.id)
-      .then()
-      .catch((err) => console.log(err));
+    onDelete(comment.id);
     setAnchorEl(null);
   };
 

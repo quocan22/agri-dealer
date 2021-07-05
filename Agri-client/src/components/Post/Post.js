@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Input, 
+import {
+  Input,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText, } from "@material-ui/core";
+  DialogContentText,
+} from "@material-ui/core";
 
 import "./Post.css";
 import Comment from "./Comment/Comment";
@@ -35,8 +37,6 @@ function Post() {
 
   const [buyQuantity, setBuyQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
-
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -78,7 +78,7 @@ function Post() {
         .catch((err) => console.log(err));
     }
     fetchCommentData();
-  }, [onChange, productId]);
+  }, [onChange, productId, comments.length]);
 
   useEffect(() => {
     axios
@@ -115,7 +115,7 @@ function Post() {
 
   const handleComment = (e) => {
     e.preventDefault();
-    
+
     if (!content) {
       return;
     }
@@ -132,14 +132,17 @@ function Post() {
       .catch((err) => console.log(err));
   };
 
-  const onDelete = (index) => {
-    setComments((comments) => {
-      comments.filter((comment, i) => i !== index);
-    });
+  const onDelete = (commentId) => {
+    axios
+      .delete("http://localhost:5000/api/comments/" + commentId)
+      .then(() => {
+        var res = comments.filter((c) => c.id !== commentId);
+        setComments(res);
+      })
+      .catch((err) => console.log(err));
   };
 
-  const addToCard = () =>
-  { 
+  const addToCard = () => {
     let loginToken = localStorage.getItem("LoginToken");
     let cartData = new FormData();
     cartData.append("userId", userAcc.id);
@@ -155,7 +158,7 @@ function Post() {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -200,32 +203,35 @@ function Post() {
                 </button>{" "}
                 {unit}
               </p>
-              <button className="cart" onClick={ userAcc ? addToCard : 
-                openDialog
-              }>
+              <button
+                className="cart"
+                onClick={userAcc ? addToCard : openDialog}
+              >
                 <i className="fas fa-cart-plus" /> Mua ngay
               </button>
             </div>
           </div>
           <div>
-                <Dialog
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="form-dialog-title"
-                >
-                  <DialogTitle style={{ alignContent: "center", color: "seagreen" }}>
-                    Thông báo
-                  </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText style={{ color: "black" }}>
-                      Bạn chưa đăng nhập, vui lòng đăng nhập để mua sản phẩm
-                      <Link to="/login" className="register-forgot-link">
-                        <p> Đăng nhập tại đây</p>
-                      </Link>
-                    </DialogContentText>
-                  </DialogContent>
-                </Dialog>
-              </div>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle
+                style={{ alignContent: "center", color: "seagreen" }}
+              >
+                Thông báo
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText style={{ color: "black" }}>
+                  Bạn chưa đăng nhập, vui lòng đăng nhập để mua sản phẩm
+                  <Link to="/login" className="register-forgot-link">
+                    <p> Đăng nhập tại đây</p>
+                  </Link>
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+          </div>
           <p style={{ fontSize: 20, margin: 20, marginLeft: 10 }}>
             MÔ TẢ SẢN PHẨM
           </p>
@@ -267,7 +273,7 @@ function Post() {
                   <Comment
                     key={comment.id}
                     comment={comment}
-                    onDelete={onDelete(index)}
+                    onDelete={onDelete}
                   />
                 ))
               )}
