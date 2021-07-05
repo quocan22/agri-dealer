@@ -64,12 +64,12 @@ const statusText = (state) => {
 
 function MyQuotationCell({ quotation }) {
   const [categoryList, setCategoryList] = useState(null);
+  const [change, setChange] = useState(false);
   const [quotationList, setQuotationList] = useState([]);
   const headingclasses = useheadingStyles();
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
 
   useEffect(() => {
     let loginToken = localStorage.getItem("LoginToken");
@@ -99,8 +99,48 @@ function MyQuotationCell({ quotation }) {
         });
     }
     fetchQuotationData();
-  }, [quotation.userId, quotation.id]);
+  }, [quotation.userId, quotation.id, change]);
 
+  const handleConfirm = (id) =>
+  { 
+    let loginToken = localStorage.getItem("LoginToken");
+    let updateConfirmStatus = new FormData();
+    updateConfirmStatus.append("id", id);
+    updateConfirmStatus.append("status", "confirmed");
+    axios
+      .put("http://localhost:5000/api/quotations/browse", updateConfirmStatus, {
+        headers: {
+          Authorization: "Bearer " + loginToken,
+        },
+      })
+      .then((res) => {
+        console.log(id);
+        setChange(!change);
+        console.log("confirmed");
+      })
+      .catch((err) => console.log(err));
+  }
+  
+  const handleCancel = (id) =>
+  { 
+    let loginToken = localStorage.getItem("LoginToken");
+    let updateCancelStatus = new FormData();
+    updateCancelStatus.append("id", id);
+    updateCancelStatus.append("status", "canceled");
+    axios
+      .put("http://localhost:5000/api/quotations/browse", updateCancelStatus, {
+        headers: {
+          Authorization: "Bearer " + loginToken,
+        },
+      })
+      .then((res) => {
+        console.log(id);
+        setChange(!change);
+        console.log("canceled");
+      })
+      .catch((err) => console.log(err));
+  }
+  
   return (
     <div>
       <div className="quotation-rq-box">
@@ -206,8 +246,8 @@ function MyQuotationCell({ quotation }) {
                           {row.state==="pending"?
                           <TableCell>
                           <div className="confirm-button-group">
-                            <Button className="confirm">Xác nhận</Button>
-                            <Button className="cancel">Hủy</Button>
+                            <Button className="confirm" onClick={() => handleConfirm(row.id)} >Xác nhận</Button>
+                            <Button onClick={() => handleCancel(row.id)}  className="cancel">Hủy</Button>
                             </div>
                             </TableCell>
                             : <TableCell/>}

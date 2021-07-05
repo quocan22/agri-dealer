@@ -14,14 +14,13 @@ import {
   // TableHead,
   // Table
 } from "@material-ui/core";
-import SettingsIcon from '@material-ui/icons/Settings';
-import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
+import SettingsIcon from "@material-ui/icons/Settings";
+import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import { Link, useHistory } from "react-router-dom";
 const axios = require("axios");
 
-
 function Profile() {
-  const {userAcc, logout} = useContext(AuthContext);
+  const { userAcc, logout } = useContext(AuthContext);
   const history = useHistory();
   const [userData, setUserData] = useState([]);
 
@@ -29,109 +28,83 @@ function Profile() {
     window.scrollTo(0, 0);
     async function fetchUserData() {
       // eslint-disable-next-line no-lone-blocks
-      axios.get('http://localhost:5000/api/users/'+userAcc.id, {
-      }).then(response => {
+      axios
+        .get("http://localhost:5000/api/users/" + userAcc.id, {})
+        .then((response) => {
           setUserData(response.data.userClaims);
           console.log(response.data.userClaims);
-      }).catch(error => {
+        })
+        .catch((error) => {
           console.log(error);
-      })
+        });
     }
     fetchUserData();
-  },[userAcc.id])
+  }, [userAcc.id]);
 
   const handleLogout = () => {
     logout().then(history.push("/"));
-  }
+  };
 
   return (
     <div className="profile-container">
-      <Typography variant="h4" style={{marginBottom:"10px"}}>THÔNG TIN CÁ NHÂN</Typography>
-      {userAcc === null ?
-      <p>Đang tải dữ liệu</p> :
-      <Card className="profile-card">
-        <Grid style={{display:"flex", justifyContent:"flex-end"}}>
-        <Link to={"/profile-setting"} className="card-content-name">
-        <SettingsIcon fontSize="large" />
-        </Link> 
-        </Grid>
-        <Grid className="row">
-          <CardMedia className="user-avatar" image={ userData.avatarUrl
-                        ? userData.avatarUrl
-                        : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"} />
-          <Grid className="profile-info">
-            <Typography style={{ fontSize: 15 }}>
-              Họ và tên:
-              <text style={{ margin: 5, fontWeight: "bold" }}>
-                {userData.displayName}
-              </text>
-            </Typography>
-            <Typography style={{ fontSize: 15 }}>
-              Số điện thoại:
-              <text style={{ margin: 5, fontWeight: "bold" }}>
-                {userData.phonenumber}
-
-              </text>
-            </Typography>
-            <Typography style={{ fontSize: 15 }}>
-              Email:
-              <text style={{ margin: 5, fontWeight: "bold" }}>
-                {userAcc.email}
-              </text>
-            </Typography>
-            <Typography style={{ fontSize: 15 }}>
-              Địa chỉ:
-              <text style={{ margin: 5, fontWeight: "bold" }}>
-                {userData.address}
-              </text>
-            </Typography>
-            <Typography style={{ fontSize: 15 }}>
-              Ngày tham gia:
-              <text style={{ margin: 5, fontWeight: "bold" }}>
-              {new Date(userData.joinDate).toLocaleDateString("vi-VI", {
-                        timeZone: "UTC",
-                      })}              
-              </text>
-            </Typography>
+      <Typography variant="h4" style={{ marginBottom: "10px" }}>
+        THÔNG TIN CÁ NHÂN
+      </Typography>
+      {userAcc === null ? (
+        <p>Đang tải dữ liệu</p>
+      ) : (
+        <Card className="profile-card">
+          <Grid style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Link to={"/profile-setting"} className="card-content-name">
+              <SettingsIcon fontSize="large" />
+            </Link>
           </Grid>
-          <Grid className="pro-history">
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              Lịch sử giao dịch
-            </Typography>
-            <Typography variant="subtitle1" style={{ margin: 5 }}>
-              - Số lần giao dịch thành công:{" "}
-              <text style={{ fontWeight: "bold" }}>3</text>
-            </Typography>
-            <Typography variant="subtitle1" style={{ margin: 5 }}>
-              - Số lượng nhà cung cấp khác nhau:{" "}
-              <text style={{ fontWeight: "bold" }}>2</text>
-            </Typography>
-            <Typography variant="subtitle1" style={{ margin: 5 }}>
-              - Số lượt đánh giá:{" "}
-              <text style={{ color: "green", fontWeight: "bold" }}>
-                {" "}
-                Hài lòng (2)
-              </text>
-              ,
-              <text style={{ color: "skyblue", fontWeight: "bold" }}>
-                {" "}
-                Bình thường (1)
-              </text> 
-              ,
-              <text style={{ color: "red", fontWeight: "bold" }}>
-                {" "}
-                Không hài lòng (0)
-              </text>
-            </Typography>
+          <Grid className="row">
+            <div className="cuscolumn1">
+              <CardMedia
+                className="user-big-avatar"
+                image={
+                  userData.avatarUrl
+                    ? userData.avatarUrl
+                    : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"
+                }
+              />
+              <h2 className="user-big-name">{userData.displayName}</h2>
+            </div>
+            <div className="profile-info">
+              <div className="profilecuscolumn">
+                <p>
+                  <text style={{ fontWeight: "bold" }}>Email:</text>{" "}
+                  {userAcc.email}{" "}
+                </p>
+                <p>
+                  <text style={{ fontWeight: "bold" }}>Ngày tham gia:</text>{" "}
+                  {new Date(userData.joinDate).toLocaleDateString("vi-VI", {
+                    timeZone: "UTC",
+                  })}{" "}
+                </p>
+                <p>
+                  {" "}
+                  <text style={{ fontWeight: "bold" }}>
+                    Số điện thoại:
+                  </text>{" "}
+                  {userData.phonenumber
+                    ? userData.phonenumber
+                    : "Số điện thoại đã được ẩn"}
+                </p>
+                <p>
+                  <text style={{ fontWeight: "bold" }}>Địa chỉ:</text>{" "}
+                  {userData.address}
+                </p>
+              </div>
+            </div>
           </Grid>
-        </Grid>
-        
-     
-      </Card>
-      }
-      <div style={{display: 'flex', justifyContent: "center"}}>
+        </Card>
+      )}
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <button className="logout" onClick={handleLogout}>
-          Đăng xuất  <DirectionsRunIcon style={{marginTop:"3px",fontSize:"large"}}/>
+          Đăng xuất{" "}
+          <DirectionsRunIcon style={{ marginTop: "3px", fontSize: "large" }} />
         </button>
       </div>
     </div>
