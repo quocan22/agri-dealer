@@ -252,7 +252,13 @@ function Post() {
               Bình luận về sản phẩm
             </div>
             <div className="comment-list">
-              {!userAcc ? null : (
+              {!userAcc ? (
+                <Link to={"/login"}>
+                  <button className="login-to-cmt-button">
+                    Đăng nhập để bình luận
+                  </button>
+                </Link>
+              ) : (
                 <form onSubmit={(e) => handleComment(e)}>
                   <Input
                     autoComplete="off"

@@ -148,6 +148,18 @@
   background-color: white;
   padding: 15px;
 }
+.login-to-cmt-button {
+  margin: 20px;
+  height: 40px;
+  padding: 10px;
+  background-color: seagreen;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
 .add-comment-field {
   border: 1px solid lightgray;
   padding: 10px;
