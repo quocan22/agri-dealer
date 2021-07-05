@@ -64,7 +64,7 @@ const statusText = (state) => {
 
 function MyQuotationCell({ quotation }) {
   const [categoryList, setCategoryList] = useState(null);
-  const [quotationId, setQuotationId] = useState(null);
+  const [change, setChange] = useState(false);
   const [quotationList, setQuotationList] = useState([]);
   const headingclasses = useheadingStyles();
   function numberWithCommas(x) {
@@ -99,14 +99,14 @@ function MyQuotationCell({ quotation }) {
         });
     }
     fetchQuotationData();
-  }, [quotation.userId, quotation.id]);
+  }, [quotation.userId, quotation.id, change]);
 
-  const handleConfirm = () =>
+  const handleConfirm = (id) =>
   { 
     let loginToken = localStorage.getItem("LoginToken");
     let updateConfirmStatus = new FormData();
-    updateConfirmStatus.append("id", quotationId);
-    updateConfirmStatus.append("status", "confirm");
+    updateConfirmStatus.append("id", id);
+    updateConfirmStatus.append("status", "confirmed");
     axios
       .put("http://localhost:5000/api/quotations/browse", updateConfirmStatus, {
         headers: {
@@ -114,17 +114,18 @@ function MyQuotationCell({ quotation }) {
         },
       })
       .then((res) => {
-        console.log(quotationId);
+        console.log(id);
+        setChange(!change);
         console.log("confirmed");
       })
       .catch((err) => console.log(err));
   }
   
-  const handleCancel = () =>
+  const handleCancel = (id) =>
   { 
     let loginToken = localStorage.getItem("LoginToken");
     let updateCancelStatus = new FormData();
-    updateCancelStatus.append("id", quotationId);
+    updateCancelStatus.append("id", id);
     updateCancelStatus.append("status", "canceled");
     axios
       .put("http://localhost:5000/api/quotations/browse", updateCancelStatus, {
@@ -133,7 +134,8 @@ function MyQuotationCell({ quotation }) {
         },
       })
       .then((res) => {
-        console.log(quotationId);
+        console.log(id);
+        setChange(!change);
         console.log("canceled");
       })
       .catch((err) => console.log(err));
@@ -244,8 +246,8 @@ function MyQuotationCell({ quotation }) {
                           {row.state==="pending"?
                           <TableCell>
                           <div className="confirm-button-group">
-                            <Button onclick={handleConfirm} className="confirm">Xác nhận</Button>
-                            <Button onclick={handleCancel}  className="cancel">Hủy</Button>
+                            <Button className="confirm" onClick={() => handleConfirm(row.id)} >Xác nhận</Button>
+                            <Button onClick={() => handleCancel(row.id)}  className="cancel">Hủy</Button>
                             </div>
                             </TableCell>
                             : <TableCell/>}
