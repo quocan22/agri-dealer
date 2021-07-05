@@ -36,7 +36,6 @@ function Post() {
   const [open, setOpen] = React.useState(false);
 
   const [buyQuantity, setBuyQuantity] = useState(1);
-  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -204,7 +203,7 @@ function Post() {
                 {unit}
               </p>
               <button
-                className="cart"
+                className="cart-button"
                 onClick={userAcc ? addToCard : openDialog}
               >
                 <i className="fas fa-cart-plus" /> Mua ngay

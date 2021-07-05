@@ -7,13 +7,13 @@ import logo from "../../assets/images/Logo3.png";
 const axios = require("axios");
 
 function Navbar() {
-  const {userAcc} = useContext(AuthContext);
+  const { userAcc } = useContext(AuthContext);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [dropdown, setDropdown] = useState(false);
   const [cates, setCates] = useState([]);
   const [search, setSearch] = useState("");
-  const {history} = useReactRouter();
+  const { history } = useReactRouter();
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -25,10 +25,12 @@ function Navbar() {
   const onMouseLeave = () => setDropdown(false);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/products/categories")
-      .then(res => {
+    axios
+      .get("http://localhost:5000/api/products/categories")
+      .then((res) => {
         setCates(res.data);
-      }).catch(error => console.log(error));
+      })
+      .catch((error) => console.log(error));
     showButton();
   }, []);
 
@@ -37,7 +39,7 @@ function Navbar() {
     history.push(`/search?type=name&value=${urlEncodedSearch}`);
     e.preventDefault();
     setSearch("");
-  }
+  };
 
   window.addEventListener("resize", showButton);
 
@@ -55,26 +57,35 @@ function Navbar() {
               type="text"
               class="searchTerm"
               placeholder="Bạn muốn mua gì?"
-              onChange={e => setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
             />
-            <button onClick={e => handleSearch(e)} type="submit" class="searchButton">
+            <button
+              onClick={(e) => handleSearch(e)}
+              type="submit"
+              class="searchButton"
+            >
               <i class="fa fa-search" />
             </button>
           </form>
           <div className="button-container">
-          <Link to={"/cart"}>
-            <button className="button-cart">
-              <i class="fa fa-shopping-cart" />
-            </button>
+            <Link to={"/cart"}>
+              {!userAcc ? (
+                <div></div>
+              ) : (
+                <button className="button-cart">
+                  <i class="fa fa-shopping-cart" />
+                </button>
+              )}
             </Link>
 
-            <Link to={userAcc ? "/profile" : "/login"} style={{textDecoration: 'none'}} >
-            <button className="button-account" >
-              <i class="fa fa-user" />
-              {userAcc ? 
-              <p>{userAcc.displayName}</p> : 
-              <p>Đăng nhập</p>}
-            </button>
+            <Link
+              to={userAcc ? "/profile" : "/login"}
+              style={{ textDecoration: "none" }}
+            >
+              <button className="button-account">
+                <i class="fa fa-user" />
+                {userAcc ? <p>{userAcc.displayName}</p> : <p>Đăng nhập</p>}
+              </button>
             </Link>
           </div>
         </div>
@@ -97,12 +108,20 @@ function Navbar() {
               {dropdown && <Dropdown cateInfo={cates} />}
             </li>
             <li className="nav-item">
-              <Link to="/provider" className="nav-links" onClick={closeMobileMenu}>
+              <Link
+                to="/provider"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
                 NHÀ CUNG CẤP
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/quotation" className="nav-links" onClick={closeMobileMenu}>
+              <Link
+                to="/quotation"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
                 BÁO GIÁ
               </Link>
             </li>

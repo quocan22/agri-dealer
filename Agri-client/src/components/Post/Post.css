@@ -93,7 +93,7 @@
   opacity: 1;
   border: 1px solid seagreen;
 }
-.box .cart {
+.box .cart-button {
   background: seagreen;
   color: white;
   outline: none;
@@ -101,9 +101,10 @@
   border: none;
   cursor: pointer;
   padding: 10px 25px;
+  margin: 5;
 }
 .cart {
-  margin-top: 0;
+  margin-top: 5;
 }
 .qtyBtn {
   background-color: white;
