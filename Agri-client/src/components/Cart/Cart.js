@@ -78,8 +78,6 @@ function Cart() {
       .then((res) => {
         let temp = cartData.filter((Cart) => Cart.productId !== productid);
         setCartData(temp);
-        console.log(temp);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }

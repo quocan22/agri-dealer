@@ -9,3 +9,8 @@
 .card-content-name:hover {
   color: seagreen;
 }
+
+.provider-name{
+  text-decoration: none;
+  color: cadetblue;
+}

@@ -28,8 +28,11 @@ function QuotationCell({ quotation }) {
   }
 
   const handleClickOpen = () => {
-    setDescription("Báo giá bởi " + userAcc.displayName);
-    setQuotePrice(quotation.wishPrice);
+    if(userData!==null)
+    {
+      setDescription("Báo giá bởi " + userAcc.displayName);
+      setQuotePrice(quotation.wishPrice);
+    }
     setOpen(true);
   };
   const handleClose = () => {
@@ -237,6 +240,7 @@ function QuotationCell({ quotation }) {
                     <text style={{ color: "seagreen" }}>
                       {" "}
                       {userData.displayName}
+                 
                     </text>
                     :
                   </DialogContentText>

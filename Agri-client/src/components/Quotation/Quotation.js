@@ -9,17 +9,19 @@ import QuotationCell from "./QuotationCell/QuotationCell.js";
 
 const axios = require("axios");
 
+
 function Quotation() {
   const { userAcc } = useContext(AuthContext);
   const [quoReq, setQuoReq] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    function fetchQuoReqData() {
+    async function fetchQuoReqData() {
       axios
         .get("http://localhost:5000/api/quotationrequests", {})
         .then((res) => {
           setQuoReq(res.data);
+          
         })
         .catch((error) => {
           console.log(error);
@@ -39,6 +41,14 @@ function Quotation() {
           </Link>
         )}
       </div>
+      {userAcc ? 
+      <div className="quotations-tab">
+        {quoReq.filter(rq=> rq.userId !== userAcc.id).map((quotationrq) => (
+          <div item key={quotationrq.id}>
+            <QuotationCell quotation={quotationrq} />
+          </div>
+        ))}
+      </div> :
       <div className="quotations-tab">
         {quoReq.map((quotationrq) => (
           <div item key={quotationrq.id}>
@@ -46,6 +56,7 @@ function Quotation() {
           </div>
         ))}
       </div>
+    }
     </div>
   );
 }

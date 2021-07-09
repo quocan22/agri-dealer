@@ -97,6 +97,7 @@
 	justify-content: space-around;
 	justify-content: space-around;
 	flex-wrap: wrap;
+	max-width: 500px;
 
 }
 .information-description .cuscolumn1{
@@ -112,6 +113,7 @@
 	justify-content: space-between;
 	flex-wrap: wrap;
 	height: 320px;
+	max-width: 318px;
 }
 
 .information-description .cuscolumn1 p{

@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect, useState} from "react";
 import {
   Card,
   CardMedia,
@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./Product.css";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
     color: "orange",
   },
 }));
+const axios = require("axios");
+
 
 const Product = ({ product }) => {
   const classes = useStyles();
@@ -29,7 +32,20 @@ const Product = ({ product }) => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
+  const [providerId, setProviderId] = useState([]);
+  useEffect(() => {
+    async function fetchProvidersData() {
+      axios
+        .get("http://localhost:5000/api/users/sellers", {})
+        .then((response) => {
+          setProviderId(response.data.find(provider => provider.sellerName === product.sellerName).userId);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchProvidersData();
+  }, [product.sellerName]);
   return (
     <Card className={classes.root}>
       <Link to={`/post/${product.id}`}>
@@ -49,13 +65,14 @@ const Product = ({ product }) => {
           </Typography>
         </div>
         <Typography variant="subtitle2" color="textSecondary">
+          <Link to={`/pvdetails/${providerId}`} className="provider-name">
           <subtitile2
             className="fas fa-map-marker-alt"
             style={{ color: "green" }}
           ></subtitile2>{" "}
           {product.sellerName}
+          </Link>
         </Typography>
-        
         <Typography variant="subtitle2" color="textSecondary">
           Tối thiểu: {product.minPurchase} {product.unit}
         </Typography>

@@ -10,6 +10,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  DialogTitle,
+  DialogContentText,
 } from "@material-ui/core";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -23,7 +28,7 @@ const axios = require("axios");
 const useheadingStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-  },  
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightBold,
@@ -67,6 +72,9 @@ function MyQuotationCell({ quotation }) {
   const [change, setChange] = useState(false);
   const [quotationList, setQuotationList] = useState([]);
   const headingclasses = useheadingStyles();
+  const [openConfirm, setOpenConfirm] = React.useState(false);
+  const [openCancel, setOpenCancel] = React.useState(false);
+
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -79,7 +87,7 @@ function MyQuotationCell({ quotation }) {
         setCategoryList(response.data);
       })
       .catch((error) => console.log(error));
-     async function fetchQuotationData() {
+    async function fetchQuotationData() {
       axios
         .get("http://localhost:5000/api/quotations/filter", {
           params: {
@@ -101,8 +109,7 @@ function MyQuotationCell({ quotation }) {
     fetchQuotationData();
   }, [quotation.userId, quotation.id, change]);
 
-  const handleConfirm = (id) =>
-  { 
+  const handleConfirm = (id) => {
     let loginToken = localStorage.getItem("LoginToken");
     let updateConfirmStatus = new FormData();
     updateConfirmStatus.append("id", id);
@@ -114,15 +121,13 @@ function MyQuotationCell({ quotation }) {
         },
       })
       .then((res) => {
-        console.log(id);
         setChange(!change);
-        console.log("confirmed");
+        setOpenConfirm(false);
       })
       .catch((err) => console.log(err));
-  }
-  
-  const handleCancel = (id) =>
-  { 
+  };
+
+  const handleCancel = (id) => {
     let loginToken = localStorage.getItem("LoginToken");
     let updateCancelStatus = new FormData();
     updateCancelStatus.append("id", id);
@@ -134,13 +139,28 @@ function MyQuotationCell({ quotation }) {
         },
       })
       .then((res) => {
-        console.log(id);
         setChange(!change);
-        console.log("canceled");
+        setOpenCancel(false);
       })
       .catch((err) => console.log(err));
-  }
-  
+  };
+
+  const handleClickOpenConfirm = () => {
+    setOpenConfirm(true);
+  };
+
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
+  };
+
+  const handleClickOpenCancel = () => {
+    setOpenCancel(true);
+  };
+
+  const handleCloseCancel = () => {
+    setOpenCancel(false);
+  };
+
   return (
     <div>
       <div className="quotation-rq-box">
@@ -148,11 +168,7 @@ function MyQuotationCell({ quotation }) {
           <Link className="quotation-name">
             <Typography variant="h5">
               {quotation.productName}
-              <span
-                className="badge"
-              >
-                {quotationList.length} Báo giá
-              </span>
+              <span className="badge">{quotationList.length} Báo giá</span>
             </Typography>
           </Link>
           <Typography style={{ marginBottom: 10, fontSize: 12 }}>
@@ -218,48 +234,166 @@ function MyQuotationCell({ quotation }) {
           </Typography>
         </AccordionSummary>
         <AccordionDetails className="quotation-list">
-        {quotationList.length < 1 ? "Hiện chưa có báo giá nào cho yêu cầu này" :
-          <div>
-            <TableContainer>
-              <Table
-                aria-labelledby="tableTitle"
-                size={"small"}
-                aria-label="enhanced table"
-              >
-          <TableHead >
-          <TableRow >
-          <TableCell align="left"  style ={{fontWeight:"700", color:"black"}}>Lời nhắn</TableCell>
-            <TableCell align="right"  style ={{fontWeight:"700", color:"black"}}>Giá báo (VNĐ)</TableCell>
-            <TableCell align="left"  style ={{fontWeight:"700", color:"black"}}>Trạng thái</TableCell>
-            <TableCell/>
-          </TableRow>
-        </TableHead>
-                <TableBody>
-                  {quotationList.map((row) => {
+          {quotationList.length < 1 ? (
+            "Hiện chưa có báo giá nào cho yêu cầu này"
+          ) : (
+            <div>
+              <TableContainer>
+                <Table
+                  aria-labelledby="tableTitle"
+                  size={"small"}
+                  aria-label="enhanced table"
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell
+                        align="left"
+                        style={{ fontWeight: "700", color: "black" }}
+                      >
+                        Lời nhắn
+                      </TableCell>
+                      <TableCell
+                        align="right"
+                        style={{ fontWeight: "700", color: "black" }}
+                      >
+                        Giá báo (VNĐ)
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        style={{ fontWeight: "700", color: "black" }}
+                      >
+                        Trạng thái
+                      </TableCell>
+                      <TableCell />
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {quotationList.map((row) => {
                       return (
                         <TableRow hover key={row.name}>
                           <TableCell align="left">{row.description}</TableCell>
-                          <TableCell align="right"> {numberWithCommas(row.quotePrice)}₫/{row.requestUnit}</TableCell>
-                          <TableCell align="left" style={{fontWeight:"600",color:statusColor(row.state)}}>
-                           {statusText(row.state)}
+                          <TableCell align="right">
+                            {" "}
+                            {numberWithCommas(row.quotePrice)}₫/
+                            {row.requestUnit}
                           </TableCell>
-                          {row.state==="pending"?
-                          <TableCell>
-                          <div className="confirm-button-group">
-                            <Button className="confirm" onClick={() => handleConfirm(row.id)} >Xác nhận</Button>
-                            <Button onClick={() => handleCancel(row.id)}  className="cancel">Hủy</Button>
-                            </div>
+                          <TableCell
+                            align="left"
+                            style={{
+                              fontWeight: "600",
+                              color: statusColor(row.state),
+                            }}
+                          >
+                            {statusText(row.state)}
+                          </TableCell>
+                          {row.state === "pending" ? (
+                            <TableCell>
+                              <div className="confirm-button-group">
+                                <Button
+                                  className="confirm"
+                                  onClick={() => handleClickOpenConfirm(row.id)}
+                                >
+                                  Xác nhận
+                                </Button>
+                                <Button
+                                  onClick={() => handleClickOpenCancel(row.id)}
+                                  className="cancel"
+                                >
+                                  Hủy
+                                </Button>
+                              </div>
                             </TableCell>
-                            : <TableCell/>}
+                          ) : (
+                            <TableCell />
+                          )}
+                          <div>
+                            <Dialog
+                              open={openConfirm}
+                              onClose={handleCloseConfirm}
+                              aria-labelledby="form-dialog-title"
+                            >
+                              <DialogTitle
+                                style={{
+                                  alignContent: "center",
+                                  color: "seagreen",
+                                }}
+                              >
+                                Xác nhận báo giá
+                              </DialogTitle>
+                              <DialogContent>
+                                <DialogContentText
+                                  style={{
+                                    color: "black",
+                                    fontStyle: "italic",
+                                  }}
+                                >
+                                  Bạn có muốn xác nhận báo giá này?
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button
+                                  onClick={handleCloseConfirm}
+                                  style={{ color: "seagreen" }}
+                                >
+                                  Quay lại
+                                </Button>
+                                <Button
+                                  onClick={()=>handleConfirm(row.id)}
+                                  style={{ color: "seagreen" }}
+                                >
+                                  Xác nhận
+                                </Button>
+                              </DialogActions>
+                            </Dialog>
+                          </div>
+                          <div>
+                            <Dialog
+                              open={openCancel}
+                              onClose={handleCloseCancel}
+                              aria-labelledby="form-dialog-title"
+                            >
+                              <DialogTitle
+                                style={{
+                                  alignContent: "center",
+                                  color: "seagreen",
+                                }}
+                              >
+                                Hủy báo giá
+                              </DialogTitle>
+                              <DialogContent>
+                                <DialogContentText
+                                  style={{
+                                    color: "black",
+                                    fontStyle: "italic",
+                                  }}
+                                >
+                                  Bạn có muốn hủy báo giá này?
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button
+                                  onClick={handleCloseCancel}
+                                  style={{ color: "seagreen" }}
+                                >
+                                  Quay lại
+                                </Button>
+                                <Button
+                                  onClick={()=>handleCancel(row.id)}
+                                  style={{ color: "seagreen" }}
+                                >
+                                  Hủy báo giá
+                                </Button>
+                              </DialogActions>
+                            </Dialog>
+                          </div>
                         </TableRow>
                       );
-                    }
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
-}
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+          )}
         </AccordionDetails>
       </Accordion>
     </div>
