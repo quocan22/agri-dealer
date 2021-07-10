@@ -9,6 +9,8 @@ namespace AgriApi.Models
         public string ProductName { get; set; }
         public string ProductImage { get; set; }
         public double ProductPrice { get; set; }
+        public int MinPurchase { get; set; }
+        public int MaxPurchase { get; set; }
 
         public CartDetailResponse(CartDetail cartDetail, Product product)
         {
@@ -17,6 +19,8 @@ namespace AgriApi.Models
             ProductName = product.ProductName;
             ProductImage = product.ImageName;
             ProductPrice = product.Price;
+            MinPurchase = product.MinPurchase;
+            MaxPurchase = product.Quantity;
         }
     }
 }

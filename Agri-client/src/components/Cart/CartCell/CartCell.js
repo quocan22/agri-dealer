@@ -7,10 +7,7 @@ const axios = require("axios");
 
 function CartCell({ cproduct, remove }) {
   const { userAcc } = useContext(AuthContext);
-  const [quantity, setQuantity] = useState(0);
-
   const [buyQuantity, setBuyQuantity] = useState(cproduct.buyQuantity);
-  const [minPurchase, setMinPurchase] = useState(0);
   const [cartId, setCartId] = useState("");
 
   useEffect(() => {
@@ -49,22 +46,20 @@ function CartCell({ cproduct, remove }) {
           Authorization: "Bearer " + loginToken,
         },
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        setBuyQuantity(buyQuantity);
       })
       .catch((err) => console.log(err));
   };
 
   function addQuantity() {
-    if (buyQuantity === quantity) return;
+    if (buyQuantity === cproduct.maxPurchase) return;
     handleQuantity(buyQuantity + 1);
-    setBuyQuantity(buyQuantity + 1);
   }
 
   function subtractQuantity() {
-    if (buyQuantity === minPurchase) return;
+    if (buyQuantity === cproduct.minPurchase) return;
     handleQuantity(buyQuantity - 1);
-    setBuyQuantity(buyQuantity - 1);
   }
 
   function numberWithCommas(x) {

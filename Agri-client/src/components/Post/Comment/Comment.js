@@ -3,8 +3,6 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import "./Comment.css";
 
-const axios = require("axios");
-
 const Comment = ({ comment, onDelete }) => {
   const { userAcc } = useContext(AuthContext);
 
@@ -31,7 +29,7 @@ const Comment = ({ comment, onDelete }) => {
     if (interval > 1) {
       return Math.floor(interval) + " phút";
     }
-    return Math.floor(seconds) + " giây";
+    return "Vài giây";
   }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -80,8 +78,8 @@ const Comment = ({ comment, onDelete }) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Chỉnh sửa</MenuItem>
-              <MenuItem onClick={handleDelete}>Xóa</MenuItem>
+              <MenuItem onClick={handleDelete}>Xóa bình luận</MenuItem>
+              <MenuItem onClick={handleClose}>Đóng</MenuItem>
             </Menu>
           </div>
         ) : null}
