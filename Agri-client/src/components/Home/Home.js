@@ -4,6 +4,7 @@ import background from "../../assets/images/background3.png";
 import "./Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "react-tabs/style/react-tabs.css";
 import fruitLogo from "../../assets/images/fruit.png";
 import vegetableLogo from "../../assets/images/vegetable.png";
@@ -21,6 +22,10 @@ const Home = () => {
 
   return (
     <div className="root">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>AgriDeal - Sàn giao dịch nông sản</title>
+      </Helmet>
       <img className="image-container" src={background} alt="Background" />
       <p className="home-title">
         Chào mừng đến với sàn giao dịch nông sản AgriDeal

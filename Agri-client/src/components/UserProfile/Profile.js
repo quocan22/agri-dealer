@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import "./Profile.css";
 import { AuthContext } from "../../contexts/AuthProvider";
-
+import { Helmet } from "react-helmet";
 import {
   Grid,
   Card,
@@ -47,6 +47,10 @@ function Profile() {
 
   return (
     <div className="profile-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Thông tin cá nhân</title>
+      </Helmet>
       <Typography variant="h4" style={{ marginBottom: "10px" }}>
         THÔNG TIN CÁ NHÂN
       </Typography>

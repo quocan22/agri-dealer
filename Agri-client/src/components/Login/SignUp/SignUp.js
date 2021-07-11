@@ -5,6 +5,7 @@ import { Alert } from "@material-ui/lab";
 import { toast } from "react-toastify";
 import "../Login.css";
 import logo from "../../../assets/images/Logo3.png";
+import { Helmet } from "react-helmet";
 const axios = require("axios");
 
 function SignUp() {
@@ -47,6 +48,10 @@ function SignUp() {
 
   return (
     <div className="login-screen">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Đăng ký</title>
+      </Helmet>
       <div autoComplete="off" className="login-container">
         <Link to="/">
           <img className="logo" src={logo} alt="logo" />

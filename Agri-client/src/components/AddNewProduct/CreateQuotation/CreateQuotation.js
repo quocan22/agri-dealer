@@ -9,11 +9,11 @@ import {
   Collapse,
   IconButton,
 } from "@material-ui/core";
-import {Alert } from "@material-ui/lab";
+import { Alert } from "@material-ui/lab";
 import CloseIcon from "@material-ui/icons/Close";
 import "../SellingProduct/SellingProduct.css";
 import { Link } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 const axios = require("axios");
 
 function CreateQuotation() {
@@ -30,12 +30,17 @@ function CreateQuotation() {
   const [successAlert, setSuccessAlert] = useState(false);
   const [failAlert, setFailAlert] = useState(false);
 
-
   const handleRequestQuotation = () => {
-    if (!productName || !categoryId || !description || !startDate || !endDate || !categoryName) {
+    if (
+      !productName ||
+      !categoryId ||
+      !description ||
+      !startDate ||
+      !endDate ||
+      !categoryName
+    ) {
       setSuccessAlert(false);
       setFailAlert(true);
-      //thong bao thieu thong tin
       return;
     }
     let userId = localStorage.getItem("UserId");
@@ -59,7 +64,7 @@ function CreateQuotation() {
       })
       .then((res) => {
         console.log(res);
-        clearAllFields()
+        clearAllFields();
         setSuccessAlert(true);
         setFailAlert(false);
       })
@@ -76,22 +81,25 @@ function CreateQuotation() {
         setCategoryList(response.data);
       })
       .catch((error) => console.log(error));
-  },[]);
-  function clearAllFields()
-  {
-    setProductName('');
+  }, []);
+  function clearAllFields() {
+    setProductName("");
     setCategoryId(null);
-    setQuantity('');
-    setWishPrice('');
-    setCategoryName('');
+    setQuantity("");
+    setWishPrice("");
+    setCategoryName("");
     setUnit(null);
-    setStartDate('');
-    setEndDate('');
-    setDescription('')
+    setStartDate("");
+    setEndDate("");
+    setDescription("");
   }
   return (
     <div className="quotation-container">
-      <Typography variant="h4">ĐĂNG BÁN SẢN PHẨM</Typography>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Tạo yêu cầu báo giá</title>
+      </Helmet>
+      <Typography variant="h4">TẠO YÊU CẦU BÁO GIÁ SẢN PHẨM</Typography>
       <div className="selling-product-main-grid">
         <Card className="selling-product-form">
           <div className="custom-row" style={{ margin: 10 }}>
@@ -191,29 +199,29 @@ function CreateQuotation() {
             </div>
             <div className="custom-column" style={{ width: 300 }}>
               <label style={{ fontSize: "16px" }}>Ngày mua </label>
-          <form noValidate >
-            <TextField
-            value={startDate}
-              id="date"
-              type="date"
-              variant="outlined"
-              format="dd//mm/yyyy"
-              onChange={(e)=>setStartDate(e.target.value)}
-            />
-          </form>
-        </div>
-        <div className="custom-column" style={{ width: 300 }}>
-          <label style={{ fontSize: "16px" }}>Ngày hết hạn </label>
-          <form  noValidate>
-            <TextField
-            value={endDate}
-              id="date"
-              type="date"
-              variant="outlined"
-              format="dd//mm/yyyy"
-              onChange={(e)=>setEndDate(e.target.value)}
-            />
-          </form>
+              <form noValidate>
+                <TextField
+                  value={startDate}
+                  id="date"
+                  type="date"
+                  variant="outlined"
+                  format="dd//mm/yyyy"
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </form>
+            </div>
+            <div className="custom-column" style={{ width: 300 }}>
+              <label style={{ fontSize: "16px" }}>Ngày hết hạn </label>
+              <form noValidate>
+                <TextField
+                  value={endDate}
+                  id="date"
+                  type="date"
+                  variant="outlined"
+                  format="dd//mm/yyyy"
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </form>
             </div>
           </div>
           <div className="custom-row" style={{ margin: 10 }}>
@@ -283,13 +291,9 @@ function CreateQuotation() {
                   Yêu cầu báo giá thất bại, vui lòng kiểm tra lại thông tin!
                 </Alert>
               </Collapse>
-              </div>
-              <Link to={"/quotation-manage"}>
-              <button
-              className="add-product-button"
-            >
-              Quay lại
-            </button>
+            </div>
+            <Link to={"/quotation-manage"}>
+              <button className="add-product-button">Quay lại</button>
             </Link>
             <button
               onClick={handleRequestQuotation}
@@ -297,7 +301,6 @@ function CreateQuotation() {
             >
               Yêu cầu báo giá
             </button>
-        
           </div>
         </Card>
       </div>

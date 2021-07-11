@@ -12,6 +12,7 @@ import "./Post.css";
 import Comment from "./Comment/Comment";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const axios = require("axios");
 const dateFormat = require("dateformat");
@@ -174,6 +175,10 @@ function Post() {
 
   return (
     <div className="root">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{productName}</title>
+      </Helmet>
       <div className="post">
         <div className="about-product">
           <div className="details">

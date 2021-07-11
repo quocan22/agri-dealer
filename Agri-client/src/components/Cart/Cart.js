@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import HistoryIcon from "@material-ui/icons/History";
 import "./Cart.css";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 const axios = require("axios");
 
 function Cart() {
@@ -80,6 +81,10 @@ function Cart() {
   }
   return (
     <div className="cart-screen-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Giỏ hàng</title>
+      </Helmet>
       <div>
         <div className="quotation-heading">
           <text style={{ marginBottom: "10px" }}>GIỎ HÀNG</text>

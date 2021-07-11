@@ -6,6 +6,7 @@ import "./Provider.css";
 import ProviderCell from "./ProviderCell/ProviderCell";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { Helmet } from "react-helmet";
 const axios = require("axios");
 
 function Provider() {
@@ -28,6 +29,10 @@ function Provider() {
 
   return (
     <div className="providers-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Danh sách nhà vườn</title>
+      </Helmet>
       <Typography variant="h4" style={{ marginBottom: "10px" }}>
         DANH SÁCH NHÀ VƯỜN
       </Typography>

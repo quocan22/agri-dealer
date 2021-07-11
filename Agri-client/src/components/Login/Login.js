@@ -4,6 +4,7 @@ import { TextField, IconButton, Collapse } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { AuthContext } from "../../contexts/AuthProvider";
 import "./Login.css";
+import { Helmet } from "react-helmet";
 import logo from "../../assets/images/Logo3.png";
 
 function Login() {
@@ -27,6 +28,10 @@ function Login() {
 
   return (
     <div className="login-screen">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Đăng nhập</title>
+      </Helmet>
       <form autoComplete="off" className="login-container">
         <Link to="/">
           <img className="logo" src={logo} alt="logo" />
