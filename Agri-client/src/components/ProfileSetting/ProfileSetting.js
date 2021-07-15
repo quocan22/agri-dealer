@@ -33,7 +33,6 @@ function ProfileSetting() {
         })
         .then((response) => {
           setProducts(response.data);
-          console.log(response);
         })
         .catch((error) => {
           console.log(error);
@@ -57,12 +56,10 @@ function ProfileSetting() {
       }
     }
     async function fetchUserData() {
-      // eslint-disable-next-line no-lone-blocks
       axios
-        .get("http://localhost:5000/api/users/" + userAcc.id, {})
+        .get("http://localhost:5000/api/users/" + userAcc.id)
         .then((response) => {
           setUserData(response.data.userClaims);
-          console.log(response.data.userClaims);
         })
         .catch((error) => {
           console.log(error);
@@ -148,7 +145,11 @@ function ProfileSetting() {
                   <label style={{ fontSize: "18px" }}>Số điện thoại </label>
                 </div>
                 <div className="column">
-                  <TextField type="number" placeholder="Số điện thoại" value={userData.phoneNumber} />
+                  <TextField
+                    type="number"
+                    placeholder="Số điện thoại"
+                    value={userData.phoneNumber}
+                  />
                 </div>
               </div>
 
@@ -246,7 +247,11 @@ function ProfileSetting() {
                   <label style={{ fontSize: "18px" }}>Họ và tên </label>
                 </div>
                 <div className="column">
-                  <TextField type="text" placeholder="Họ và tên" value={userData.displayName} />
+                  <TextField
+                    type="text"
+                    placeholder="Họ và tên"
+                    value={userData.displayName}
+                  />
                 </div>
               </div>
 
@@ -255,8 +260,13 @@ function ProfileSetting() {
                   <label style={{ fontSize: "18px" }}>Email </label>
                 </div>
                 <div className="column">
-                  <TextField disabled                     variant="filled"
- type="email" placeholder="Email" value={userAcc.email}/>
+                  <TextField
+                    disabled
+                    variant="filled"
+                    type="email"
+                    placeholder="Email"
+                    value={userAcc.email}
+                  />
                 </div>
               </div>
 
@@ -265,7 +275,11 @@ function ProfileSetting() {
                   <label style={{ fontSize: "18px" }}>Số điện thoại </label>
                 </div>
                 <div className="column">
-                  <TextField type="number" placeholder="Số điện thoại" value={userData.phoneNumber} />
+                  <TextField
+                    type="number"
+                    placeholder="Số điện thoại"
+                    value={userData.phoneNumber}
+                  />
                 </div>
               </div>
 
@@ -274,7 +288,11 @@ function ProfileSetting() {
                   <label style={{ fontSize: "18px" }}>Địa chỉ </label>
                 </div>
                 <div className="column">
-                  <TextField type="text" placeholder="Địa chỉ" value={userData.address} />
+                  <TextField
+                    type="text"
+                    placeholder="Địa chỉ"
+                    value={userData.address}
+                  />
                 </div>
               </div>
               <div
