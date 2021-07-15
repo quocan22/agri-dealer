@@ -144,6 +144,7 @@ namespace AgriApi.Services
                 var price = _productService.Get(d.ProductId).Price;
                 totalAmount += (d.BuyQuantity * price);
             }
+            cart.BuyDate = System.DateTime.Now;
             cart.Total = totalAmount;
             cart.Paid = true;
             _cart.ReplaceOne(cart => cart.Id == id, cart);

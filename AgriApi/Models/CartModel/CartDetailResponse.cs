@@ -7,6 +7,7 @@ namespace AgriApi.Models
         public string ProductId { get; set; }
         public int BuyQuantity { get; set; }
         public string ProductName { get; set; }
+        public string ProductUnit { get; set; }
         public string ProductImage { get; set; }
         public double ProductPrice { get; set; }
         public int MinPurchase { get; set; }
@@ -17,6 +18,7 @@ namespace AgriApi.Models
             ProductId = cartDetail.ProductId;
             BuyQuantity = cartDetail.BuyQuantity;
             ProductName = product.ProductName;
+            ProductUnit = product.Unit;
             ProductImage = product.ImageName;
             ProductPrice = product.Price;
             MinPurchase = product.MinPurchase;
