@@ -22,6 +22,10 @@ function ProfileSetting() {
   const [products, setProducts] = useState([]);
   const [seller, setSellerData] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [address, setAddress] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [displayName, setDisplayName] = useState(null);
+
   useEffect(() => {
     async function fetchProductData() {
       axios
@@ -69,6 +73,29 @@ function ProfileSetting() {
     fetchSellerData();
     fetchUserData();
   }, [userAcc.id, userAcc.role]);
+
+  const updateUserData = (e) => {
+    e.preventDefault();
+    let loginToken = localStorage.getItem("LoginToken");  
+    const newInfo = new FormData();
+    newInfo.append("id", userAcc.id);
+    newInfo.append("phoneNumber", phoneNumber);
+    newInfo.append("address", address);
+    newInfo.append("displayName", displayName);
+    axios
+      .put("http://localhost:5000/api/users/" + userAcc.id, newInfo, {
+        headers: {
+          Authorization: "Bearer " + loginToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
 
   return (
     //THÔNG TIN NHÀ CUNG CẤP
@@ -119,9 +146,8 @@ function ProfileSetting() {
                   <TextField
                     type="text"
                     placeholder="Chủ sở hữu"
-                    variant="filled"
-                    disabled
                     value={userAcc.displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
                   />
                 </div>
               </div>
@@ -149,6 +175,7 @@ function ProfileSetting() {
                     type="number"
                     placeholder="Số điện thoại"
                     value={userData.phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                   />
                 </div>
               </div>
@@ -161,7 +188,8 @@ function ProfileSetting() {
                   <TextField
                     type="text"
                     placeholder="Địa chỉ bán hàng"
-                    value={userData.phoneNumber}
+                    value={userData.address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
               </div>
@@ -211,7 +239,7 @@ function ProfileSetting() {
                 className="row"
                 style={{ margin: 10, justifyContent: "center" }}
               >
-                <button className="add-product-button">
+                <button className="add-product-button" onClick={(e) => updateUserData(e)} >
                   Cập nhật thông tin
                 </button>
               </div>
@@ -299,7 +327,7 @@ function ProfileSetting() {
                 className="row"
                 style={{ margin: 10, justifyContent: "center" }}
               >
-                <button className="add-product-button">
+                <button className="add-product-button" onClick={(e) => updateUserData(e)}>
                   Cập nhật thông tin
                 </button>
               </div>

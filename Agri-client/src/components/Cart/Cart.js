@@ -1,5 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Grid, Typography, Card, Button } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Card,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  TableContainer,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableHead,
+  Table,
+} from "@material-ui/core";
 import "react-tabs/style/react-tabs.css";
 import CartCell from "./CartCell/CartCell";
 import { Link } from "react-router-dom";
@@ -14,6 +30,7 @@ function Cart() {
   const { userAcc } = useContext(AuthContext);
   const [cartData, setCartData] = useState([]);
   const [cartId, setCartId] = useState("");
+  const [open, setOpen] = React.useState(false);
 
   var total = 0;
   function numberWithCommas(x) {
@@ -56,6 +73,7 @@ function Cart() {
         toast.success("Đặt hàng thành công", {
           position: toast.POSITION.TOP_CENTER,
         });
+        setOpen(true);
       })
       .catch((err) => console.log(err));
   };
@@ -79,6 +97,12 @@ function Cart() {
       })
       .catch((err) => console.log(err));
   }
+
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="cart-screen-container">
       <Helmet>
@@ -122,7 +146,6 @@ function Cart() {
                 >
                   Tạm tính:
                 </Typography>
-
                 {cartData.map((cproduct) => (
                   <Grid
                     className="row"
@@ -167,7 +190,6 @@ function Cart() {
                     </text>
                   </Grid>
                 ))}
-
                 <Grid className="row">
                   <Typography
                     variant="subtitle1"
@@ -218,6 +240,136 @@ function Cart() {
               <Button className="buy-btn" onClick={PaidCart}>
                 đặt hàng
               </Button>
+              <div>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="form-dialog-title"
+                >
+                  <DialogTitle
+                    style={{ alignContent: "center", color: "seagreen" }}
+                  >
+                    Hóa đơn
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText
+                      style={{ color: "seagreen", margin: 10 }}
+                    >
+                      {" "}
+                      Danh sách sản phẩm
+                    </DialogContentText>
+                    <div>
+                      <TableContainer>
+                        <Table
+                          aria-labelledby="tableTitle"
+                          size={"small"}
+                          aria-label="enhanced table"
+                        >
+                          <TableHead>
+                            <TableRow>
+                              <TableCell
+                                align="left"
+                                style={{
+                                  fontWeight: "700",
+                                  color: "black",
+                                }}
+                              >
+                                Sản phẩm
+                              </TableCell>
+                              <TableCell
+                                align="left"
+                                style={{
+                                  fontWeight: "700",
+                                  color: "black",
+                                }}
+                              >
+                                Số lượng
+                              </TableCell>
+                              <TableCell
+                                align="right"
+                                style={{
+                                  fontWeight: "700",
+                                  color: "black",
+                                }}
+                              >
+                                Giá bán (VNĐ)
+                              </TableCell>
+                              <TableCell
+                                align="right"
+                                style={{
+                                  fontWeight: "700",
+                                  color: "black",
+                                }}
+                              >
+                                Thành tiền (VNĐ)
+                              </TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {cartData.map((product) => {
+                              return (
+                                <TableRow hover key={product.productName}>
+                                  <TableCell align="left">
+                                    {product.productName}
+                                  </TableCell>
+                                  <TableCell align="left">
+                                    {product.buyQuantity}
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    {" "}
+                                    {numberWithCommas(product.productPrice)}₫
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    {" "}
+                                    {numberWithCommas(
+                                      product.productPrice * product.buyQuantity
+                                    )}
+                                    ₫
+                                  </TableCell>
+                                </TableRow>
+                              );
+                            })}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </div>
+                  </DialogContent>
+                  <DialogContent>
+                    <DialogContentText
+                      style={{ color: "black", margin: 10, fontWeight: "bold" }}
+                      align="right"
+                      justify="flex-end"
+                    >
+                      Tổng cộng:{" "}
+                      <text
+                        style={{
+                          color: "seagreen",
+                          fontWeight: "bold",
+                          alignContent: "center",
+                        }}
+                      >
+                        {" "}
+                        {numberWithCommas(total)}₫
+                      </text>
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Link className="cart-btn-link" to="/">
+                      <Button
+                        onClick={handleClose}
+                        style={{ color: "seagreen" }}
+                      >
+                        Trở về trang chủ
+                      </Button>
+                    </Link>
+                    <Button style={{ color: "seagreen" }}>
+                      <Link className="cart-btn-link" to={"/cart-history"}>
+                        Xem lịch sử mua hàng
+                      </Link>
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
             </Grid>
           </Grid>
         )}

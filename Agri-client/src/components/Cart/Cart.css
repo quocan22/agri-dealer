@@ -86,5 +86,10 @@
 	margin: 10px;
 	justify-content: center;
 	align-content: center;
+}
 
+.cart-btn-link{		/* Font & Text */
+	color: seagreen;
+	text-decoration: none;
+	margin: 10px;
 }

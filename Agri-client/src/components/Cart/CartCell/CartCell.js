@@ -9,7 +9,6 @@ function CartCell({ cproduct, remove }) {
   const { userAcc } = useContext(AuthContext);
   const [buyQuantity, setBuyQuantity] = useState(cproduct.buyQuantity);
   const [cartId, setCartId] = useState("");
-
   useEffect(() => {
     function fetchCartData() {
       let loginToken = localStorage.getItem("LoginToken");
