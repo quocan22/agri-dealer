@@ -30,7 +30,7 @@ function CartCell({ cproduct, remove }) {
         });
     }
     fetchCartData();
-  }, [userAcc.id,cproduct]);
+  }, [userAcc.id, cproduct]);
 
   const handleQuantity = (buyQuantity) => {
     let loginToken = localStorage.getItem("LoginToken");
@@ -108,6 +108,7 @@ function CartCell({ cproduct, remove }) {
             <button className="qtyBtn" onClick={addQuantity}>
               <i className="fas fa-plus" />
             </button>{" "}
+            {cproduct.productUnit}
           </p>
           <Button
             onClick={() => remove(cproduct.productId)}

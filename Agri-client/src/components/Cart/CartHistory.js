@@ -23,7 +23,7 @@ const axios = require("axios");
 function CartHistory() {
   const { userAcc } = useContext(AuthContext);
   const [cartHistoryData, setCartHistoryData] = useState([]);
-  var total=0;
+  var total = 0;
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -57,7 +57,6 @@ function CartHistory() {
           },
         })
         .then((res) => {
-          console.log(res);
           setCartHistoryData(res.data);
         })
         .catch((error) => {
@@ -83,14 +82,16 @@ function CartHistory() {
               </Typography>
               <Typography variant="subtitle1" style={{ margin: 5 }}>
                 - Số lần giao dịch thành công:{" "}
-                <text style={{ fontWeight: "bold" }}>{cartHistoryData.length}</text>
+                <text style={{ fontWeight: "bold" }}>
+                  {cartHistoryData.length}
+                </text>
               </Typography>
               <Typography variant="subtitle1" style={{ margin: 5 }}>
                 - Tổng chi tiêu:{" "}
-                {cartHistoryData.forEach((data) => (
-                  total+=(data.total)
-                ))}
-                <text style={{ fontWeight: "bold" }}>{numberWithCommas(total)}₫</text>
+                {cartHistoryData.forEach((data) => (total += data.total))}
+                <text style={{ fontWeight: "bold" }}>
+                  {numberWithCommas(total)}₫
+                </text>
               </Typography>
             </Grid>
           </Grid>
@@ -103,7 +104,7 @@ function CartHistory() {
               <TableHead>
                 <TableRow>
                   <TableCell style={{ fontWeight: "bold" }}>
-                    Mã Đơn Hàng
+                    Ngày mua hàng
                   </TableCell>
                   <TableCell style={{ fontWeight: "bold" }}>
                     Số sản phẩm
@@ -118,11 +119,11 @@ function CartHistory() {
                 {cartHistoryData.map((row) => (
                   <TableRow key={row.id}>
                     <TableCell component="th" scope="row">
-                      {row.id}
+                      {new Date(row.buyDate).toLocaleDateString("vi-VI")}
                     </TableCell>
                     <TableCell>{row.details.length}</TableCell>
                     <TableCell>{numberWithCommas(row.total)}₫</TableCell>
-                    <div>
+                    <TableCell>
                       <Accordion
                         TransitionProps={{ unmountOnExit: true }}
                         className="quotation-list-dropdown"
@@ -155,7 +156,7 @@ function CartHistory() {
                                         Sản phẩm
                                       </TableCell>
                                       <TableCell
-                                        align="left"
+                                        align="center"
                                         style={{
                                           fontWeight: "700",
                                           color: "black",
@@ -164,29 +165,47 @@ function CartHistory() {
                                         Số lượng
                                       </TableCell>
                                       <TableCell
+                                        align="center"
+                                        style={{
+                                          fontWeight: "700",
+                                          color: "black",
+                                        }}
+                                      >
+                                        Đơn vị
+                                      </TableCell>
+                                      <TableCell
                                         align="right"
                                         style={{
                                           fontWeight: "700",
                                           color: "black",
                                         }}
                                       >
-                                        Giá bán (VNĐ)
+                                        Giá bán
                                       </TableCell>
                                     </TableRow>
                                   </TableHead>
                                   <TableBody>
                                     {row.details.map((product) => {
                                       return (
-                                        <TableRow hover key={product.productName}>
-                                           <TableCell align="left">
+                                        <TableRow
+                                          hover
+                                          key={product.productName}
+                                        >
+                                          <TableCell align="left">
                                             {product.productName}
                                           </TableCell>
-                                          <TableCell align="left">
+                                          <TableCell align="center">
                                             {product.buyQuantity}
+                                          </TableCell>
+                                          <TableCell align="center">
+                                            {product.productUnit}
                                           </TableCell>
                                           <TableCell align="right">
                                             {" "}
-                                            {numberWithCommas(product.productPrice)}₫
+                                            {numberWithCommas(
+                                              product.productPrice
+                                            )}
+                                            ₫
                                           </TableCell>
                                         </TableRow>
                                       );
@@ -198,7 +217,7 @@ function CartHistory() {
                           }
                         </AccordionDetails>
                       </Accordion>
-                    </div>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
