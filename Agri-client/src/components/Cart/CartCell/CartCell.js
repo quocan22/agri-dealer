@@ -22,7 +22,6 @@ function CartCell({ cproduct, remove }) {
           },
         })
         .then((res) => {
-          console.log(cproduct);
           setCartId(res.data.id);
         })
         .catch((error) => {

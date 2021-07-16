@@ -9,7 +9,6 @@
 .provider-table{
         display: flex;
         flex-direction: column;
-
 	/* Box */
 	height: auto;
 	width: fit-content;

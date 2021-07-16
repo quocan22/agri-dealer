@@ -30,6 +30,7 @@ function Cart() {
   const { userAcc } = useContext(AuthContext);
   const [cartData, setCartData] = useState([]);
   const [cartId, setCartId] = useState("");
+
   const [open, setOpen] = React.useState(false);
 
   var total = 0;
@@ -58,7 +59,7 @@ function Cart() {
         });
     }
     fetchCartData();
-  }, [userAcc.id, cartData.length]);
+  }, [userAcc.id, cartData]);
   const PaidCart = () => {
     let loginToken = localStorage.getItem("LoginToken");
     let PaidData = new FormData();
@@ -103,6 +104,7 @@ function Cart() {
     setOpen(false);
   };
 
+
   return (
     <div className="cart-screen-container">
       <Helmet>
@@ -128,7 +130,7 @@ function Cart() {
                 <Grid className="list-item" justify="flex-start">
                   {cartData.map((cproduct) => (
                     <Grid>
-                      <CartCell cproduct={cproduct} remove={removeProduct} />
+                      <CartCell cproduct={cproduct} remove={removeProduct}/>
                     </Grid>
                   ))}
                 </Grid>
