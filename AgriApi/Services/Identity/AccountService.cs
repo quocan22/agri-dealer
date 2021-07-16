@@ -32,5 +32,19 @@ namespace AgriApi.Services.Identity
             }
             return new Tuple<bool, string>(false, "Đăng ký bán hàng thất bại");
         }
+
+        public bool UpdateProfile(string id, UserClaim claim)
+        {
+            var currentClaim = _userService.Get(id).UserClaims;
+            if (currentClaim != null)
+            {
+                currentClaim.Address = claim.Address;
+                currentClaim.DisplayName = claim.DisplayName;
+                currentClaim.PhoneNumber = claim.PhoneNumber;
+                _userService.Update(id, "UserClaims", currentClaim);
+                return true;
+            }
+            return false;
+        }
     }
 }
