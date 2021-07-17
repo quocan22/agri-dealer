@@ -5,13 +5,18 @@ import {
   ListItem,
   List,
   TextField,
-  CardMedia,
   Divider,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
 } from "@material-ui/core";
 import "./ProfileSetting.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import ArrowBackOutlined from "@material-ui/icons/ArrowBackOutlined";
 const axios = require("axios");
 
 function ProfileSetting() {
@@ -25,6 +30,8 @@ function ProfileSetting() {
   const [address, setAddress] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [displayName, setDisplayName] = useState(null);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [openWarning, setOpenWarning] = useState(false);
 
   useEffect(() => {
     async function fetchProductData() {
@@ -76,7 +83,7 @@ function ProfileSetting() {
 
   const updateUserData = (e) => {
     e.preventDefault();
-    let loginToken = localStorage.getItem("LoginToken");  
+    let loginToken = localStorage.getItem("LoginToken");
     const newInfo = new FormData();
     newInfo.append("id", userAcc.id);
     newInfo.append("phoneNumber", phoneNumber);
@@ -96,6 +103,21 @@ function ProfileSetting() {
       });
   };
 
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
+  };
+
+  const handleClickOpenConfirm = () => {
+    setOpenConfirm(true);
+  };
+
+  const handleCloseWarning = () => {
+    setOpenWarning(false);
+  };
+
+  const handleClickOpenWarning = () => {
+    setOpenWarning(true);
+  };
 
   return (
     //THÔNG TIN NHÀ CUNG CẤP
@@ -106,23 +128,13 @@ function ProfileSetting() {
             CHỈNH SỬA THÔNG TIN NHÀ CUNG CẤP
           </Typography>
           <div className="profile-setting-main-grid">
+            <div align="right">
+              <ArrowBackOutlined
+                style={{ color: "green", fontSize: "35", margin: 5 }}
+                onClick={handleClickOpenWarning}
+              />
+            </div>
             <Card className="profile-setting">
-              <div className="row" style={{ margin: 10 }}>
-                <div className="column" style={{ margin: 10, width: 425 }}>
-                  <label style={{ fontSize: "18px" }}>Ảnh đại diện </label>
-                </div>
-                <div className="column">
-                  <CardMedia
-                    className="setting-avatar"
-                    image={
-                      userData.avatarUrl
-                        ? userData.avatarUrl
-                        : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"
-                    }
-                  />
-                </div>
-              </div>
-
               <div className="row" style={{ margin: 10 }}>
                 <div className="column" style={{ margin: 10, width: 425 }}>
                   <label style={{ fontSize: "18px" }}>Tên nhà vườn </label>
@@ -239,10 +251,69 @@ function ProfileSetting() {
                 className="row"
                 style={{ margin: 10, justifyContent: "center" }}
               >
-                <button className="add-product-button" onClick={(e) => updateUserData(e)} >
+                <button
+                  className="add-product-button"
+                  onClick={(e) => handleClickOpenConfirm(e)}
+                >
                   Cập nhật thông tin
                 </button>
               </div>
+              <Dialog
+                open={openConfirm}
+                onClose={handleCloseConfirm}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle
+                  style={{ alignContent: "center", color: "seagreen" }}
+                >
+                  Lưu thay đổi?
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText style={{ color: "black" }}>
+                    Thông tin cá nhân của bạn sẽ được cập nhật
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ margin: 10 }}>
+                  <Button
+                    onClick={handleCloseConfirm}
+                    style={{ color: "seagreen" }}
+                  >
+                    Hủy
+                  </Button>
+                  <Button onClick style={{ color: "seagreen" }}>
+                    Xác nhận
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
+              <Dialog
+                open={openWarning}
+                onClose={handleCloseConfirm}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle
+                  style={{ alignContent: "center", color: "seagreen" }}
+                >
+                  Rời khỏi trang?
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText style={{ color: "black" }}>
+                    Bạn chưa cập thông tin. Bạn có muốn rời mà không hoàn tất
+                    không?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ margin: 10 }}>
+                  <Button
+                    onClick={handleCloseWarning}
+                    style={{ color: "seagreen" }}
+                  >
+                    Ở lại trang
+                  </Button>
+                  <Button style={{ color: "seagreen" }}>
+                    <Link to="/profile" className="normalink">Rời khỏi trang</Link>
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </Card>
           </div>
         </div>
@@ -253,23 +324,13 @@ function ProfileSetting() {
             CHỈNH SỬA THÔNG TIN CÁ NHÂN
           </Typography>
           <div className="profile-setting-main-grid">
+            <div align="right">
+              <ArrowBackOutlined
+                style={{ color: "green", fontSize: "35", margin: 5 }}
+                onClick={handleClickOpenWarning}
+              />
+            </div>
             <Card className="profile-setting">
-              <div className="row" style={{ margin: 10 }}>
-                <div className="column" style={{ margin: 10, width: 425 }}>
-                  <label style={{ fontSize: "18px" }}>Ảnh đại diện </label>
-                </div>
-                <div className="column">
-                  <CardMedia
-                    className="setting-avatar"
-                    image={
-                      userData.avatarUrl
-                        ? userData.avatarUrl
-                        : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"
-                    }
-                  />
-                </div>
-              </div>
-
               <div className="row" style={{ margin: 10 }}>
                 <div className="column" style={{ margin: 10, width: 425 }}>
                   <label style={{ fontSize: "18px" }}>Họ và tên </label>
@@ -327,10 +388,69 @@ function ProfileSetting() {
                 className="row"
                 style={{ margin: 10, justifyContent: "center" }}
               >
-                <button className="add-product-button" onClick={(e) => updateUserData(e)}>
+                <button
+                  className="add-product-button"
+                  onClick={(e) => handleClickOpenConfirm(e)}
+                >
                   Cập nhật thông tin
                 </button>
               </div>
+              <Dialog
+                open={openConfirm}
+                onClose={handleCloseConfirm}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle
+                  style={{ alignContent: "center", color: "seagreen" }}
+                >
+                  Lưu thay đổi?
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText style={{ color: "black" }}>
+                    Thông tin cá nhân của bạn sẽ được cập nhật
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ margin: 10 }}>
+                  <Button
+                    onClick={handleCloseConfirm}
+                    style={{ color: "seagreen" }}
+                  >
+                    Hủy
+                  </Button>
+                  <Button onClick style={{ color: "seagreen" }}>
+                    Xác nhận
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
+              <Dialog
+                open={openWarning}
+                onClose={handleCloseConfirm}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle
+                  style={{ alignContent: "center", color: "seagreen" }}
+                >
+                  Rời khỏi trang?
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText style={{ color: "black" }}>
+                    Bạn chưa cập thông tin. Bạn có muốn rời mà không hoàn tất
+                    không?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ margin: 10 }}>
+                  <Button
+                    onClick={handleCloseWarning}
+                    style={{ color: "seagreen" }}
+                  >
+                    Ở lại trang
+                  </Button>
+                  <Button onClick style={{ color: "seagreen" }}>
+                    <Link to="/profile" className="normalink">Rời khỏi trang</Link>
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </Card>
           </div>
         </div>

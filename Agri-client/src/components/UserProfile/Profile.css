@@ -44,6 +44,51 @@
 	border-bottom-right-radius: 50%;
 }
 
+.img-holder
+{
+	width: 550px;
+	min-height: 400px;
+	min-width: 400px;
+}
+.preview-img-holder
+{
+	height: 550px;
+	width: 550px;
+	min-height: 550px;
+	min-width: 550px;
+}
+
+.custom-page
+{
+	width: fit-content;
+
+}
+
+.custom-container
+{
+	align-content: center;
+	width: fit-content;
+}
+
+.change-image-icon {
+	border: 40px;
+	border-top-left-radius: 50%;	 
+	border-top-right-radius: 50%;
+	border-bottom-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+	height: 35px;
+	width: 35px;
+	min-height: 35px;
+	min-width: 35px;
+	background-color: lightgrey;
+	color: black;
+	margin-top: 165px;
+	margin-left: 155px;
+}
+
+.change-image-icon :hover{
+	color: green;
+}
 
 .user-big-name {
 	text-align: center;
@@ -102,134 +147,73 @@
 	align-content: center;
 }
 
-.seller-profile-card {
-	/* Box */
-	height: auto;
-	width: 1000px;
-	border: 1px solid rgb(236, 236, 236);
-	border-top: 1px solid rgb(236, 236, 236);
-	border-right: 1px solid rgb(236, 236, 236);
-	border-bottom: 1px solid rgb(236, 236, 236);
-	border-left: 1px solid rgb(236, 236, 236);
-	margin: 0px 0px 20px;
-	padding: 30px 10px;
-	display: flex;
-	flex-direction: column;
-}
-.seller-profile-card .row {
+.custom-file-input::-webkit-file-upload-button {
+	visibility: hidden;
+  }
+  .custom-file-input::before {
+	content: 'Tải ảnh lên';
+	display: inline-block;
+	background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+	border: 1px solid #999;
+	border-radius: 3px;
+	padding: 2px;
+	outline: none;
+	cursor: pointer;
+	text-shadow: 1px 1px #fff;
+	font-weight: 700;
+	font-size: 10pt;
+  }
+  .custom-file-input:hover::before {
+	border-color: black;
+  }
+  .custom-file-input:active::before {
+	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }
 
-	/* Box */
-	height: 166px;
-	width: 1000;
-	margin: 0px 0px;
-	display: flex;
-	flex-direction: row;
+  .custom-file-input::-webkit-file-upload-button {
+	visibility: hidden;
+  }
 
-	/* Effects */
-	transform: none;
-	transition: all 0s ease 0s;
-}
-
-.seller-container-profile {
-
-	height: 539px;
-	width: 1000px;
-	margin: 20px auto;
-	padding: 0px 10px;
-}
-
-.seller-history {
-	/* Font & Text */
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	letter-spacing: normal;
-	line-height: 20px;
-	text-decoration: none solid rgb(68, 68, 68);
-	text-align: start;
-	text-indent: 0px;
-	text-transform: none;
-	white-space: normal;
-	word-spacing: 0px;
-
-	/* Box */
-	height: 166px;
-	width: 405px;
-	border: 3px solid rgb(218, 218, 218);
-	border-top: 3px solid rgb(218, 218, 218);
-	border-right: 3px solid rgb(218, 218, 218);
-	border-bottom: 3px solid rgb(218, 218, 218);
-	border-left: 3px solid rgb(218, 218, 218);
-	margin: 0px;
-	padding-left: 5px;
-
-}
-.seller-avatar {
-	/* Font & Text */
-	font-family: "Font Awesome 5 Free";
-	font-size: 160px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 900;
-	letter-spacing: normal;
-	line-height: 160px;
-	text-decoration: none solid rgb(68, 68, 68);
-	text-align: center;
-	text-indent: 0px;
-	text-transform: none;
-	vertical-align: baseline;
-	white-space: normal;
-	word-spacing: 0px;
-
-	/* Color & Background */
-	background-attachment: scroll;
-	background-color: rgb(205, 205, 205);
-	background-image: none;
-	background-position: 0% 0%;
-	background-repeat: repeat;
-	color: rgb(68, 68, 68);
-
-	/* Box */
-	height: 160px;
-	width: 160px;
-	min-height: 160px;
-	min-width: 160px;
-
-
+  .icon-exit{
+	border: 40px;
 	border-top-left-radius: 50%;	 
 	border-top-right-radius: 50%;
 	border-bottom-left-radius: 50%;
 	border-bottom-right-radius: 50%;
+	height: 35px;
+	width: 35px;
+	min-height: 35px;
+	min-width: 35px;
+	background-color: lightgrey;
+	color: black;
+	margin-top: 165px;
+	margin-left: 155px;
+  }
+  .icon-exit :hover{
+	color: red;
+}
+.normalink{
+	text-decoration: none;
+	color: green;
 }
 
-.seller-info {
-	/* Font & Text */
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	letter-spacing: normal;
-	line-height: 20px;
-	text-decoration: none solid rgb(68, 68, 68);
-	text-align: start;
-	text-indent: 0px;
-	text-transform: none;
-	white-space: normal;
-
-	/* Color & Background */
-	background-attachment: scroll;
-	background-color: rgba(0, 0, 0, 0);
-	background-image: none;
-	background-position: 0% 0%;
-	background-repeat: repeat;
-	color: rgb(68, 68, 68);
-
-	/* Box */
-	height: 130px;
-	width: auto;
-	padding: 0px 15px;
-	margin: auto auto auto 0px;
-}
+  .button-delete {
+	display: inline-block;
+	background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+	border: 1px solid #999;
+	border-radius: 3px;
+	padding: 2px;
+	outline: none;
+	cursor: pointer;
+	text-shadow: 1px 1px #fff;
+	font-weight: 700;
+	font-size: 10pt;
+	margin-top: 5px;
+	margin-left: 185px;
+  }
+  .button-delete:hover {
+	border-color: black;
+  }
+  .button-delete:active {
+	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }

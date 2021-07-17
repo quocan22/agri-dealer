@@ -98,6 +98,7 @@ function Cart() {
       })
       .catch((err) => console.log(err));
   }
+  
 
 
   const handleClose = () => {
@@ -249,7 +250,8 @@ function Cart() {
                   aria-labelledby="form-dialog-title"
                 >
                   <DialogTitle
-                    style={{ alignContent: "center", color: "seagreen" }}
+                    align="center"
+                    style={{ color: "seagreen" }}
                   >
                     Hóa đơn
                   </DialogTitle>
