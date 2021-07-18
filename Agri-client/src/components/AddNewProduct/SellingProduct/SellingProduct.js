@@ -14,9 +14,12 @@ import CloseIcon from "@material-ui/icons/Close";
 import "./SellingProduct.css";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { Helmet } from "react-helmet";
+import { useHistory } from "react-router-dom";
+
 const axios = require("axios");
 
 function SellingProduct() {
+  const history = useHistory();
   const [productName, setProductName] = useState("");
   const { userAcc } = useContext(AuthContext);
   const [cateList, setCateList] = useState([]);
@@ -256,7 +259,7 @@ function SellingProduct() {
               style={{
                 margin: 10,
                 justifyContent: "flex-start",
-                width: "700px",
+                width: "670px",
               }}
             >
               <Collapse in={successAlert}>
@@ -299,6 +302,8 @@ function SellingProduct() {
                 </Alert>
               </Collapse>
             </div>
+            <button className="add-product-button"
+              onClick={() => history.goBack()}>Quay lại</button>
             <button onClick={addNewProduct} className="add-product-button">
               Thêm sản phẩm
             </button>

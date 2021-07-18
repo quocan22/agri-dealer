@@ -12,7 +12,7 @@ import {
 import { Alert } from "@material-ui/lab";
 import CloseIcon from "@material-ui/icons/Close";
 import "../SellingProduct/SellingProduct.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 const axios = require("axios");
 
@@ -29,6 +29,8 @@ function CreateQuotation() {
   const [endDate, setEndDate] = useState(null);
   const [successAlert, setSuccessAlert] = useState(false);
   const [failAlert, setFailAlert] = useState(false);
+  const history = useHistory();
+
 
   const handleRequestQuotation = () => {
     if (
@@ -292,9 +294,8 @@ function CreateQuotation() {
                 </Alert>
               </Collapse>
             </div>
-            <Link to={"/quotation-manage"}>
-              <button className="add-product-button">Quay lại</button>
-            </Link>
+              <button className="add-product-button"
+              onClick={() => history.goBack()}>Quay lại</button>
             <button
               onClick={handleRequestQuotation}
               className="add-product-button"

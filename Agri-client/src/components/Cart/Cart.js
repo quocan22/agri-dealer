@@ -101,10 +101,6 @@ function Cart() {
   
 
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
 
   return (
     <div className="cart-screen-container">
@@ -246,7 +242,6 @@ function Cart() {
               <div>
                 <Dialog
                   open={open}
-                  onClose={handleClose}
                   aria-labelledby="form-dialog-title"
                 >
                   <DialogTitle
@@ -360,7 +355,6 @@ function Cart() {
                   <DialogActions>
                     <Link className="cart-btn-link" to="/">
                       <Button
-                        onClick={handleClose}
                         style={{ color: "seagreen" }}
                       >
                         Trở về trang chủ

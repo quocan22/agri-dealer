@@ -64,7 +64,7 @@ function Profile() {
 
   const updateAvatar = (e) => {
     e.preventDefault();
-    if (!onUpdate) {
+    if (!onUpdate || !selectedFile) {
       setOpen(false);
       return;
     }
@@ -124,6 +124,7 @@ function Profile() {
   const handleClose = () => {
     setOpen(false);
     setPreview(undefined);
+    setSelectedFile(undefined);
   };
 
   const onSelectFile = (e) => {
