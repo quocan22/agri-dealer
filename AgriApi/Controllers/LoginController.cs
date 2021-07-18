@@ -98,6 +98,26 @@ namespace AgriApi.Controllers
             return BadRequest(new { message = "Cập nhật ảnh đại diện không thành công" });
         }
 
+        [HttpPut("account/deleteavatar")]
+        [Authorize("user, seller")]
+        public ActionResult DeleteAvatar([FromForm] string id)
+        {
+            string userId = (HttpContext.Items["User"] as User).Id;
+            if (userId != id)
+            {
+                return StatusCode(403, new { message = "Forbidden" });
+            }
+            
+            if (DeleteImage(id))
+            {
+                var currentUser = _userService.Get(id);
+                currentUser.UserClaims.AvatarUrl = null;
+                _userService.Update(id, currentUser);
+                return Ok(new { message = "Cập nhật ảnh đại diện thành công" });
+            }
+            return BadRequest(new { message = "Cập nhật ảnh đại diện không thành công" });
+        }
+
         [NonAction]
         public async Task<string> SaveImage(IFormFile imageFile)
         {

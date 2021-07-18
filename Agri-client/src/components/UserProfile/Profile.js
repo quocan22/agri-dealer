@@ -15,9 +15,10 @@ import {
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from "@material-ui/icons/Close";
 import { Link, useHistory } from "react-router-dom";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import { toast } from "react-toastify";
 const axios = require("axios");
 
 function Profile() {
@@ -27,9 +28,14 @@ function Profile() {
   const [open, setOpen] = useState(false);
   const [preview, setPreview] = useState();
   const [selectedFile, setSelectedFile] = useState();
+  const [onUpdate, setOnUpdate] = useState(false);
+  const [onChange, setOnChange] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     async function fetchUserData() {
       axios
         .get("http://localhost:5000/api/users/" + userAcc.id)
@@ -41,20 +47,8 @@ function Profile() {
         });
     }
     fetchUserData();
-  }, [userAcc.id]);
+  }, [userAcc, onChange]);
 
-  const handleLogout = () => {
-    logout().then(history.push("/"));
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setPreview(undefined);
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined);
@@ -65,12 +59,76 @@ function Profile() {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
+  const updateAvatar = (e) => {
+    e.preventDefault();
+    if (!onUpdate) {
+      setOpen(false);
+      return;
+    }
+    let loginToken = localStorage.getItem("LoginToken");
+    let updateAvatarForm = new FormData();
+    updateAvatarForm.append("id", userAcc.id);
+    updateAvatarForm.append("file", selectedFile);
+    axios
+      .put("http://localhost:5000/api/account/changeavatar", updateAvatarForm, {
+        headers: {
+          Authorization: "Bearer " + loginToken,
+        },
+      })
+      .then(() => {
+        setOpen(false);
+        setOnUpdate(false);
+        setOnChange(!onChange);
+        toast.success("Cập nhật ảnh đại diện thành công", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const deleteAvatar = (e) => {
+    e.preventDefault();
+    if (!userData.avatarUrl) {
+      setOpen(false);
+      return;
+    }
+    let loginToken = localStorage.getItem("LoginToken");
+    let userId = localStorage.getItem("UserId");
+    let deleteForm = new FormData();
+    deleteForm.append("id", userId);
+    axios
+      .put("http://localhost:5000/api/account/deleteavatar", deleteForm, {
+        headers: {
+          Authorization: "Bearer " + loginToken,
+        },
+      })
+      .then(() => {
+        setOpen(false);
+        setOnChange(!onChange);
+        setPreview(undefined);
+        toast.success("Xóa ảnh đại diện thành công", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleLogout = () => {
+    logout().then(history.push("/"));
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setPreview(undefined);
+  };
+
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined);
       return;
     }
     setSelectedFile(e.target.files[0]);
+    setOnUpdate(true);
   };
 
   return (
@@ -103,12 +161,12 @@ function Profile() {
                           ? userData.avatarUrl
                           : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"
                       }
-                    > 
+                    >
                       <button className="change-image-button">
-                      <AddPhotoAlternateIcon
-                        className="change-image-icon"
-                        onClick={handleClickOpen}
-                      ></AddPhotoAlternateIcon>
+                        <AddPhotoAlternateIcon
+                          className="change-image-icon"
+                          onClick={() => setOpen(true)}
+                        ></AddPhotoAlternateIcon>
                       </button>
                     </CardMedia>
                   </div>
@@ -154,12 +212,14 @@ function Profile() {
                 aria-labelledby="form-dialog-title"
                 fullWidth
                 maxWidth="sm"
-              
               >
                 <div align="right">
-                <button className="button-exit">
-                <CloseIcon className="icon-exit" onClick={handleClose}></CloseIcon>
-                </button>
+                  <button className="button-exit">
+                    <CloseIcon
+                      className="icon-exit"
+                      onClick={handleClose}
+                    ></CloseIcon>
+                  </button>
                 </div>
                 <DialogTitle
                   align="center"
@@ -179,19 +239,34 @@ function Profile() {
                         />
                       </div>
                       <div className="uppload-button-group">
-                      <div className="input-wrapper">
-                      <input type="file" class="custom-file-input" onChange={onSelectFile}/>
-                      </div>
-                      <button class="button-delete"> Xóa ảnh đại diện</button>
+                        <div className="input-wrapper">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            class="custom-file-input"
+                            onChange={onSelectFile}
+                          />
+                        </div>
+                        {userAcc.role === "user" && (
+                          <button
+                            onClick={(e) => deleteAvatar(e)}
+                            class="button-delete"
+                          >
+                            Xóa ảnh đại diện
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
                 </DialogContent>
-                <DialogActions style={{margin:10}}>
+                <DialogActions style={{ margin: 10 }}>
                   <Button onClick={handleClose} style={{ color: "seagreen" }}>
                     Quay lại
                   </Button>
-                  <Button onClick style={{ color: "seagreen" }}>
+                  <Button
+                    onClick={(e) => updateAvatar(e)}
+                    style={{ color: "seagreen" }}
+                  >
                     Xác nhận
                   </Button>
                 </DialogActions>
