@@ -103,11 +103,13 @@ function Profile() {
                           ? userData.avatarUrl
                           : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"
                       }
-                    >
+                    > 
+                      <button className="change-image-button">
                       <AddPhotoAlternateIcon
                         className="change-image-icon"
                         onClick={handleClickOpen}
                       ></AddPhotoAlternateIcon>
+                      </button>
                     </CardMedia>
                   </div>
                   <h2 className="user-big-name">{userData.displayName}</h2>
@@ -154,7 +156,11 @@ function Profile() {
                 maxWidth="sm"
               
               >
-                <CloseIcon className="icon-exit" onClick={handleClose} style={{color:"green",marginTop:5,marginLeft:560}}></CloseIcon>
+                <div align="right">
+                <button className="button-exit">
+                <CloseIcon className="icon-exit" onClick={handleClose}></CloseIcon>
+                </button>
+                </div>
                 <DialogTitle
                   align="center"
                   style={{ alignContent: "center", color: "seagreen" }}
@@ -172,8 +178,10 @@ function Profile() {
                           className="preview-img-holder"
                         />
                       </div>
-                      <div >
+                      <div className="uppload-button-group">
+                      <div className="input-wrapper">
                       <input type="file" class="custom-file-input" onChange={onSelectFile}/>
+                      </div>
                       <button class="button-delete"> Xóa ảnh đại diện</button>
                       </div>
                     </div>

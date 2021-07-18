@@ -70,7 +70,8 @@
 	width: fit-content;
 }
 
-.change-image-icon {
+
+.change-image-button {
 	border: 40px;
 	border-top-left-radius: 50%;	 
 	border-top-right-radius: 50%;
@@ -86,8 +87,23 @@
 	margin-left: 155px;
 }
 
-.change-image-icon :hover{
+.change-image-icon {
+	border: 40px;
+	border-top-left-radius: 50%;	 
+	border-top-right-radius: 50%;
+	border-bottom-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+	height: 35px;
+	width: 35px;
+	min-height: 35px;
+	min-width: 35px;
+	background-color: gainsboro;
+	color: black;
+}
+
+.change-image-button :hover{
 	color: green;
+	background-color: lightgrey;
 }
 
 .user-big-name {
@@ -151,20 +167,35 @@
 	visibility: hidden;
   }
   .custom-file-input::before {
-	content: 'Tải ảnh lên';
+	content: 'Tải hình ảnh lên';
 	display: inline-block;
-	background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-	border: 1px solid #999;
+	border: 1px none #999;
 	border-radius: 3px;
-	padding: 2px;
+	background-color: #ccffcc;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	padding: 10px;
 	outline: none;
+	height: 40;
 	cursor: pointer;
-	text-shadow: 1px 1px #fff;
-	font-weight: 700;
-	font-size: 10pt;
+	font-weight: 600;
+	font-size: 11pt;
+	display:ruby;
+	color: green;
   }
+
+  .input-wrapper {
+    height: 40px;
+	min-height: 40px;
+    width: 126px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+	margin-top: 5px;	
+
+    /*Using a background color, but you can use a background image to represent a button*/
+}
   .custom-file-input:hover::before {
-	border-color: black;
+	background-color: #99fdaa;
   }
   .custom-file-input:active::before {
 	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
@@ -172,6 +203,21 @@
 
   .custom-file-input::-webkit-file-upload-button {
 	visibility: hidden;
+  }
+
+  .button-exit{
+	border: 40px;
+	border-top-left-radius: 50%;	 
+	border-top-right-radius: 50%;
+	border-bottom-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+	height: 35px;
+	width: 35px;
+	min-height: 35px;
+	min-width: 35px;
+	background-color: whitesmoke;
+	color: green;
+	margin: 20px 20px 0px 0px;
   }
 
   .icon-exit{
@@ -184,13 +230,10 @@
 	width: 35px;
 	min-height: 35px;
 	min-width: 35px;
-	background-color: lightgrey;
-	color: black;
-	margin-top: 165px;
-	margin-left: 155px;
   }
-  .icon-exit :hover{
+  .button-exit :hover{
 	color: red;
+	background-color: lightgrey;
 }
 .normalink{
 	text-decoration: none;
@@ -198,21 +241,26 @@
 }
 
   .button-delete {
-	display: inline-block;
-	background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-	border: 1px solid #999;
+	display:ruby;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #ffe5e5;	
+	border: 1px none #999;
 	border-radius: 3px;
-	padding: 2px;
+	padding: 10px;
 	outline: none;
 	cursor: pointer;
-	text-shadow: 1px 1px #fff;
-	font-weight: 700;
-	font-size: 10pt;
+	font-weight: 600;
+	font-size: 11pt;
+	color: red;
 	margin-top: 5px;
-	margin-left: 185px;
+  }
+  .uppload-button-group{
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: space-between;
   }
   .button-delete:hover {
-	border-color: black;
+	background-color: #FFCCCC;
   }
   .button-delete:active {
 	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
