@@ -10,6 +10,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  DialogContentText,
   DialogActions,
   Button,
 } from "@material-ui/core";
@@ -26,6 +27,8 @@ function Profile() {
   const history = useHistory();
   const [userData, setUserData] = useState(undefined);
   const [open, setOpen] = useState(false);
+  const [openDelConfirm, setOpenDelConfirm] = useState(false);
+
   const [preview, setPreview] = useState();
   const [selectedFile, setSelectedFile] = useState();
   const [onUpdate, setOnUpdate] = useState(false);
@@ -99,13 +102,14 @@ function Profile() {
     axios
       .put("http://localhost:5000/api/account/deleteavatar", deleteForm, {
         headers: {
-          Authorization: "Bearer " + loginToken,
+          Authorization: "Bearer " + loginToken, 
         },
       })
       .then(() => {
         setOpen(false);
         setOnChange(!onChange);
         setPreview(undefined);
+        setOpenDelConfirm(false);
         toast.success("Xóa ảnh đại diện thành công", {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -213,26 +217,36 @@ function Profile() {
                 fullWidth
                 maxWidth="sm"
               >
-                <div align="right">
-                  <button className="button-exit">
-                    <CloseIcon
-                      className="icon-exit"
-                      onClick={handleClose}
-                    ></CloseIcon>
-                  </button>
-                </div>
                 <DialogTitle
                   align="center"
-                  style={{ alignContent: "center", color: "seagreen" }}
+                  style={{
+                    verticalAlign: "middle",
+                    color: "seagreen",
+                    borderBottom: "1px solid rgb(212, 212, 212)",
+                  }}
                 >
-                  Cập nhật ảnh đại diện
+                  <div className="custom-dialog-title">
+                    <text>Cập nhật ảnh đại diện</text>
+                    <button className="button-exit">
+                      <CloseIcon
+                        className="icon-exit"
+                        onClick={handleClose}
+                      ></CloseIcon>
+                    </button>
+                  </div>
                 </DialogTitle>
                 <DialogContent>
                   <div className="custom-page">
                     <div className="custom-container">
                       <div className="img-holder">
                         <img
-                          src={preview ? preview : userData.avatarUrl}
+                          src={
+                            preview
+                              ? preview
+                              : userData.avatarUrl && userData.avatarUrl
+                              ? userData.avatarUrl
+                              : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"
+                          }
                           alt=""
                           id="img"
                           className="preview-img-holder"
@@ -247,9 +261,9 @@ function Profile() {
                             onChange={onSelectFile}
                           />
                         </div>
-                        {userAcc.role === "user" && (
+                        {userAcc.role === "user" && userData.avatarUrl && (
                           <button
-                            onClick={(e) => deleteAvatar(e)}
+                            onClick={() => setOpenDelConfirm(true)}
                             class="button-delete"
                           >
                             Xóa ảnh đại diện
@@ -268,6 +282,37 @@ function Profile() {
                     style={{ color: "seagreen" }}
                   >
                     Xác nhận
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
+              <Dialog
+                open={openDelConfirm}
+                onClose={() => setOpenDelConfirm(false)}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle
+                  style={{ alignContent: "center", color: "seagreen" }}
+                >
+                  Xóa ảnh đại diện?
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText style={{ color: "black" }}>
+                    Ảnh đại diện sẽ trở về mặc định? Bạn có muốn xóa ảnh?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ margin: 10 }}>
+                  <Button
+                    onClick={() => setOpenDelConfirm(false)}
+                    style={{ color: "seagreen" }}
+                  >
+                    Hủy bỏ
+                  </Button>
+                  <Button
+                    onClick={(e) => deleteAvatar(e)}
+                    style={{ color: "red" }}
+                  >
+                    Xóa ảnh
                   </Button>
                 </DialogActions>
               </Dialog>

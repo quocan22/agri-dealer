@@ -195,7 +195,7 @@
     /*Using a background color, but you can use a background image to represent a button*/
 }
   .custom-file-input:hover::before {
-	background-color: #99fdaa;
+	background-color: #a9f588;
   }
   .custom-file-input:active::before {
 	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
@@ -217,8 +217,21 @@
 	min-width: 35px;
 	background-color: whitesmoke;
 	color: green;
-	margin: 20px 20px 0px 0px;
+	margin: 5px 0px 0px 113px;
   }
+
+.custom-dialog-title {
+    position: relative;
+	vertical-align: middle;
+ }
+
+ .custom-dialog-title text {
+    font-size:24px;
+	margin-left:150px;
+	font-weight:600;
+	margin-bottom:10px;
+	vertical-align: text-bottom	;
+ }
 
   .icon-exit{
 	border: 40px;
@@ -260,7 +273,7 @@
 	  justify-content: space-between;
   }
   .button-delete:hover {
-	background-color: #FFCCCC;
+	background-color: #FFBCCC;
   }
   .button-delete:active {
 	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
