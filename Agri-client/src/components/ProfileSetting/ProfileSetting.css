@@ -1,6 +1,7 @@
 .profile-setting-container {
     width: 1000px;
     margin: 25px auto;
+    min-height: 600px;
 }
 .profile-setting-main-grid{
 	max-width: 1008px;
@@ -59,9 +60,5 @@
     cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
-    left: 50%;
-    position: inherit;
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
 }
 

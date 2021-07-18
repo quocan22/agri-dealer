@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "react-tabs/style/react-tabs.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ArrowBackOutlined from "@material-ui/icons/ArrowBackOutlined";
 import "./Quotation.css";
 import MyQuotationCell from "./QuotationCell/MyQuotationCell.js";
@@ -13,6 +13,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const axios = require("axios");
 
 function QuotationManage() {
+  const history = useHistory();
   const [tabAll, setTabAll] = useState(0);
   const { userAcc } = useContext(AuthContext);
   const [quoReqData, setQuoReqData] = useState([]);
@@ -59,9 +60,10 @@ function QuotationManage() {
     <div className="quotation-container">
       <div className="quotation-heading">
         <text style={{ marginBottom: "10px" }}>QUẢN LÝ BÁO GIÁ</text>
-        <Link className="manage-link" to={"/quotation"}>
-          <ArrowBackOutlined style={{ color: "green", fontSize: "35" }} />
-        </Link>
+        <ArrowBackOutlined
+          onClick={() => history.goBack()}
+          style={{ color: "green", fontSize: "35" }}
+        />
       </div>
       <Tabs
         className="quotations-tab"

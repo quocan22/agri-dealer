@@ -41,7 +41,6 @@
 .add-product-button {
     height: 40px;
     width: fit-content;
-    min-width: fit-content;
     border: none;
     border-radius: 5px;
     color: white;
@@ -49,11 +48,6 @@
     font-size: larger;
     background-color: seagreen;
     cursor: pointer;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    left: 50%;
-    position: inherit;
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
+    margin: 10px;
 }
 

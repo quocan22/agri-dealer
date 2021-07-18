@@ -13,25 +13,28 @@ import {
   DialogContent,
   DialogContentText,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import "./ProfileSetting.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import ArrowBackOutlined from "@material-ui/icons/ArrowBackOutlined";
+import { toast } from "react-toastify";
 const axios = require("axios");
 
 function ProfileSetting() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
   const { userAcc } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
-  const [seller, setSellerData] = useState([]);
-  const [userData, setUserData] = useState([]);
-  const [address, setAddress] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState(null);
-  const [displayName, setDisplayName] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [openConfirm, setOpenConfirm] = useState(false);
   const [openWarning, setOpenWarning] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     async function fetchProductData() {
@@ -49,40 +52,33 @@ function ProfileSetting() {
           console.log(error);
         });
     }
-    async function fetchSellerData() {
-      if (userAcc.role === "seller") {
-        axios
-          .get("http://localhost:5000/api/users/seller", {
-            params: {
-              id: userAcc.id,
-            },
-          })
-          .then((response) => {
-            setSellerData(response.data);
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
-    async function fetchUserData() {
-      axios
-        .get("http://localhost:5000/api/users/" + userAcc.id)
-        .then((response) => {
-          setUserData(response.data.userClaims);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
     fetchProductData();
-    fetchSellerData();
     fetchUserData();
-  }, [userAcc.id, userAcc.role]);
+    // eslint-disable-next-line
+  }, []);
+
+  function fetchUserData() {
+    axios
+      .get("http://localhost:5000/api/users/" + userAcc.id)
+      .then((response) => {
+        setUserData(response.data);
+        setAddress(response.data.userClaims.address);
+        setPhoneNumber(response.data.userClaims.phoneNumber);
+        setDisplayName(response.data.userClaims.displayName);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const updateUserData = (e) => {
     e.preventDefault();
+    if (displayName === "") {
+      toast.error("Tên người dùng không được để trống", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
     let loginToken = localStorage.getItem("LoginToken");
     const newInfo = new FormData();
     newInfo.append("id", userAcc.id);
@@ -90,80 +86,102 @@ function ProfileSetting() {
     newInfo.append("address", address);
     newInfo.append("displayName", displayName);
     axios
-      .put("http://localhost:5000/api/users/" + userAcc.id, newInfo, {
+      .put("http://localhost:5000/api/account", newInfo, {
         headers: {
           Authorization: "Bearer " + loginToken,
         },
       })
       .then((res) => {
-        console.log(res);
+        toast.success("Cập nhật thông tin thành công", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setOpenConfirm(false);
+        fetchUserData();
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Cập nhật thông tin thất bại", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       });
   };
 
-  const handleCloseConfirm = () => {
-    setOpenConfirm(false);
-  };
-
   const handleClickOpenConfirm = () => {
+    if (
+      phoneNumber === userData.userClaims.phoneNumber &&
+      address === userData.userClaims.address &&
+      displayName === userData.userClaims.displayName
+    ) {
+      toast.warning("Không có thông tin nào được thay đổi", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
     setOpenConfirm(true);
   };
 
-  const handleCloseWarning = () => {
-    setOpenWarning(false);
-  };
-
   const handleClickOpenWarning = () => {
-    setOpenWarning(true);
+    if (
+      phoneNumber !== userData.userClaims.phoneNumber ||
+      address !== userData.userClaims.address ||
+      displayName !== userData.userClaims.displayName
+    ) {
+      setOpenWarning(true);
+    } else {
+      history.goBack();
+    }
   };
 
   return (
-    //THÔNG TIN NHÀ CUNG CẤP
-    <div>
-      {userAcc.role === "seller" ? (
+    <div style={{ minHeight: 600 }}>
+      {userData && (
         <div className="profile-setting-container">
           <Typography variant="h4" style={{ marginBottom: "10px" }}>
-            CHỈNH SỬA THÔNG TIN NHÀ CUNG CẤP
+            {userAcc.role === "seller"
+              ? "CHỈNH SỬA THÔNG TIN NHÀ CUNG CẤP"
+              : "CHỈNH SỬA THÔNG TIN CÁ NHÂN"}
           </Typography>
           <div className="profile-setting-main-grid">
             <div align="right">
               <ArrowBackOutlined
-                style={{ color: "green", fontSize: "35", margin: 5 }}
+                style={{ color: "green", fontSize: "35", margin: 20 }}
                 onClick={handleClickOpenWarning}
               />
             </div>
             <Card className="profile-setting">
+              {userAcc.role === "seller" && (
+                <div className="row" style={{ margin: 10 }}>
+                  <div className="column" style={{ margin: 10, width: 425 }}>
+                    <label style={{ fontSize: "18px" }}>Tên nhà vườn </label>
+                  </div>
+                  <div className="column">
+                    <TextField
+                      type="text"
+                      placeholder="Tên nhà vườn"
+                      variant="filled"
+                      disabled
+                      value={userData.sellerClaims.sellerName}
+                    />
+                  </div>
+                </div>
+              )}
               <div className="row" style={{ margin: 10 }}>
                 <div className="column" style={{ margin: 10, width: 425 }}>
-                  <label style={{ fontSize: "18px" }}>Tên nhà vườn </label>
+                  <label style={{ fontSize: "18px" }}>
+                    {userAcc.role === "seller" ? "Chủ sở hữu" : "Họ và tên"}
+                  </label>
                 </div>
                 <div className="column">
                   <TextField
                     type="text"
-                    placeholder="Tên nhà vườn"
-                    variant="filled"
-                    disabled
-                    value={seller.sellerName}
-                  />
-                </div>
-              </div>
-
-              <div className="row" style={{ margin: 10 }}>
-                <div className="column" style={{ margin: 10, width: 425 }}>
-                  <label style={{ fontSize: "18px" }}>Chủ sở hữu </label>
-                </div>
-                <div className="column">
-                  <TextField
-                    type="text"
-                    placeholder="Chủ sở hữu"
-                    value={userAcc.displayName}
+                    placeholder={
+                      userAcc.role === "seller" ? "Chủ sở hữu" : "Họ và tên"
+                    }
+                    value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
                   />
                 </div>
               </div>
-
               <div className="row" style={{ margin: 10 }}>
                 <div className="column" style={{ margin: 10, width: 425 }}>
                   <label style={{ fontSize: "18px" }}>Email </label>
@@ -172,7 +190,7 @@ function ProfileSetting() {
                   <TextField
                     type="email"
                     placeholder="Email"
-                    value={userAcc.email}
+                    value={userData.email}
                     variant="filled"
                     disabled
                   />
@@ -186,12 +204,11 @@ function ProfileSetting() {
                   <TextField
                     type="number"
                     placeholder="Số điện thoại"
-                    value={userData.phoneNumber}
+                    value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                   />
                 </div>
               </div>
-
               <div className="row" style={{ margin: 10 }}>
                 <div className="column" style={{ margin: 10, width: 425 }}>
                   <label style={{ fontSize: "18px" }}>Địa chỉ </label>
@@ -199,13 +216,14 @@ function ProfileSetting() {
                 <div className="column">
                   <TextField
                     type="text"
-                    placeholder="Địa chỉ bán hàng"
-                    value={userData.address}
+                    placeholder={
+                      userAcc.role === "seller" ? "Địa chỉ bán hàng" : "Địa chỉ"
+                    }
+                    value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
               </div>
-
               {userAcc.role === "seller" && (
                 <div className="row" style={{ margin: 10 }}>
                   <div className="column" style={{ margin: 10, width: 425 }}>
@@ -249,7 +267,10 @@ function ProfileSetting() {
               )}
               <div
                 className="row"
-                style={{ margin: 10, justifyContent: "center" }}
+                style={{
+                  margin: 10,
+                  justifyContent: "center",
+                }}
               >
                 <button
                   className="add-product-button"
@@ -260,7 +281,7 @@ function ProfileSetting() {
               </div>
               <Dialog
                 open={openConfirm}
-                onClose={handleCloseConfirm}
+                onClose={() => setOpenConfirm(false)}
                 aria-labelledby="form-dialog-title"
               >
                 <DialogTitle
@@ -275,12 +296,15 @@ function ProfileSetting() {
                 </DialogContent>
                 <DialogActions style={{ margin: 10 }}>
                   <Button
-                    onClick={handleCloseConfirm}
+                    onClick={() => setOpenConfirm(false)}
                     style={{ color: "seagreen" }}
                   >
                     Hủy
                   </Button>
-                  <Button onClick style={{ color: "seagreen" }}>
+                  <Button
+                    onClick={(e) => updateUserData(e)}
+                    style={{ color: "seagreen" }}
+                  >
                     Xác nhận
                   </Button>
                 </DialogActions>
@@ -288,7 +312,7 @@ function ProfileSetting() {
 
               <Dialog
                 open={openWarning}
-                onClose={handleCloseConfirm}
+                onClose={() => setOpenConfirm(false)}
                 aria-labelledby="form-dialog-title"
               >
                 <DialogTitle
@@ -304,150 +328,16 @@ function ProfileSetting() {
                 </DialogContent>
                 <DialogActions style={{ margin: 10 }}>
                   <Button
-                    onClick={handleCloseWarning}
+                    onClick={() => setOpenWarning(false)}
                     style={{ color: "seagreen" }}
                   >
                     Ở lại trang
                   </Button>
-                  <Button style={{ color: "seagreen" }}>
-                    <Link to="/profile" className="normalink">Rời khỏi trang</Link>
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </Card>
-          </div>
-        </div>
-      ) : (
-        //THÔNG TIN CÁ NHÂN
-        <div className="profile-setting-container">
-          <Typography variant="h4" style={{ marginBottom: "10px" }}>
-            CHỈNH SỬA THÔNG TIN CÁ NHÂN
-          </Typography>
-          <div className="profile-setting-main-grid">
-            <div align="right">
-              <ArrowBackOutlined
-                style={{ color: "green", fontSize: "35", margin: 5 }}
-                onClick={handleClickOpenWarning}
-              />
-            </div>
-            <Card className="profile-setting">
-              <div className="row" style={{ margin: 10 }}>
-                <div className="column" style={{ margin: 10, width: 425 }}>
-                  <label style={{ fontSize: "18px" }}>Họ và tên </label>
-                </div>
-                <div className="column">
-                  <TextField
-                    type="text"
-                    placeholder="Họ và tên"
-                    value={userData.displayName}
-                  />
-                </div>
-              </div>
-
-              <div className="row" style={{ margin: 10 }}>
-                <div className="column" style={{ margin: 10, width: 425 }}>
-                  <label style={{ fontSize: "18px" }}>Email </label>
-                </div>
-                <div className="column">
-                  <TextField
-                    disabled
-                    variant="filled"
-                    type="email"
-                    placeholder="Email"
-                    value={userAcc.email}
-                  />
-                </div>
-              </div>
-
-              <div className="row" style={{ margin: 10 }}>
-                <div className="column" style={{ margin: 10, width: 425 }}>
-                  <label style={{ fontSize: "18px" }}>Số điện thoại </label>
-                </div>
-                <div className="column">
-                  <TextField
-                    type="number"
-                    placeholder="Số điện thoại"
-                    value={userData.phoneNumber}
-                  />
-                </div>
-              </div>
-
-              <div className="row" style={{ margin: 10 }}>
-                <div className="column" style={{ margin: 10, width: 425 }}>
-                  <label style={{ fontSize: "18px" }}>Địa chỉ </label>
-                </div>
-                <div className="column">
-                  <TextField
-                    type="text"
-                    placeholder="Địa chỉ"
-                    value={userData.address}
-                  />
-                </div>
-              </div>
-              <div
-                className="row"
-                style={{ margin: 10, justifyContent: "center" }}
-              >
-                <button
-                  className="add-product-button"
-                  onClick={(e) => handleClickOpenConfirm(e)}
-                >
-                  Cập nhật thông tin
-                </button>
-              </div>
-              <Dialog
-                open={openConfirm}
-                onClose={handleCloseConfirm}
-                aria-labelledby="form-dialog-title"
-              >
-                <DialogTitle
-                  style={{ alignContent: "center", color: "seagreen" }}
-                >
-                  Lưu thay đổi?
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText style={{ color: "black" }}>
-                    Thông tin cá nhân của bạn sẽ được cập nhật
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions style={{ margin: 10 }}>
                   <Button
-                    onClick={handleCloseConfirm}
+                    onClick={() => history.goBack()}
                     style={{ color: "seagreen" }}
                   >
-                    Hủy
-                  </Button>
-                  <Button onClick style={{ color: "seagreen" }}>
-                    Xác nhận
-                  </Button>
-                </DialogActions>
-              </Dialog>
-
-              <Dialog
-                open={openWarning}
-                onClose={handleCloseConfirm}
-                aria-labelledby="form-dialog-title"
-              >
-                <DialogTitle
-                  style={{ alignContent: "center", color: "seagreen" }}
-                >
-                  Rời khỏi trang?
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText style={{ color: "black" }}>
-                    Bạn chưa cập thông tin. Bạn có muốn rời mà không hoàn tất
-                    không?
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions style={{ margin: 10 }}>
-                  <Button
-                    onClick={handleCloseWarning}
-                    style={{ color: "seagreen" }}
-                  >
-                    Ở lại trang
-                  </Button>
-                  <Button onClick style={{ color: "seagreen" }}>
-                    <Link to="/profile" className="normalink">Rời khỏi trang</Link>
+                    Rời khỏi trang
                   </Button>
                 </DialogActions>
               </Dialog>
