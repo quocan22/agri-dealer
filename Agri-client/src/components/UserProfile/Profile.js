@@ -102,7 +102,7 @@ function Profile() {
     axios
       .put("http://localhost:5000/api/account/deleteavatar", deleteForm, {
         headers: {
-          Authorization: "Bearer " + loginToken, 
+          Authorization: "Bearer " + loginToken,
         },
       })
       .then(() => {
@@ -244,7 +244,7 @@ function Profile() {
                           src={
                             preview
                               ? preview
-                              : userData.avatarUrl && userData.avatarUrl
+                              : userData.avatarUrl
                               ? userData.avatarUrl
                               : "https://fgcucdn.fgcu.edu/_resources/images/faculty-staff-male-avatar-200x200.jpg"
                           }

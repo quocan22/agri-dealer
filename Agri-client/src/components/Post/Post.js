@@ -7,7 +7,6 @@ import {
   DialogContent,
   DialogContentText,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 import "./Post.css";
 import Comment from "./Comment/Comment";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -38,7 +37,6 @@ function Post() {
   const [open, setOpen] = React.useState(false);
 
   const [buyQuantity, setBuyQuantity] = useState(1);
-  const history = useHistory();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -160,7 +158,6 @@ function Post() {
         toast.success("Thêm sản phẩm vào giỏ hàng thành công", {
           position: toast.POSITION.TOP_CENTER,
         });
-        history.push("/cart");
       })
       .catch((err) => console.log(err));
   };
