@@ -62,7 +62,7 @@ function QuotationManage() {
         <text style={{ marginBottom: "10px" }}>QUẢN LÝ BÁO GIÁ</text>
         <ArrowBackOutlined
           onClick={() => history.goBack()}
-          style={{ color: "green", fontSize: "35" }}
+          style={{ color: "green", fontSize: "35", cursor: "pointer" }}
         />
       </div>
       <Tabs

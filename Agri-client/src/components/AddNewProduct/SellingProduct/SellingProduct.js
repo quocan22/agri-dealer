@@ -34,6 +34,10 @@ function SellingProduct() {
   const [preview, setPreview] = useState();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     axios
       .get("http://localhost:5000/api/products/categories")
       .then((response) => {
@@ -302,8 +306,12 @@ function SellingProduct() {
                 </Alert>
               </Collapse>
             </div>
-            <button className="add-product-button"
-              onClick={() => history.goBack()}>Quay lại</button>
+            <button
+              className="add-product-button"
+              onClick={() => history.goBack()}
+            >
+              Quay lại
+            </button>
             <button onClick={addNewProduct} className="add-product-button">
               Thêm sản phẩm
             </button>

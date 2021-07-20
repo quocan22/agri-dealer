@@ -212,7 +212,7 @@
 		/* Effects */
 		transform: none;
 		transition: all 0s ease 0s;
-		outline: rgb(0, 128, 0) ridge 1px;
+		outline: seagreen ridge 1px;
 		outline-offset: 0px;
 		box-sizing: border-box;
 		resize: none;

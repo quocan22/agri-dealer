@@ -145,7 +145,7 @@ function ProviderDetails() {
             height: 50,
             fontSize: 25,
             padding: 16,
-            backgroundColor: "green",
+            backgroundColor: "seagreen",
           }}
         >
           DANH SÁCH SẢN PHẨM CUNG CẤP
