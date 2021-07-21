@@ -15,6 +15,7 @@ import "./SellingProduct.css";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const axios = require("axios");
 
@@ -32,6 +33,7 @@ function SellingProduct() {
   const [introduction, setIntroduction] = useState("");
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
+  const [failAlert, setFailAlert] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -62,11 +64,7 @@ function SellingProduct() {
     setSelectedFile(e.target.files[0]);
   };
 
-  const [successAlert, setSuccessAlert] = useState(false);
-  const [failAlert, setFailAlert] = useState(false);
-
   const addNewProduct = () => {
-    setSuccessAlert(false);
     setFailAlert(false);
     let loginToken = localStorage.getItem("LoginToken");
     let userId = userAcc.id;
@@ -95,8 +93,10 @@ function SellingProduct() {
         setDescription("");
         setIntroduction("");
         setSelectedFile(null);
-        console.log("thanh cong");
-        setSuccessAlert(true);
+        toast.success("Thêm sản phẩm thành công", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        window.scrollTo(0, 0);
       })
       .catch((error) => {
         console.log(error);
@@ -266,26 +266,6 @@ function SellingProduct() {
                 width: "670px",
               }}
             >
-              <Collapse in={successAlert}>
-                <Alert
-                  severity="success"
-                  action={
-                    <IconButton
-                      aria-label="close"
-                      color="inherit"
-                      size="small"
-                      onClick={() => {
-                        setSuccessAlert(false);
-                      }}
-                    >
-                      <CloseIcon fontSize="inherit" />
-                    </IconButton>
-                  }
-                >
-                  Thêm sản phẩm thành công!
-                </Alert>
-              </Collapse>
-
               <Collapse in={failAlert}>
                 <Alert
                   severity="error"

@@ -189,7 +189,6 @@ function Post() {
               <span>
                 {numberWithCommas(price)} đ / {unit}
               </span>
-              <p className="content">{description}</p>
               <p className="content">
                 Còn lại: {quantity} {unit}
               </p>
