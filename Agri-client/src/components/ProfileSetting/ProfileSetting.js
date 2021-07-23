@@ -225,6 +225,7 @@ function ProfileSetting() {
                 </div>
               </div>
               {userAcc.role === "seller" && (
+                <div>
                 <div className="row" style={{ margin: 10 }}>
                   <div className="column" style={{ margin: 10, width: 425 }}>
                     <label style={{ fontSize: "18px" }}>
@@ -248,9 +249,12 @@ function ProfileSetting() {
                       </List>
                     ))}
                     <Divider />
-                    <div
+                  </div>
+                  </div>
+                  <div
                       className="row"
                       style={{ margin: 10, justifyContent: "flex-end" }}
+                      align="right"
                     >
                       <Link
                         to={"/selling-new-product"}
@@ -263,7 +267,6 @@ function ProfileSetting() {
                       </Link>
                     </div>
                   </div>
-                </div>
               )}
               <div
                 className="row"

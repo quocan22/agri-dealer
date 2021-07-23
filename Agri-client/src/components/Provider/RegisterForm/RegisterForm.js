@@ -156,6 +156,7 @@ function RegisterForm() {
                     value={displayName}
                     onChange={(e) => setDisplayname(e.target.value)}
                     type="text"
+                    variant="outlined"
                     placeholder="Tên chủ sở hữu"
                   />
                 </div>
@@ -186,6 +187,8 @@ function RegisterForm() {
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     type="number"
                     placeholder="Số điện thoại"
+                    variant="outlined"
+
                   />
                 </div>
               </div>
@@ -200,6 +203,8 @@ function RegisterForm() {
                     onChange={(e) => setSellerName(e.target.value)}
                     type="text"
                     placeholder="Tên doanh nghiệp"
+                    variant="outlined"
+
                   />
                 </div>
               </div>
@@ -213,6 +218,7 @@ function RegisterForm() {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     type="text"
+                    variant="outlined"
                     placeholder="Địa chỉ"
                   />
                 </div>
@@ -258,6 +264,8 @@ function RegisterForm() {
                     onChange={(e) => setBrandName(e.target.value)}
                     type="text"
                     placeholder="Thương hiệu"
+                    variant="outlined"
+
                   />
                 </div>
               </div>
@@ -274,6 +282,7 @@ function RegisterForm() {
                       value={capacity}
                       onChange={(e) => setCapacity(e.target.value)}
                       type="number"
+                      variant="outlined"
                       placeholder="Tổng sản lượng"
                       style={{ width: "450px" }}
                     />
@@ -307,6 +316,7 @@ function RegisterForm() {
                       onChange={(e) => setScale(e.target.value)}
                       type="number"
                       placeholder="Tổng diện tích"
+                      variant="outlined"
                       style={{ width: "450px" }}
                     />
 
