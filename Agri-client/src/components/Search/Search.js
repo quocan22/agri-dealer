@@ -24,7 +24,11 @@ function Search() {
         <p className="search-result-text">
           Kết quả hiển thị cho: <strong>{value}</strong>
         </p>
-      ) : value === "all" ? null : (
+      ) : value === "all" ? (
+        <p className="search-result-text">
+          <strong>Tất cả sản phẩm</strong>
+        </p>
+      ) : (
         <p className="search-result-text">
           Sản phẩm theo danh mục: <strong>{value}</strong>
         </p>

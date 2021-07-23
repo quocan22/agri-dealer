@@ -35,9 +35,12 @@ function Navbar() {
   }, []);
 
   const handleSearch = (e) => {
+    e.preventDefault();
+    if (!search) {
+      return;
+    }
     const urlEncodedSearch = encodeURI(search);
     history.push(`/search?type=name&value=${urlEncodedSearch}`);
-    e.preventDefault();
     setSearch("");
   };
 

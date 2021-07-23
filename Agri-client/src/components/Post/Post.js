@@ -212,7 +212,7 @@ function Post() {
                 className="cart-button"
                 onClick={userAcc ? addToCard : openDialog}
               >
-                <i className="fas fa-cart-plus" /> Mua ngay
+                <i className="fas fa-cart-plus" /> Thêm vào giỏ hàng
               </button>
             </div>
           </div>
