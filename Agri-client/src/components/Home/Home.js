@@ -43,7 +43,7 @@ const Home = () => {
           <Tab>Sản phẩm bán trước</Tab>
         </TabList>
         <TabPanel>
-          <Products type="catename" value="all" />
+          <Products limit={8} type="catename" value="all" />
         </TabPanel>
         <TabPanel style={{ width: 1000 }}></TabPanel>
       </Tabs>
