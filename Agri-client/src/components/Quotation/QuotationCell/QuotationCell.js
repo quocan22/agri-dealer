@@ -130,7 +130,9 @@ function QuotationCell({ quotation }) {
             <subtitile2> | </subtitile2>
             Được yêu cầu bởi:{" "}
             <Link className="small-link">
-              {userAcc.id === quotation.userId ? "tôi" : userData.displayName}
+              {userAcc && userAcc.id === quotation.userId
+                ? "tôi"
+                : userData.displayName}
             </Link>
             )
           </Typography>
@@ -169,7 +171,7 @@ function QuotationCell({ quotation }) {
             "{quotation.description}"
           </Typography>
         </CardContent>
-        {userAcc.id !== quotation.userId && (
+        {userAcc && userAcc.id !== quotation.userId && (
           <Button className="quote-btn" onClick={handleClickOpen}>
             Báo giá
           </Button>

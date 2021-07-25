@@ -17,7 +17,7 @@ function Quotation() {
     window.scrollTo(0, 0);
     async function fetchQuoReqData() {
       axios
-        .get("http://localhost:5000/api/quotationrequests", {})
+        .get("http://localhost:5000/api/quotationrequests")
         .then((res) => {
           setQuoReq(res.data);
         })
@@ -36,30 +36,20 @@ function Quotation() {
       </Helmet>
       <div className="quotation-heading">
         <text style={{ marginBottom: "10px" }}>BÁO GIÁ SẢN PHẨM</text>
-        {!userAcc ? null : (
+        {userAcc && (
           <Link className="manage-link" to={"/quotation-manage"}>
             <h6 style={{ marinTop: "50px" }}>Quản lý báo giá</h6>{" "}
             <SubjectIcon style={{ color: "green", fontSize: "35" }} />
           </Link>
         )}
       </div>
-      {userAcc ? (
-        <div className="quotations-tab">
-          {quoReq.map((quotationrq) => (
-            <div item key={quotationrq.id}>
-              <QuotationCell quotation={quotationrq} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="quotations-tab">
-          {quoReq.map((quotationrq) => (
-            <div item key={quotationrq.id}>
-              <QuotationCell quotation={quotationrq} />
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="quotations-tab">
+        {quoReq.map((quotationrq) => (
+          <div item key={quotationrq.id}>
+            <QuotationCell quotation={quotationrq} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
