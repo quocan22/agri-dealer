@@ -22,14 +22,12 @@ function QuotationCell({ quotation }) {
   const [userData, setUserData] = useState([]);
   const [quotationList, setQuotationList] = useState([]);
 
- 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   const handleClickOpen = () => {
-    if(userData!==null)
-    {
+    if (userData !== null) {
       setDescription("Báo giá bởi " + userAcc.displayName);
       setQuotePrice(quotation.wishPrice);
     }
@@ -45,9 +43,8 @@ function QuotationCell({ quotation }) {
   const handleCreateQuotationtoRequest = () => {
     let userId = localStorage.getItem("UserId");
     let loginToken = localStorage.getItem("LoginToken");
-  
-    if (!userAcc || !quotation.id)
-    {
+
+    if (!userAcc || !quotation.id) {
       return;
     }
     const newquotationForm = new FormData();
@@ -132,7 +129,10 @@ function QuotationCell({ quotation }) {
             </Link>
             <subtitile2> | </subtitile2>
             Được yêu cầu bởi:{" "}
-            <Link className="small-link">{userData.displayName}</Link>)
+            <Link className="small-link">
+              {userAcc.id === quotation.userId ? "tôi" : userData.displayName}
+            </Link>
+            )
           </Typography>
           <Typography style={{ marginTop: 5, fontSize: 15 }}>
             Số lượng cần mua:
@@ -169,9 +169,11 @@ function QuotationCell({ quotation }) {
             "{quotation.description}"
           </Typography>
         </CardContent>
-        <Button className="quote-btn" onClick={handleClickOpen}>
-          Báo giá
-        </Button>
+        {userAcc.id !== quotation.userId && (
+          <Button className="quote-btn" onClick={handleClickOpen}>
+            Báo giá
+          </Button>
+        )}
       </div>
       {!userAcc ? (
         <div>
@@ -240,7 +242,6 @@ function QuotationCell({ quotation }) {
                     <text style={{ color: "seagreen" }}>
                       {" "}
                       {userData.displayName}
-                 
                     </text>
                     :
                   </DialogContentText>
@@ -248,7 +249,7 @@ function QuotationCell({ quotation }) {
                     label="Lời nhắn"
                     multiline
                     fullWidth
-                    defaultValue ={"Báo giá bởi " + userAcc.displayName}
+                    defaultValue={"Báo giá bởi " + userAcc.displayName}
                     onChange={(e) => setDescription(e.target.value)}
                     rowsMax={4}
                     variant="outlined"

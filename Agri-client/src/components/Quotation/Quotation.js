@@ -45,13 +45,11 @@ function Quotation() {
       </div>
       {userAcc ? (
         <div className="quotations-tab">
-          {quoReq
-            .filter((rq) => rq.userId !== userAcc.id)
-            .map((quotationrq) => (
-              <div item key={quotationrq.id}>
-                <QuotationCell quotation={quotationrq} />
-              </div>
-            ))}
+          {quoReq.map((quotationrq) => (
+            <div item key={quotationrq.id}>
+              <QuotationCell quotation={quotationrq} />
+            </div>
+          ))}
         </div>
       ) : (
         <div className="quotations-tab">
